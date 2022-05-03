@@ -1,0 +1,454 @@
+
+title{
+  display: none;
+}
+script{
+  display: none;
+}
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+/* -------------------HOME PAGE----------------------- */
+#banner{
+  background-color: black;
+  
+}
+#banner-words{
+  width: 100%;
+  height: 28px;
+}
+.banner-words{
+  color: white;
+  display:flex;
+  justify-content: center;
+  font-family:'Courier New', Courier, monospace, bold;
+  font-size: 12px;
+  padding-top: .7%;
+}
+/* ######## NAV ####### */
+#nav{
+  width:100%;
+  display:flex;
+  /*position: fixed;*/
+  background-color: white;
+}
+
+.logo{
+  margin-left: 5%;
+  width: 7%;
+  height: auto;
+}
+
+.logoimg{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+/* Button */
+.btn {
+    display: flex;
+    background-color: white;
+    color: black;
+    font-family:'Courier New', Courier, monospace, bold;
+    padding: 16px;
+    font-size: 1.2em; /*USING EM NOT PX*/
+    text-align: center;
+    border: none;
+    
+  }
+.buttons{
+  display: flex;
+  justify-content: left;
+  margin: 0% 20% 0% 10%;
+}
+
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    font-family:'Courier New', Courier, monospace, bold;
+  }
+  .clothing {
+    position: relative;
+    display: inline-block;
+    font-family:'Courier New', Courier, monospace, bold;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .clothing-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  .clothing-content a:hover {background-color: #ddd;}
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  .clothing:hover .dropdown-content {display: block;}
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  .btn:hover{background-color: #ddd;}
+
+  
+  .sml:hover{color: coral;}
+
+.topnav{
+    display: flex;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+.fa-search{
+  color: #7C6990;
+}
+.search{
+  margin-left: 15%;
+  margin-top: .5%;
+  height: 45px;
+}
+.input{
+  border-style: none;
+  border-radius: 10px;
+  background-color: #e5e5e7;
+}
+.topnav i{
+  position: absolute;
+  right:0px;
+  padding: 5px;
+}
+/* ####### MAIN ####### */
+#main{
+  display: block;
+  background-image: url("image/TravelBackground_1.png");
+  width: 100%;
+  object-fit: contain;
+}
+.hero{
+  width: 100%;
+}
+.heroimg{
+  object-fit: scale-down;
+  width: 100%;
+}
+.shop-now{
+  border: 2px solid blue;
+}
+.break{
+  width: 93%;
+  margin-left: 2.5%;
+  filter: drop-shadow(0px 0px 4px #ddd);
+}
+.breakimg{
+  width: 100%;
+}
+.center{
+  display: flex;
+  justify-content: center;
+  margin-left: 2%;
+  width: 95%;
+  height: auto;
+  background-color: white;
+}
+
+.left{
+  height: auto;
+  margin-right: 20px;
+  filter: drop-shadow(0px 0px 4px #8b8691);
+  overflow: hidden;
+  object-fit: contain;
+}
+.leftimg{
+  max-width: 100%;
+  height: auto;
+  object-fit: fill;
+  float: left;
+  overflow: hidden;
+}
+.overlay{
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #ddd;
+  overflow: hidden;
+}
+.left:hover .overlay{
+  opacity: .5;
+}
+.right{
+  display: relative;
+  height: auto;
+  filter: drop-shadow(0px 0px 4px #8b8691);
+  overflow: hidden;
+}
+.rightimg{
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.right:hover .overlay{
+  opacity: .5;
+}
+
+/* ######## FOOTER ####### */
+footer{
+  display: flex;
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 160px;
+  
+}
+a{
+  color:white;
+  margin-top: 2%;
+  display: block;
+}
+.ftwords{
+  display: flex;
+  width: 40%;
+  height: 90%;
+  margin-left: 5%;
+}
+.ftleft{
+  margin: 1% 5% 1% 1%;
+  width: 20%;
+  display: block;
+}
+.ftright{
+  margin: 1% 1% 1% 1%;
+  width: 20%;
+  display: inline-block;
+}
+.bold{
+  font-family:'Courier New', Courier, monospace, bold;
+  font-size: 20px;
+  text-decoration: none;
+}
+.sml{
+  font-family:'Courier New', Courier, monospace, bold;
+  font-size: 12px;
+}
+.ftinfo{
+  display: block;
+  height: 50px;
+  margin-left: 60%;
+}
+.info{
+  display: flex;
+  width: 50%;
+  
+}
+.fab{
+  font-size: 30px;
+  margin-top: 5%;
+  margin-right: 5%;
+}
+.rightfoot{
+  display: block;
+  margin-left: 30%;
+  justify-content: right;
+}
+.icon{
+  justify-content: right;
+  margin-left: 80%;
+}
+p{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+}
+.fa-check-square{
+  margin-top: 2%;
+}
+.check{
+  color:#dedede;
+}
+.connect{
+  height: 25px;
+  display: flex;
+}
+.tiny{
+  font-size: 8px;
+}
+.copyright{
+ margin-top: 20%;
+}
+
+
+/* ------------------PRODUCT PAGES------------------- */
+.prodTitle{
+  font-family: 'Courier New', Courier, monospace;
+  color: black;
+  padding-top: 2%;
+  padding-left: 15%;
+}
+.prod{
+  display: block;
+  background-color: white;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 1%;
+  height: auto;
+  filter: drop-shadow(0px 0px 4px #8b8691);
+}
+.prod-line-1{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}
+.prod-line-1 > div{
+  background-color: white;
+  margin: 1%;
+  padding: 20px;
+  font-size: 30px;
+  height: 250px;
+  justify-content: center;
+  margin-top: 1%;
+}
+.prod-line-2{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}
+.prod-line-2 > div{
+  background-color: white;
+  margin: 1%;
+  padding: 20px;
+  font-size: 30px;
+  height: 250px;
+  justify-content: center;
+}
+.prod-line-3{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}
+.prod-line-3 > div{
+  background-color: white;
+  margin: 1%;
+  padding: 20px;
+  font-size: 30px;
+  height: 250px;
+  justify-content: center;
+}
+.prodimg{
+  width: 11.5%;
+}
+/*-------------------All PROD---------------------------*/
+.prod_all{
+  display: block;
+  background-color: white;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 1%;
+  height: 1000px;
+  filter: drop-shadow(0px 0px 4px #8b8691);
+}
+
+/*-------------------SINGLE PROD------------------------*/
+#pp-main{
+  background-color: white;
+}
+.desc{
+  width: 100%;
+  height: 600px;
+  display: flex;
+}
+.prod-pg-left{
+  width: 50%;
+  border: 2px solid red;
+  height: 400px;
+}
+.pic{
+  width: 50%;
+  height: 400px;
+  border: 2px solid green;
+}
+.prod-pic{
+  width: 100%;
+  object-fit: contain;
+}
+.prod-pg-right{
+  width: 50%;
+  height: 600px;
+  border: 2px solid hotpink;
+}
+.size{
+  color: #838383;
+  border-style: hidden;
+  border-radius: 8px;
+  margin-top: 2%;
+  margin-right: 2%;
+}
+.text{
+  margin-left: 10%;
+  width: 90%;
+}
+.prod-title{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 60px;
+}
+.prod-price{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 25px;
+}
+.colorpick{
+  margin-top: 20%;
+}
+.pick{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: #cecdcd;
+}
+.addbtn{
+  background-color: #7C6990;
+  color:#cecdcd;
+  width:30%;
+  text-align: center;
+}
+.addbtntxt{
+  padding: 5%;
+}
