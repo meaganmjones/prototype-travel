@@ -452,3 +452,17 @@ p{
 .addbtntxt{
   padding: 5%;
 }
+
+/*--------------Contact Us Page------------------*/
+.contact-info{
+  height: 400px;
+  width: 80%;
+  display: block;
+  margin-left: 10%;
+  background-color: white;
+}
+
+.contact{
+  font-size: 40px;
+  align-items: center;
+}
