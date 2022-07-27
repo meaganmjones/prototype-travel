@@ -5,6 +5,9 @@ title{
 script{
   display: none;
 }
+h1{
+  font-family: 'Courier New', Courier, monospace;
+}
 /* Scroll Bar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -314,6 +317,10 @@ p{
  margin-top: 20%;
 }
 
+.title{
+  text-align: center;
+}
+
 
 /* ------------------PRODUCT PAGES------------------- */
 .prodTitle{
@@ -465,4 +472,25 @@ p{
 .contact{
   font-size: 40px;
   align-items: center;
+  font-family: 'Courier New', Courier, monospace;
+  margin-left: 25%;
+}
+
+/*----------------FAQ---------------------*/
+.qa{
+  height: 400px;
+  width: 80%;
+  margin-left: 10%;
+  background-color: white;
+}
+
+.faq{
+  text-align: center;
+  margin-top: 5%;
+}
+
+/*----------------About Us -----------------------*/
+.abt{
+  margin-left: 5%;
+  margin-right: 5%;
 }
