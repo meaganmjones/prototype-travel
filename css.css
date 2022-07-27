@@ -494,3 +494,35 @@ p{
   margin-left: 5%;
   margin-right: 5%;
 }
+
+/*----------LOGIN-------------------*/
+.login{
+  text-align: center;
+}
+
+/*----------INVENTORY-----------------*/
+.inventory{
+  width: 100%;
+  text-align: center;
+}
+.inv-btn{
+  display: flex;
+  
+}
+
+.left-btn{
+  
+}
+
+.right-btn{
+  margin-left: 85%;
+}
+
+.col_head{
+  padding: 20px;
+}
+
+.top-img{
+  margin-left: 50%;
+}
+
