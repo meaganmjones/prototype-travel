@@ -510,10 +510,6 @@ p{
   
 }
 
-.left-btn{
-  
-}
-
 .right-btn{
   margin-left: 85%;
 }
@@ -526,3 +522,12 @@ p{
   margin-left: 50%;
 }
 
+/*-----------UPDATE PAGE--------------*/
+.update{
+  width: 100%;
+  background-color: #7C6990;
+}
+
+input{
+  align-items: center;
+}
