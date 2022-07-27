@@ -496,8 +496,28 @@ p{
 }
 
 /*----------LOGIN-------------------*/
-.login{
+#login{
   text-align: center;
+  width: 80%;
+  margin: auto;
+  margin-top: 10%;
+}
+.login{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-text{
+  display: table-row;
+}
+
+.login-lbl{
+  display: table-cell;
+}
+
+.login-input{
+  display: table-cell;
 }
 
 /*----------INVENTORY-----------------*/
@@ -523,11 +543,26 @@ p{
 }
 
 /*-----------UPDATE PAGE--------------*/
+#update{
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  margin-top: 10%;
+}
 .update{
-  width: 100%;
-  background-color: #7C6990;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-input{
-  align-items: center;
+.update-text{
+  display: table-row;
+}
+
+.update-lbl{
+  display: table-cell;
+}
+
+.update-input{
+  display: table-cell;
 }
