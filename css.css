@@ -1,4 +1,6 @@
-
+*{
+  box-sizing: border-box;
+}
 title{
   display: none;
 }
@@ -24,14 +26,21 @@ h1{
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+.container{
+  position: relative;
+  width: auto;
+  height:auto;
+}
 /* -------------------HOME PAGE----------------------- */
 #banner{
   background-color: black;
-  
+  padding: 0;
+  margin: 0;
 }
 #banner-words{
   width: auto;
-  height: 28px;
+  height: auto;
 }
 .banner-words{
   color: white;
@@ -39,20 +48,39 @@ h1{
   justify-content: center;
   font-family:'Courier New', Courier, monospace, bold;
   font-size: 12px;
-  padding-top: .7%;
+  padding-top: .2%;
+  padding-bottom: .2%;
 }
 /* ######## NAV ####### */
-#nav{
+/* #nav{
   width:auto;
   height: auto;
+  position: relative;
   display:flex;
-  background-color: white;
+  overflow:hidden;
+  padding-top: .5%;
+} */
+
+.navbar{
+  background-color: black;
+  display: block;
+  float:center;
+  width: auto;
+  overflow: hidden;
 }
+
+
+
+/* @media screen and (minwidth: 480px){
+  #nav{
+    background-color: purple;
+  }
+} */
 
 .logo{
   margin-left: 5%;
   margin-top: 1%;
-  width: 7%;
+  width: auto;
   height: auto;
 }
 
@@ -132,7 +160,7 @@ h1{
 
 .account{
   width:auto;
-  height:0%;
+  height: auto;
   display: flex;
   margin-top: 2%;
   margin-left: 15%;
@@ -140,10 +168,10 @@ h1{
 
 .topnav{
     display: flex;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: relative;
+    width: auto;
+    padding: 0 auto;
+    margin: 0 auto;
+    position: absolute;
   }
 .fa-search{
   color: #7C6990;
@@ -153,17 +181,18 @@ h1{
   margin-left: 5%;
   margin-right: 2%;
   margin-top: 2%;
-  height: 45px;
+  height: auto
 }
 .search_input{
   width:auto;
   border-style: none;
   border-radius: 10px;
   background-color: #e5e5e7;
+  right:0px;
 }
 .topnav i{
   position: absolute;
-  right:0px;
+  
   padding: 8px;
 }
 
@@ -172,6 +201,7 @@ h1{
   display: block;
   background-image: url("image/TravelBackground_1.png");
   width: auto;
+  position: relative;
   object-fit: contain;
 }
 .hero{
