@@ -30,7 +30,7 @@ h1{
   
 }
 #banner-words{
-  width: 100%;
+  width: auto;
   height: 28px;
 }
 .banner-words{
@@ -43,20 +43,21 @@ h1{
 }
 /* ######## NAV ####### */
 #nav{
-  width:100%;
+  width:auto;
+  height: auto;
   display:flex;
-  /*position: fixed;*/
-  background-color: white;
+  background-color: blue;
 }
 
 .logo{
   margin-left: 5%;
+  margin-top: 1%;
   width: 7%;
   height: auto;
 }
 
 .logoimg{
-  width: 100%;
+  width: auto;
   height: auto;
   overflow: hidden;
 }
@@ -129,6 +130,14 @@ h1{
   
   .sml:hover{color: coral;}
 
+.account{
+  width:auto;
+  height:0%;
+  display: flex;
+  margin-top: 2%;
+  margin-left: 15%;
+}
+
 .topnav{
     display: flex;
     width: 100%;
@@ -140,11 +149,14 @@ h1{
   color: #7C6990;
 }
 .search{
-  margin-left: 15%;
-  margin-top: .5%;
+  width: auto;
+  margin-left: 5%;
+  margin-right: 2%;
+  margin-top: 2%;
   height: 45px;
 }
-.input{
+.search_input{
+  width:auto;
   border-style: none;
   border-radius: 10px;
   background-color: #e5e5e7;
@@ -152,8 +164,9 @@ h1{
 .topnav i{
   position: absolute;
   right:0px;
-  padding: 5px;
+  padding: 8px;
 }
+
 /* ####### MAIN ####### */
 #main{
   display: block;
@@ -162,7 +175,7 @@ h1{
   object-fit: contain;
 }
 .hero{
-  width: 100%;
+  width: auto;
 }
 .heroimg{
   object-fit: scale-down;
@@ -177,7 +190,7 @@ h1{
   filter: drop-shadow(0px 0px 4px #ddd);
 }
 .breakimg{
-  width: 100%;
+  width: auto;
 }
 .center{
   display: flex;
