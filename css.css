@@ -62,20 +62,12 @@ h1{
 } */
 
 .navbar{
-  background-color: black;
-  display: block;
+  background-color: white;
+  display: flex;
   float:center;
   width: auto;
-  overflow: hidden;
 }
 
-
-
-/* @media screen and (minwidth: 480px){
-  #nav{
-    background-color: purple;
-  }
-} */
 
 .logo{
   margin-left: 5%;
@@ -173,9 +165,11 @@ h1{
     margin: 0 auto;
     position: absolute;
   }
+
 .fa-search{
   color: #7C6990;
 }
+
 .search{
   width: auto;
   margin-left: 5%;
@@ -183,17 +177,19 @@ h1{
   margin-top: 2%;
   height: auto
 }
+
 .search_input{
   width:auto;
   border-style: none;
   border-radius: 10px;
   background-color: #e5e5e7;
-  right:0px;
+  
 }
+
 .topnav i{
   position: absolute;
-  
   padding: 8px;
+  right: 2%;
 }
 
 /* ####### MAIN ####### */

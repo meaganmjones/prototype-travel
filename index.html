@@ -25,7 +25,7 @@
             <button class="btn">New</button>
           </div><!--END OF NEW-->
           <div class="clothing">
-            <button onclick="myFunction()" class="btn">Clothing</button>
+            <button onclick="dropDown()" class="btn">Clothing</button>
             <div class="dropdown-content">
               <a href="shirts.html" class="menu">T Shirts</a>
               <a href="hoodies.html" class="menu">Hoodies</a>
@@ -34,7 +34,7 @@
             </div><!--END OF DROPDOWN-CONTENT-->
         </div><!--END OF CLOTHING-->
         <div class="dropdown">
-            <button onclick="myFunction()" class="btn">Accessories</button>
+            <button onclick="dropDown()" class="btn">Accessories</button>
             <div class="dropdown-content">
               <a href="#" class="menu">Hats</a>
               <a href="#" class="menu">Bags</a>
@@ -44,7 +44,15 @@
           </div><!--END OF BUTTONS-->
 
           <div class="account">
-            <i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i>
+            <div class="dropdown">
+              <a style="text-decoration: none;" href="login.html" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
+              <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
+              <div class="dropdown-content">
+                <a href="#" class="menu">Account</a>
+                <a href="#" class="menu">Logout</a>
+                <!-- <a href="#" class="menu"></a> -->
+              </div><!--END OF DROPDOWN-CONTENT-->
+            </div><!--END OF DROPDOWN-->
           </div><!--END OF ACCOUNT-->
 
 
@@ -115,7 +123,7 @@
           </div><!--END OF INFO-->
 
         <div class="copyright"></div>
-          <a style="text-decoration: none;" href="login.html"><p class="tiny">&copyTravel 2018</p></a>
+          <p class="tiny">&copyTravel 2018</p>
       </div><!--END OF COPYRIGHT-->
       </div><!--END OF RIGHTFOOT-->
     </div><!--END OF FTINFO-->
@@ -123,7 +131,6 @@
 
 </footer><!--END OF FOOTER-->
 </div><!--END OF CONTAINER-->
- <script type="text/javascript" src="https://example.com/fontawesome/v5.10.2/js/conflict-detection.js">
 </script>
 </body>
 </html>
