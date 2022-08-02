@@ -62,20 +62,12 @@ h1{
 } */
 
 .navbar{
-  background-color: black;
-  display: block;
+  background-color: white;
+  display: flex;
   float:center;
   width: auto;
-  overflow: hidden;
 }
 
-
-
-/* @media screen and (minwidth: 480px){
-  #nav{
-    background-color: purple;
-  }
-} */
 
 .logo{
   margin-left: 5%;
@@ -173,9 +165,11 @@ h1{
     margin: 0 auto;
     position: absolute;
   }
+
 .fa-search{
   color: #7C6990;
 }
+
 .search{
   width: auto;
   margin-left: 5%;
@@ -183,17 +177,19 @@ h1{
   margin-top: 2%;
   height: auto
 }
+
 .search_input{
   width:auto;
   border-style: none;
   border-radius: 10px;
   background-color: #e5e5e7;
-  right:0px;
+  
 }
+
 .topnav i{
   position: absolute;
-  
   padding: 8px;
+  right: 2%;
 }
 
 /* ####### MAIN ####### */
@@ -568,6 +564,14 @@ p{
   width: 100%;
   text-align: center;
 }
+
+.inv_tbl{
+  width: 100%; 
+  border: 2px solid black;
+}
+.inv_tbl:nth-child(even){
+  background-color: #3e8e41;
+}
 .inv-btn{
   display: flex;
   
@@ -580,6 +584,18 @@ p{
 .col_head{
   padding: 20px;
 }
+.col_data{
+  padding: 20px;
+  text-align: center;
+}
+
+/* .col_data:nth-child(even){
+  background-color: #8b8691;
+} */
+
+
+
+
 
 .top-img{
   margin-left: 50%;
