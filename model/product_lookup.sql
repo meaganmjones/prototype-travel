@@ -5,6 +5,6 @@ CREATE TABLE  IF NOT EXISTS product_lookup (
   colorID INT NOT NULL,
   productSize NVARCHAR(20) NOT NULL,
   productQuantity INT NOT NULL,
-  productImage IMAGE NOT NULL
+  productImage IMAGE NOT NULL;
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
