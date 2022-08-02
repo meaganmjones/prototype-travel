@@ -11,16 +11,16 @@
 </head>
 <body>
 <div id="container">
-  <div id="nav">
+  <div id="nav" class="navbar">
     <div class="logo">
       <a href="index.html"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
     </div><!--END OF LOGO-->
     <div class="buttons">
-    <div class="new">
+      <div class="new">
         <button class="btn">New</button>
-    </div><!--END OF NEW-->
-    <div class="clothing">
-        <button onclick="myFunction()" class="btn">Clothing</button>
+      </div><!--END OF NEW-->
+      <div class="clothing">
+        <button onclick="dropDown()" class="btn">Clothing</button>
         <div class="dropdown-content">
           <a href="shirts.html" class="menu">T Shirts</a>
           <a href="hoodies.html" class="menu">Hoodies</a>
@@ -29,7 +29,7 @@
         </div><!--END OF DROPDOWN-CONTENT-->
     </div><!--END OF CLOTHING-->
     <div class="dropdown">
-        <button onclick="myFunction()" class="btn">Accessories</button>
+        <button onclick="dropDown()" class="btn">Accessories</button>
         <div class="dropdown-content">
           <a href="#" class="menu">Hats</a>
           <a href="#" class="menu">Bags</a>
@@ -37,18 +37,36 @@
         </div><!--END OF DROPDOWN-CONTENT-->
       </div><!--END OF DROPDOWN-->
       </div><!--END OF BUTTONS-->
+
+      <div class="account">
+        <div class="dropdown">
+          <a style="text-decoration: none;" href="login.html" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
+          <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
+          <div class="dropdown-content">
+            <a href="#" class="menu">Account</a>
+            <a href="#" class="menu">Logout</a>
+            <!-- <a href="#" class="menu"></a> -->
+          </div><!--END OF DROPDOWN-CONTENT-->
+        </div><!--END OF DROPDOWN-->
+      </div><!--END OF ACCOUNT-->
+
+
     <div class="search">
         <div class="topnav">
-            <input type="text" placeholder="Search" class="input">
-            <i class="fas fa-search fa-xs" class="magnify"></i>
-        </div><!--END OF TOPNAV-->
-    </div><!--END OF SEARCH-->
+            <input type="text" placeholder="Search" class="search_input">
+            <i class="fas fa-search fa-xs"></i>
+
+            
+          </div><!--END OF TOPNAV-->
+        </div><!--END OF SEARCH-->
+
+
 </div><!--END OF NAV-->
 <div id="pp-main">
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">
-                <img src="image/Full Size Images/MountainsImage.png" class="prod-pic">
+                <img src="#" class="prod-pic">
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
@@ -61,6 +79,14 @@
                         <input type="radio" name="rdo_color">
                         <span class="checkmark"></span>
                     </label>
+                    <label class="edit_color">grey
+                      <input type="radio" name="rdo_color">
+                      <span class="checkmark"></span>
+                  </label>
+                  <label class="edit_color">blue
+                    <input type="radio" name="rdo_color">
+                    <span class="checkmark"></span>
+                </label>
                     <!-- <i class="fas fa-circle fa-lg" style="color: hotpink;"></i>
                     <i class="fas fa-circle fa-lg" style="color: grey;"></i>
                     <i class="fas fa-circle fa-lg" style="color: black;"></i> -->
