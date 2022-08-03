@@ -1,6 +1,7 @@
 *{
   box-sizing: border-box;
 }
+
 title{
   display: none;
 }
@@ -64,7 +65,6 @@ h1{
 .navbar{
   background-color: white;
   display: flex;
-  float:center;
   width: auto;
 }
 
@@ -81,9 +81,9 @@ h1{
   height: auto;
   overflow: hidden;
 }
+
 /* Button */
 .btn {
-    display: flex;
     background-color: white;
     color: black;
     font-family:'Courier New', Courier, monospace, bold;
@@ -93,6 +93,7 @@ h1{
     border: none;
     
   }
+
 .buttons{
   display: flex;
   justify-content: left;
@@ -106,6 +107,7 @@ h1{
     display: inline-block;
     font-family:'Courier New', Courier, monospace, bold;
   }
+
   .clothing {
     position: relative;
     display: inline-block;
@@ -158,13 +160,14 @@ h1{
   margin-left: 15%;
 }
 
-.topnav{
-    display: flex;
-    width: auto;
-    padding: 0 auto;
-    margin: 0 auto;
-    position: absolute;
-  }
+.top-nav{
+  display: flex;
+  width: 500px;
+  padding: 50%;
+  margin: 0 auto;
+  position: absolute;
+  background-color: #3e8e41;
+}
 
 .fa-search{
   color: #7C6990;
@@ -172,10 +175,6 @@ h1{
 
 .search{
   width: auto;
-  margin-left: 5%;
-  margin-right: 2%;
-  margin-top: 2%;
-  height: auto
 }
 
 .search_input{
@@ -184,6 +183,10 @@ h1{
   border-radius: 10px;
   background-color: #e5e5e7;
   
+  display: flex;
+  padding: 0 auto;
+  margin: 0 auto;
+  position: absolute;
 }
 
 .topnav i{
