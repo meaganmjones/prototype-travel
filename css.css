@@ -494,13 +494,18 @@ p{
   color: #cecdcd;
 }
 .addbtn{
+  padding-top: 2%;
+}
+.addbtntxt{
+  
   background-color: #7C6990;
   color:#cecdcd;
   width:30%;
   text-align: center;
 }
-.addbtntxt{
-  padding: 5%;
+
+.addbtntxt:hover{
+  cursor: pointer;
 }
 
 /*--------------Contact Us Page------------------*/

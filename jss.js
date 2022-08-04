@@ -17,5 +17,12 @@ function dropDown() {
       }
     }
   }
+
+
+function cartBtn(){
+  swal("Item Added to Cart" , "Continue shopping?", "info",{
+    buttons: ["Keep shopping!", "To the cart!"]
+  });
+}
   
   
