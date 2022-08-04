@@ -71,8 +71,9 @@
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
             <div class="text">
-                <h2 class="prod-title"><input style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h2>
-                <h3 class="prod-price"><input style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h3>
+              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h2>
+              
+              <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h3>
                 <div class="colorpick">
                     <p class="pick">Choose A Color</p>
                     <label class="edit_color">pink
@@ -90,7 +91,17 @@
                     <!-- <i class="fas fa-circle fa-lg" style="color: hotpink;"></i>
                     <i class="fas fa-circle fa-lg" style="color: grey;"></i>
                     <i class="fas fa-circle fa-lg" style="color: black;"></i> -->
+                <div class="dropdown">
+                    <button onclick="dropDown()">Choose Color</button>
+                      <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
+                    <div class="dropdown-content">
+                      <a href="#" class="menu">White</a>
+                      <a href="#" class="menu">Grey</a>
+                      <a href="#" class="menu">Black</a>
+                    </div><!--END OF DROPDOWN-CONTENT-->
+
                 </div><!--END OF COLORPICK-->
+
                 <div class="sizepick">
                     <button class="size">XS</button>
                     <button class="size">S</button>
