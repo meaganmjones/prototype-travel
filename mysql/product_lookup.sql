@@ -1,6 +1,7 @@
 CREATE TABLE  IF NOT EXISTS product_lookup (
   productID INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
   productName NVARCHAR(50) NOT NULL,
+  productPrice MONEY NOT NULL,
   categoryID INT NOT NULL,
   colorID INT NOT NULL,
   productSize NVARCHAR(20) NOT NULL,
