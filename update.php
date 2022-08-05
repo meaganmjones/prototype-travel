@@ -7,7 +7,7 @@
   // Set up configuration file and create database
   $configFile = __DIR__ . '/model/dbconfig.ini';
 
-  if (!isUserLoggedIn())
+  if (!loggedIn())
     {
         header ('Location: login.php');
     }
@@ -21,7 +21,7 @@
       echo "<h2>" . $error->getMessage() . "</h2>";
   }   
    
-  // If it is a GET, we are coming from admin_portal.html
+  // If it is a GET, we are coming from admin_portal.php
   // let's figure out if we're doing update or add
   if (isset($_GET['action'])) 
   {
@@ -48,7 +48,7 @@
   } // end if GET
 
   // If it is a POST, we are coming from update.php
-  // we need to determine action, then return to admin_portal.html
+  // we need to determine action, then return to admin_portal.php
   elseif (isset($_POST['action'])) 
   {
       $action = filter_input(INPUT_POST, 'action');
@@ -69,14 +69,14 @@
       }
 
       // Redirect to admin_portal page
-      header('Location: admin_portal.html');
+      header('Location: admin_portal.php');
   } // end if POST
 
   // If it is neither POST nor GET, we go to view.php
   // This page should not be loaded directly
   else
   {
-    header('Location: admin_portal.html');  
+    header('Location: admin_portal.php');  
   }
       
 ?>

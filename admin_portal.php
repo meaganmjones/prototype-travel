@@ -6,7 +6,7 @@
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
 
-    if (!isUserLoggedIn())
+    if (!loggedIn())
     {
         header ('Location: login.php');
     }
@@ -20,8 +20,8 @@
         echo "<h2>" . $error->getMessage() . "</h2>";
     }   
     // If POST, delete the requested car before listing all
-    if (isPostRequest()) {
-        $id = filter_input(INPUT_POST, 'carId');
+    if (postRequest()) {
+        $id = filter_input(INPUT_POST, 'productID');
         $productDatabase->deleteProduct($product_id);
 
     }
