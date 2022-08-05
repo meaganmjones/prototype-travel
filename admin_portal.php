@@ -21,7 +21,7 @@
     }   
     // If POST, delete the requested car before listing all
     if (postRequest()) {
-        $id = filter_input(INPUT_POST, 'productID');
+        $product_id = filter_input(INPUT_POST, 'productID');
         $productDatabase->deleteProduct($product_id);
 
     }

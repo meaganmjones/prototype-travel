@@ -72,7 +72,7 @@
       header('Location: admin_portal.php');
   } // end if POST
 
-  // If it is neither POST nor GET, we go to view.php
+  // If it is neither POST nor GET, we go to admin_portal.php
   // This page should not be loaded directly
   else
   {

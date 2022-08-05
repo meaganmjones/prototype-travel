@@ -20,7 +20,7 @@ function loggedIn()
     }
 
     // Check if isLoggedIn is set, check its status
-    return (array_key_exists('isLoggedIn', $_SESSION) && ($_SESSION['isLoggedIn']));
+    return (array_key_exists('loggedIn', $_SESSION) && ($_SESSION['loggedIn']));
 }
 
 ?>
