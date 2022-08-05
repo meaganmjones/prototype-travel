@@ -28,7 +28,7 @@ class Product{
 
     
     // Get listing from the database
-    public function getProducts() {
+    public function getProduct() {
         $results = [];
         $productTable = $this->productData;
 
@@ -196,10 +196,10 @@ class Product{
     //allows children to make queries to the database
     protected function getDatabaseRef()
     {
-        return $this->carData;
+        return $this->productData;
     }
 
-}//end car class
+}//end product class
 
    
 
