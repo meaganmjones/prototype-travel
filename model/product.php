@@ -3,6 +3,8 @@
 //provides a wrapper to the database
 class Product{
 
+    //might nedd seperate classes for category and color but unsure
+
     private $productData;
 
     public function __construct($configFile){
