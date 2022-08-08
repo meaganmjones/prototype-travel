@@ -26,7 +26,7 @@
   if (isset($_GET['action'])) 
   {
       $action = filter_input(INPUT_GET, 'action');
-      $id = filter_input(INPUT_GET, 'productID', );
+      $product_id = filter_input(INPUT_GET, 'productID', );
       if ($action == "Update") 
       {
           $row = $productData->getProduct($product_id);

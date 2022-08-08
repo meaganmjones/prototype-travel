@@ -27,13 +27,16 @@ $isFirstClause = true;
                 $sqlQuery2 .= " WHERE ";
                 $isFirstClause = false;
             }
-            // else
-            // {
-            //     $sqlQuery2 .= " WHERE ";
-            //     $isFirstClause = false;
-            // }
-            // $sqlQuery .= "  carYear LIKE :carYear";
-            // $binds['carYear'] = '%'.$carYear.'%';
+            else
+            {
+                $sqlQuery .= "WHERE ";
+                $sqlQuery2 .= " WHERE ";
+                $isFirstClause = false;
+            }
+            $sqlQuery .= "  product_name LIKE :productName";
+            $binds['productName'] = '%'.$product_name.'%';
+            $sqlQuery2 .= "  category_type LIKE :categoryType";
+            $binds['categoryType'] = '%'.$category_type.'%';
         }
 
 

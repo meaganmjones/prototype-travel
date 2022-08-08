@@ -43,6 +43,36 @@ class Product{
          return ($results);
     }
 
+    public function getCategory() {
+        $results = [];
+        $categoryTable = $this->categoryData;
+
+        $stmt = $categoryTable->prepare("SELECT categoryID, categoryType FROM category_lookup ORDER BY categoryID");
+        
+        if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
+        {
+             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                 
+         }
+         
+         return ($results);
+    }
+
+    public function getColor() {
+        $results = [];
+        $colorTable = $this->ColorData;
+
+        $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookuop ORDER BY colorID");
+        
+        if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
+        {
+             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                 
+         }
+         
+         return ($results);
+    }
+
     //Add to database
     public function addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image) {
         $addSuccessful = false;
