@@ -1,5 +1,55 @@
 <?php
 
+<<<<<<< HEAD
+=======
+    // Include functions
+    include_once __DIR__ . '/include/functions.php';
+
+    // include AdminLogin Class
+    include_once __DIR__ . '/model/admin_login.php';
+
+    // set logged in to false
+    $_SESSION['loggedIn'] = false;
+    
+    
+    $message = "";
+    if (postRequest()) 
+    {
+        // get _POST form fields
+        $username = filter_input(INPUT_POST, 'username');
+        $password = filter_input(INPUT_POST, 'password');
+        
+        // Set up configuration file and create database
+        $configFile = __DIR__ . '/model/dbconfig.ini';
+        try 
+        {
+            $loginLookup = new AdminLogin($configFile);
+            
+        } 
+        catch ( Exception $error ) 
+        {
+            
+            echo "<h2>" . $error->getMessage() . "</h2>";
+        }   
+    
+        
+        // check to see if user credentials are valid.
+        if ($loginLookup->validateCredentials($username, $password))
+        {
+            
+            // set logged in to TRUE
+            $_SESSION['loggedIn'] = true;
+            // Redirect to admin_portal page
+            header ('Location: admin_portal.html');
+        } 
+        else 
+        {
+            
+           // error message
+           $message = "You did not enter the correct login credentials.";
+        }
+    }
+>>>>>>> 86e8956a120291baf07dcb90f282708ccb7e3e76
 
 ?>
 
