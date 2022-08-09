@@ -65,13 +65,14 @@ h1{
 .navbar{
   background-color: white;
   display: flex;
-  width: auto;
+  width: 100%;
 }
 
 
 .logo{
   margin-left: 5%;
   margin-top: 1%;
+  justify-content: flex-start;
   width: auto;
   height: auto;
 }
@@ -160,22 +161,26 @@ h1{
   margin-left: 15%;
 }
 
-.top-nav{
+/* .top-nav{
   display: flex;
   width: 500px;
   padding: 50%;
   margin: 0 auto;
   position: absolute;
 
-}
+} */
 
 .fa-search{
   color: #7C6990;
 }
 
+.thisisdumb{
+  justify-content: flex-end;
+}
+
 .search{
   display: flex;
-  width: auto;
+
 }
 
 .search_input{
@@ -183,18 +188,9 @@ h1{
   border-style: none;
   border-radius: 10px;
   background-color: #e5e5e7;
-  
-  display: flex;
-  padding: 0 auto;
-  margin: 0 auto;
-  position: absolute;
 }
 
-.topnav i{
-  position: absolute;
-  padding: 8px;
-  right: 2%;
-}
+
 
 /* ####### MAIN ####### */
 #main{
