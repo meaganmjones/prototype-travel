@@ -1,3 +1,88 @@
+<?php
+
+  include_once __DIR__ . '/model/product.php';
+
+  include_once __DIR__ . '/include/functions.php';
+  
+  // Set up configuration file and create database
+  $configFile = __DIR__ . '/model/dbconfig.ini';
+
+  if (!loggedIn())
+    {
+        header ('Location: login.php');
+    }
+
+  try 
+  {
+      $productData = new Product($configFile);
+  } 
+  catch ( Exception $error ) 
+  {
+      echo "<h2>" . $error->getMessage() . "</h2>";
+  }   
+   
+  // If it is a GET, we are coming from admin_portal.php
+  // let's figure out if we're doing update or add
+  if (isset($_GET['action'])) 
+  {
+      $action = filter_input(INPUT_GET, 'action');
+      $product_id = filter_input(INPUT_GET, 'productID', );
+      if ($action == "Update") 
+      {
+          $row = $productData->getProduct($product_id);
+          $product_name = $row['productName'];
+          $product_price = $row['productPrice'];
+          $product_size = $row['productSize'];
+          $product_quantity = $row['productQuantity'];
+          $product_image = $row['productImage'];
+      } 
+      //else it is Add and the user will enter info
+      else 
+      {
+          $product_name = "";
+          $product_price = "";
+          $product_size = "";
+          $product_quantity = "";
+          $product_image = "";
+      }
+  } // end if GET
+
+  // If it is a POST, we are coming from update.php
+  // we need to determine action, then return to admin_portal.php
+  elseif (isset($_POST['action'])) 
+  {
+      $action = filter_input(INPUT_POST, 'action');
+      $product_id = filter_input(INPUT_POST, 'productID');
+      $product_name = filter_input(INPUT_POST, 'productName');
+      $product_price = filter_input(INPUT_POST, 'productPrice');
+      $product_size = filter_input(INPUT_POST, 'productSize');
+      $product_quantity = filter_input(INPUT_POST, 'productQuantity');
+      $product_image = filter_input(INPUT_POST, 'productImage');
+
+      if ($action == "Add") 
+      {
+          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image);
+      } 
+      elseif ($action == "Update") 
+      {
+          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image);
+      }
+
+      // Redirect to admin_portal page
+      header('Location: admin_portal.php');
+  } // end if POST
+
+  // If it is neither POST nor GET, we go to admin_portal.php
+  // This page should not be loaded directly
+  else
+  {
+    header('Location: admin_portal.php');  
+  }
+      
+?>
+    <!--Creating the form to be used to update or add a product to the database-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

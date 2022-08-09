@@ -1,3 +1,37 @@
+<?php
+
+    include_once __DIR__ . '/model/product.php';
+    include_once __DIR__ . '/include/functions.php';
+
+    // Set up configuration file and create database
+    $configFile = __DIR__ . '/model/dbconfig.ini';
+
+    if (!loggedIn())
+    {
+        header ('Location: login.php');
+    }
+
+    try 
+    {
+        $productDatabase = new Product($configFile);
+    } 
+    catch ( Exception $error ) 
+    {
+        echo "<h2>" . $error->getMessage() . "</h2>";
+    }   
+    // If POST, delete the requested car before listing all
+    if (postRequest()) {
+        $product_id = filter_input(INPUT_POST, 'productID');
+        $productDatabase->deleteProduct($product_id);
+
+    }
+    $productList = $productDatabase->getProduct();
+    
+?>
+
+<!--Creating a table for the products to be displayed in-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
