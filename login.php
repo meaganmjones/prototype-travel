@@ -4,10 +4,10 @@
     include_once __DIR__ . '/include/functions.php';
 
     // Include user database definitions
-    include_once __DIR__ . '/model/users.php';
+    include_once __DIR__ . '/model/admin_login.php';
 
     // This loads HTML header and starts our session if it has not been started
-    include_once __DIR__ . "/include/header.php";
+    //include_once __DIR__ . "/include/header.php";
 
     // set logged in to false
     $_SESSION['isLoggedIn'] = false;
@@ -16,7 +16,7 @@
     // First we need to gab the crednetials form the form 
     //      and create a user database object
     $message = "";
-    if (isPostRequest()) 
+    if (postRequest()) 
     {
         //echo "made it";
         // get _POST form fields
@@ -89,7 +89,7 @@
 
             <div class="login-btn">
                 <button type="submit" class="login-btn">Login</button> 
-                <a href="admin_portal.html" style="color:blue">PROTOTYPE LOGIN</a>
+                <a href="admin_portal.php" style="color:blue">PROTOTYPE LOGIN</a>
                 <a href="index.html" class="login-home" style="color:#7C6990"><p>Site Home</p></a>
             </div><!--END OF LOGIN-BTN-->
         </form><!--END OF FORM-->

@@ -1,17 +1,18 @@
 <?php
 
     include_once __DIR__ . '/model/product.php';
+    include_once __DIR__ . '/model/category.php';
+    include_once __DIR__ . '/model/color.php';
     include_once __DIR__ . '/include/functions.php';
-    include_once __DIR__ . '/include/login.php';
+    //include_once __DIR__ . '/include/login.php';
 
+    // if (!loggedIn())
+    // {
+    //     header ('Location: login.php');
+    // }
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
-
-    if (!loggedIn())
-    {
-        header ('Location: login.php');
-    }
-
+    
     try 
     {
         $productDatabase = new Product($configFile);
