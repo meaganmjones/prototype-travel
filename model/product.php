@@ -45,36 +45,6 @@ class Product{
          return ($results);
     }
 
-    public function getCategory() {
-        $results = [];
-        $categoryTable = $this->categoryData;
-
-        $stmt = $categoryTable->prepare("SELECT categoryID, categoryType FROM category_lookup ORDER BY categoryID");
-        
-        if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
-        {
-             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                 
-         }
-         
-         return ($results);
-    }
-
-    public function getColor() {
-        $results = [];
-        $colorTable = $this->ColorData;
-
-        $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookuop ORDER BY colorID");
-        
-        if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
-        {
-             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                 
-         }
-         
-         return ($results);
-    }
-
     //Add to database
     public function addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image) {
         $addSuccessful = false;
@@ -96,41 +66,6 @@ class Product{
         
         return $addSuccessful;
     }
-
-    public function addCategory($category_type){
-        $addSuccessful = false;
-        $categoryTable = $this->categoryData;
-        
-
-        $stmt = $categoryTable->prepare("INSERT INTO category_lookup SET category_type = :categoryType");
-        
-
-        $boundCategory = array (
-            ":categoryType" => $category_type
-        );
-
-        $addSuccessful = ($stmt->execute($boundCategory) && $stmt->rowCount() > 0);
-        
-        return $addSuccessful;
-
-    } 
-
-    public function addColor($color_hex, $color_desc){
-        $addSuccessful = false;
-        $colorTable = $this->colorData;
-
-        $stmt = $colorTable->prepare("INSERT INTO color_lookup SET color_hex = :colorHex, color_desc = :colorDesc");
-
-        $boundColor = array (
-            ":colorHex" => $color_hex,
-            ":colorDesc" => $color_desc
-        );
-
-        $addSuccessful = ($stmt->execute($boundColor) && $stmt->rowCount() > 0);
-
-        return $addSuccessful;
-    }
-   
   
 
 
@@ -151,29 +86,6 @@ class Product{
 
         
     }
-
-    public function updateCategory($category_id, $category_type){
-        $updateSuccessful = false;
-        $categoryTable = $this->CategoryDate;
-
-        $stmt = $categoryTable->prepare("UPDATE category_lookup SET category_type = :categoryType WHERE category_id = :categoryID");
-
-        $stmt->bindValue(':categoryID', $category_id);
-        $stmt->bindValue(':categoryType', $category_type);
-
-    }
-
-    public function updateColor($color_id, $color_hex, $color_desc){
-        $updateSuccessful = false;
-        $colorTable = $this->categoryData;
-
-        $stmt = $colorTable->prepare("UPDATE color_lookup SET color_hex = :colorHex, color_desc = :colorDesc WHERE color_id = :colorID");
-
-        $stmt->bindvalue(':colorID', $color_id);
-        $stmt->bindvalue(':colorHex', $color_hex);
-        $stmt->bindvalue(':colorDesc', $color_desc);
-    }
-
 
 //Delete from the database
     public function deleteProduct ($product_id)
@@ -208,22 +120,6 @@ class Product{
         return $results;
     }
 
-    public function getColor($color_id){
-
-        $results = [];
-        $colorTable = $this->colorDate;
-
-        $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookup WHERE color_id = :colorID");
-
-        $stmt->bindvalue(':colorID', $color_id);
-
-        if($stmt->execute() && $stmt->rowcount() > 0)
-        {
-            $results = $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        return $results;
-    }
-
     //special function accessible to derived classes
     //allows children to make queries to the database
     protected function getDatabaseRef()
@@ -232,7 +128,4 @@ class Product{
     }
 
 }//end product class
-
-   
-
 ?>
