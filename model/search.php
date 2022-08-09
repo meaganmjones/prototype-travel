@@ -16,27 +16,27 @@ class ProductSearch extends Product
 
         // Create base SQL statement that we can append
         // specific restrictions to
-        $sqlQuery =  "SELECT * FROM  product_lookup     ";
-        $sqlQuery2 = "SELECT * FROM category_lookup     ";
+        $sqlQuery =  "SELECT * FROM  product_lookup AND category_lookup    ";
+        //$sqlQuery2 = "SELECT * FROM category_lookup     ";
 $isFirstClause = true;
         // if the user has input, then append the value and bind the parameter
         if ($product_name != "" || $category_type != "") {
             if ($isFirstClause)
             {
                 $sqlQuery .=  " WHERE ";
-                $sqlQuery2 .= " WHERE ";
+                //$sqlQuery2 .= " WHERE ";
                 $isFirstClause = false;
             }
             else
             {
                 $sqlQuery .= "WHERE ";
-                $sqlQuery2 .= " WHERE ";
+                //$sqlQuery2 .= " WHERE ";
                 $isFirstClause = false;
             }
-            $sqlQuery .= "  product_name LIKE :productName";
-            $binds['productName'] = '%'.$product_name.'%';
-            $sqlQuery2 .= "  category_type LIKE :categoryType";
-            $binds['categoryType'] = '%'.$category_type.'%';
+            $sqlQuery .= "  product_name OR category_typeLIKE :productName OR c:ategoryType";
+            $binds['productName, categoryType'] = '%'.$product_name.'%'.'OR'.'%'.$category_type.'%';
+            //$sqlQuery2 .= "  category_type LIKE :categoryType";
+            //$binds['categoryType'] = '%'.$category_type.'%';
         }
 
 
