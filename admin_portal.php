@@ -1,9 +1,9 @@
 <?php
 
-    include_once __DIR__ . '/model/product.php';
-    include_once __DIR__ . '/model/category.php';
-    include_once __DIR__ . '/model/color.php';
-    include_once __DIR__ . '/include/functions.php';
+    include_once __DIR__ . '\model\product.php';
+    include_once __DIR__ . '\model\category.php';
+    include_once __DIR__ . '\model\color.php';
+    include_once __DIR__ . '\include\functions.php';
     //include_once __DIR__ . '/include/login.php';
 
     // if (!loggedIn())
@@ -11,8 +11,8 @@
     //     header ('Location: login.php');
     // }
     // Set up configuration file and create database
-    $configFile = __DIR__ . '/model/dbconfig.ini';
-    
+    $configFile = __DIR__ . '\model\dbconfig.ini';
+
     try 
     {
         $productDatabase = new Product($configFile);
@@ -74,7 +74,7 @@
             <td class="col_data">data</td>
             <td class="col_data">no</td>
             <td class="col_data">value</td>
-            <td class="col_data"><a href="update.html" style="color: red;">Edit</a></td>
+            <td class="col_data"><a href="update.php" style="color: red;">Edit</a></td>
             <td class="col_data"><a href="#" style="color: red;">Delete</a></td>
         </tr>
     </table>

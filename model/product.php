@@ -1,5 +1,6 @@
 <?php
 
+    
 //provides a wrapper to the database
 class Product{
 
@@ -11,7 +12,7 @@ class Product{
 
         if ($ini = parse_ini_file($configFile)){
             
-            $productPDO = new PDO ("mysql:host=" .$ini['servername'] . ";port=" .$ini['port'] . ";dbname=" . $ini['dbname'], $ini['username'], $ini['password']);
+            $productPDO = new PDO ("postgressql:host=" .$ini['servername'] . ":port=" .$ini['port'] . ":dbname=" . $ini['dbname'], $ini['username'], $ini['password']);
 
             //dont emulate prepare statements
             $productPDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
