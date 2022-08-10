@@ -72,7 +72,7 @@
             <td class="col_data">data</td>
             <td class="col_data">no</td>
             <td class="col_data">value</td>
-            <td class="col_data"><a href="update.html" style="color: red;">Edit</a></td>
+            <td class="col_data"><a href="update.php" style="color: red;">Edit</a></td>
             <td class="col_data"><a href="#" style="color: red;">Delete</a></td>
         </tr>
     </table>
