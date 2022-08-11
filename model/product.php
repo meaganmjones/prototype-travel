@@ -117,6 +117,7 @@ class Product
 
         if ($stmt->execute() && $stmt->rowCount() > 0)
         {
+            
             $results = $stmt->fetch(PDO::FETCH_ASSOC);
         }
         return $results;
@@ -131,3 +132,4 @@ class Product
 
 }//end product class
 ?>
+

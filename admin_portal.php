@@ -27,11 +27,11 @@
     if (postRequest()) {
         $product_id = filter_input(INPUT_POST, 'productID');
         $productDatabase->deleteProduct($product_id);
-        $file = addslashes(file_get_contents($_FILES["productImage"]["tmp_name"]));  
-        $sqlQuery = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE productID = :productID"; 
+        
 
     }
     $productList = $productDatabase->getProduct();
+    
     
 ?>
 
@@ -80,7 +80,8 @@
                 <td class="col-data"><?php echo $row['colorID'];?></td>
                 <td class="col-data"><?php echo $row['productSize']; ?></td>
                 <td class="col-data"><?php echo $row['productQuantity']; ?></td>
-                <td><a href="update.php?action=Update&productID=<?= $row['productID'] ?>" styyle="color: red;">Edit</a></td> 
+                <td class="col-data"><?php echo $row['productImage']; ?></td>
+                <td><a href="update.php?action=Update&productID=<?= $row['productID'] ?>" style="color: red;">Edit</a></td> 
                 <td class="col_data"><a href="#"  style="color: red;">Delete</a></td>
                 </form> 
                 <!--Removed links-->
@@ -105,25 +106,3 @@
     </div><!--END OF INVENTORY-->
 </body>
 </html>
-<script>  
- $(document).ready(function(){  
-      $('#insert').click(function(){  
-           var image_name = $('#image').val();  
-           if(image_name == '')  
-           {  
-                alert("Please Select Image");  
-                return false;  
-           }  
-           else  
-           {  
-                var extension = $('#image').val().split('.').pop().toLowerCase();  
-                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
-                {  
-                     alert('Invalid Image File');  
-                     $('#image').val('');  
-                     return false;  
-                }  
-           }  
-      });  
- });  
- </script>

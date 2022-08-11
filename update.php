@@ -161,10 +161,35 @@
 <div id="pp-main">
     <div class="desc">
         <div class="prod-pg-left">
-            <div class="pic">
-              
-              <img src="data:image/png;charset=utf8;base64,<?php echo base64_encode('product_image');?>" class="prod-pic">
-              
+            <div class="pic">              
+
+              <!-- need to add slashes to the image file when it comes out of the database -->
+<!-- $file = addslashes(file_get_contents($_FILES["productImage"]["tmp_name"]));  
+$stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE productID = :productID";
+<script>  
+ $(document).ready(function(){  
+      $('#insert').click(function(){  
+           var image_name = $('#image').val();  
+           if(image_name == '')  
+           {  
+                alert("Please Select Image");  
+                return false;  
+           }  
+           else  
+           {  
+                var extension = $('#image').val().split('.').pop().toLowerCase();  
+                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
+                {  
+                     alert('Invalid Image File');  
+                     $('#image').val('');  
+                     return false;  
+                }  
+           }  
+      });  
+ });  
+ </script> -->
+
+              <img src="<?php echo $product_image?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
