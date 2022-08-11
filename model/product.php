@@ -47,6 +47,21 @@ class Product
          return ($results);
     }
 
+    public function getOneProduct($id) {
+        $results = [];
+        $productTable = $this->productData;
+
+        $stmt = $productTable->prepare("SELECT * FROM product_lookup WHERE productID = :id");
+
+        $stmt->bindValue(':id', $id);
+
+        if($stmt->execute() && $stmt->rowCount() >0){
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return ($results);
+
+    }
+
     //Add to database
     public function addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image) {
         $addSuccessful = false;

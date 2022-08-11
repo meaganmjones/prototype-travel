@@ -53,6 +53,7 @@
         <a href="index.html"><image src="image/TravelLogo_2.jpg" class="top-img"></a>
     </br>
     <table class="inv_tbl">
+    <thead>
         <tr>
             <th class="col_head">ID</th>
             <th class="col_head">Product Name</th>
@@ -62,10 +63,11 @@
             <th class="col_head">Quantity</th>
             <th class="col_head"></th>
         </tr>
+    </thead>
         <?php foreach ($productList as $row): ?>
         <tr>                       
             <td class="col-data" style="contents: hidden;"><?php echo $row['productID']; ?></td>
-            <td class="col-data"><a href="update.php" style="color: blue;"><?php echo $row['productName']; ?></a></td>
+            <td class="col-data"><a href="update.php?action=Update&id=<?php echo $row['productID']; ?>" style="color: blue;"><?php echo $row['productName']; ?></a></td>
             <td class="col-data"><?php echo $row['categoryID']; ?></td>
             <td class="col-data"><?php echo $row['colorID'];?></td>
             <td class="col-data"><?php echo $row['productSize']; ?></td>

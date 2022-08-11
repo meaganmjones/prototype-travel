@@ -1,44 +1,56 @@
 <?php
 
-  include_once __DIR__ . '/model/product.php';
+  include_once __DIR__ . '/model/product.php'; //include Product Class
 
-  include_once __DIR__ . '/include/functions.php';
+  include_once __DIR__ . '/model/category.php'; //include Category Class (child of Product Class)
+
+  include_once __DIR__ . '/model/color.php'; //inlcude Color Class (child of Product Class)
+
+  include_once __DIR__ . '/include/functions.php'; //include functions
   
   // Set up configuration file and create database
   $configFile = __DIR__ . '/model/dbconfig.ini';
 
-  if (!loggedIn())
-    {
-        header ('Location: login.php');
-    }
+  // if (!loggedIn()) //if user not logged in:
+  //   {
+  //       header ('Location: login.php'); //redirect to login page
+  //   }
 
   try 
   {
-      $productData = new Product($configFile);
+      $productData = new Product($configFile); //new instance of Product Class
   } 
   catch ( Exception $error ) 
   {
-      echo "<h2>" . $error->getMessage() . "</h2>";
+      echo "<h2>" . $error->getMessage() . "</h2>"; //show error message
   }   
    
   // If it is a GET, we are coming from admin_portal.php
   // let's figure out if we're doing update or add
-  if (isset($_GET['action'])) 
+  if (isset($_GET['action'])) //if an action is sent over:
   {
-      $action = filter_input(INPUT_GET, 'action');
-      $product_id = filter_input(INPUT_GET, 'productID', );
-      if ($action == "Update") 
+      $action = filter_input(INPUT_GET, 'action'); //store what the action is
+      $product_id = filter_input(INPUT_GET, 'id', ); //store the product 
+
+      //echo $product_id; 
+
+      if ($action == "Update") //if the action is update:
       {
-          $row = $productData->getProduct($product_id);
-          $product_name = $row['productName'];
-          $product_price = $row['productPrice'];
-          $product_size = $row['productSize'];
-          $row = $categoryData->getOneCategory($category_id);
-          $product_quantity = $row['productQuantity'];
-          $product_image = $row['productImage'];
+        $row = $productData->getOneProduct($product_id); //query the product_lookup table, store as $row
+        var_dump($row);
+
+        $key = array_keys($row);
+
+        var_dump($key);
+          //store data respectively 
+          //$product_name = $row['productName'];
+          //$product_price = $row['productPrice'];
+          //$product_size = $row['productSize'];
+          //$row = $categoryData->getOneCategory($category_id);
+          //$product_quantity = $row['productQuantity'];
+          //$product_image = $row['productImage'];
       } 
-      //else it is Add and the user will enter info
-      else 
+      else //else it is Add and the user will enter info
       {
           $product_name = "";
           $product_price = "";
@@ -52,6 +64,7 @@
   // we need to determine action, then return to admin_portal.php
   elseif (isset($_POST['action'])) 
   {
+    //POST - grab from html body
       $action = filter_input(INPUT_POST, 'action');
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
@@ -60,17 +73,16 @@
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
 
-      if ($action == "Add") 
+      if ($action == "Add") //if action is add:
       {
-          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image);
+          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image); //query product_lookup w/ INSERT
       } 
-      elseif ($action == "Update") 
+      elseif ($action == "Update") //if action is update:
       {
-          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image);
+          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image); //query product_lookup w/ UPDATE
       }
-
-      // Redirect to admin_portal page
-      header('Location: admin_portal.php');
+      
+      header('Location: admin_portal.php'); // Redirect to admin_portal page
   } // end if POST
 
   // If it is neither POST nor GET, we go to admin_portal.php
@@ -155,17 +167,18 @@
             <div class="pic">
               <form class="imgUpload">
                 <label>Upload Image: </label>
-                <input type="file" accept="image/*">
+                <input type="file" >
                 <input type="submit">
               </form>
-                <img src="#" class="prod-pic"><p>this needs JS to display after upload</p>
+                <img src="<?php echo $product_image; ?>" class="prod-pic"><p>this needs JS to display after upload</p>
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
             <div class="text">
-              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h2>
+              <input placeholder="<?php echo $product_id ?>">
+              <h2 class="prod-title"><input value="<?php echo $product_name?>" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h2>
               
-              <h3 class="prod-price"><input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h3>
+              <h3 class="prod-price"><input value="<?php echo $product_price?>" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h3>
                <div class="colorpick">
               <!--<p class="pick">Choose A Color</p>
                     <label class="edit_color">pink
@@ -201,8 +214,8 @@
                     <button class="size">L</button>
                     <button class="size">XL</button>
                 </div><!--END OF SIZEPICK-->
-                <div class="addbtn"><?php echo $action; ?>
-                    <button onclick="cartBtn()">Add To Cart</button>
+                <div class="addbtn">
+                    <button onclick="cartBtn()"><?php echo $action; ?></button>
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->
