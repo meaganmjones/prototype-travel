@@ -18,6 +18,7 @@
 
   try 
   {
+      $categoryData = new Category($configFile);
       $productData = new Product($configFile);
   } 
   catch ( Exception $error ) 
@@ -30,14 +31,18 @@
   if (isset($_GET['action'])) 
   {
       $action = filter_input(INPUT_GET, 'action');
+      //echo $action;
       $product_id = filter_input(INPUT_GET, 'productID', );
+       
+      
       if ($action == "Update") 
       {
-          $row = $productData->getProduct($product_id);
+          $row = $productData->getOneProduct($product_id);          
           $product_name = $row['productName'];
           $product_price = $row['productPrice'];
           $product_size = $row['productSize'];
-          $row = $categoryData->getOneCategory($category_id);
+          $category_id = $row['categoryID'];
+          $color_id = $row['colorID'];
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
       } 
@@ -82,8 +87,8 @@
   else
   {
     header('Location: admin_portal.php');  
-  }
-      
+  } 
+ 
 ?>
     <!--Creating the form to be used to update or add a product to the database-->
 
@@ -157,14 +162,16 @@
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">
-                <img src="#" class="prod-pic">
+              
+              <img src="data:image/png;charset=utf8;base64,<?php echo base64_encode('product_image');?>" class="prod-pic">
+              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
             <div class="text">
-              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h2>
+              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
               
-              <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h3>
+              <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
                 <div class="colorpick">
                     <p class="pick">Choose A Color</p>
                     <label class="edit_color">pink
@@ -189,6 +196,7 @@
                       <a href="#" class="menu">White</a>
                       <a href="#" class="menu">Grey</a>
                       <a href="#" class="menu">Black</a>
+                      <a href="#" class="menu" value=<?php echo $color_id;?>></a>
                     </div><!--END OF DROPDOWN-CONTENT-->
 
                 </div><!--END OF COLORPICK-->

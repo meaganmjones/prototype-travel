@@ -68,21 +68,21 @@ class Color{
         $stmt->bindvalue(':colorDesc', $color_desc);
     }
 
-    // public function getColor($color_id){
+    public function getOneColor($color_id){
 
-    //     $results = [];
-    //     $colorTable = $this->colorDate;
+        $results = [];
+        $colorTable = $this->ColorData;
 
-    //     $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookup WHERE color_id = :colorID");
+        $stmt = $colorTable->prepare("SELECT colorDesc FROM color_lookup WHERE color_id = :colorID");
 
-    //     $stmt->bindvalue(':colorID', $color_id);
+        $stmt->bindvalue(':colorID', $color_id);
 
-    //     if($stmt->execute() && $stmt->rowcount() > 0)
-    //     {
-    //         $results = $stmt->fetch(PDO::FETCH_ASSOC);
-    //     }
-    //     return $results;
-    // }
+        if($stmt->execute() && $stmt->rowcount() > 0)
+        {
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        return $results;
+    }
 
     protected function getDatabaseRef()
     {

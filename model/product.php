@@ -106,21 +106,21 @@ class Product
 
 
 //Get listing from the database
-    // public function getProduct ($product_id)
-    // {
-    //     $results = [];
-    //     $productTable = $this->productData;
+    public function getOneProduct ($product_id)
+    {
+        $results = [];
+        $productTable = $this->productData;
 
-    //     $stmt = $productTable->prepare("SELECT productID, productName, productPrice, productSize, productImage FROM product_lookup WHERE product_id = :productID");
+        $stmt = $productTable->prepare("SELECT productID, productName, productPrice, categoryID, colorID, productSize, productQuantity, productImage FROM product_lookup WHERE productID = :productID");
 
-    //     $stmt->bindValue(':productID', $product_id);
+        $stmt->bindValue(':productID', $product_id);
 
-    //     if ($stmt->execute() && $stmt->rowCount() > 0)
-    //     {
-    //         $results = $stmt->fetch(PDO::FETCH_ASSOC);
-    //     }
-    //     return $results;
-    // }
+        if ($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        return $results;
+    }
 
     //special function accessible to derived classes
     //allows children to make queries to the database

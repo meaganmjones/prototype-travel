@@ -78,7 +78,7 @@ class Category
         $results = [];
         $categoryTable = $this->categoryData;
 
-        $stmt = $categoryTable->prepare("SELECT categoryID, categoryType FROM category_lookup WHERE category_id = :categoryID");
+        $stmt = $categoryTable->prepare("SELECT categoryType FROM category_lookup WHERE categoryID = :categoryID");
 
         $stmt->bindValue(':categoryID', $category_id);
 
