@@ -1,16 +1,20 @@
 <?php
 
-  include_once __DIR__ . '/model/product.php';
+  include_once __DIR__ . '\model\product.php';
 
-  include_once __DIR__ . '/include/functions.php';
+  include_once __DIR__ . '\model\category.php';
+
+  include_once __DIR__ . '\model\color.php';
+
+  include_once __DIR__ . '\include\functions.php';
   
   // Set up configuration file and create database
-  $configFile = __DIR__ . '/model/dbconfig.ini';
+  $configFile = __DIR__ . '\model\dbconfig.ini';
 
-  if (!loggedIn())
-    {
-        header ('Location: login.php');
-    }
+  // if (!loggedIn())
+  //   {
+  //       header ('Location: login.php');
+  //   }
 
   try 
   {
@@ -33,6 +37,7 @@
           $product_name = $row['productName'];
           $product_price = $row['productPrice'];
           $product_size = $row['productSize'];
+          $row = $categoryData->getOneCategory($category_id);
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
       } 
@@ -99,7 +104,7 @@
 <div id="container">
   <div id="nav" class="navbar">
     <div class="logo">
-      <a href="index.html"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
+      <a href="index.php"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
     </div><!--END OF LOGO-->
     <div class="buttons">
       <div class="new">
@@ -126,7 +131,7 @@
 
       <div class="account">
         <div class="dropdown">
-          <a style="text-decoration: none;" href="login.html" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
+          <a style="text-decoration: none;" href="login.php" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
           <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
           <div class="dropdown-content">
             <a href="#" class="menu">Account</a>
@@ -195,7 +200,7 @@
                     <button class="size">L</button>
                     <button class="size">XL</button>
                 </div><!--END OF SIZEPICK-->
-                <div class="addbtn">
+                <div class="addbtn"><?php echo $action; ?>
                     <button onclick="cartBtn()">Add To Cart</button>
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->

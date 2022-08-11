@@ -1,6 +1,9 @@
 <?php
 
-class Category{
+
+
+class Category
+{
 
 
     private $categoryData;
@@ -70,21 +73,21 @@ class Category{
 
     }
 
-    // public function getCategory($category_id)
-    // {
-    //     $results = [];
-    //     $categoryTable = $this->categoryData;
+    public function getOneCategory($category_id)
+    {
+        $results = [];
+        $categoryTable = $this->categoryData;
 
-    //     $stmt = $categoryTable->prepare("SELECT categoryID, categoryType FROM category_lookup WHERE category_id = :categoryID");
+        $stmt = $categoryTable->prepare("SELECT categoryID, categoryType FROM category_lookup WHERE category_id = :categoryID");
 
-    //     $stmt->bindValue(':categoryID', $category_id);
+        $stmt->bindValue(':categoryID', $category_id);
 
-    //     if ($stmt->execute() && $stmt->rowCount() > 0)
-    //     {
-    //         $results = $stmt->fetch(PDO::FETCH_ASSOC);
-    //     }
-    //     return $results;
-    // }
+        if ($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        return $results;
+    }
 
     protected function getDatabaseRef()
     {
