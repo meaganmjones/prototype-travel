@@ -564,7 +564,7 @@ p{
   display: table-cell;
 }
 
-/*----------INVENTORY-----------------*/
+/*----------ADMIN PORTAL-----------------*/
 .inventory{
   width: 100%;
   text-align: center;
@@ -590,9 +590,9 @@ p{
   padding: 20px;
 }
 .col_data{
-  padding: 20px;
   text-align: center;
-  height: 300px;
+  width: auto;
+  margin-right: 20px;
 }
 
 /* .col_data:nth-child(even){

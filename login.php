@@ -23,7 +23,7 @@
             </br>
 
             <p class="login-text">
-                <label class="login-lbl" for="">Category: </label> 
+                <label class="login-lbl" for="">Password: </label> 
                 <input class="login-input" type="password" name="password"> 
                 <a onclick="#">Show Password</a>
             </p>

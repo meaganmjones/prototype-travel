@@ -6,10 +6,10 @@
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
 
-    if (!loggedIn())
-    {
-        header ('Location: login.php');
-    }
+    // if (!loggedIn())
+    // {
+    //     header ('Location: login.php');
+    // }
 
     try 
     {
@@ -49,7 +49,7 @@
             <a href="index.php"><button class="btn" >Site Home</button></a>
         </div><!--END OF INV-BTN-->
     </br>
-    <div>
+    
         <a href="index.html"><image src="image/TravelLogo_2.jpg" class="top-img"></a>
     </br>
     <table class="inv_tbl">
@@ -60,44 +60,25 @@
             <th class="col_head">Color</th>
             <th class="col_head">Size</th>
             <th class="col_head">Quantity</th>
-            <th class="col_head">Update</th>
-            <th class="col_head">Delete</th>
+            <th class="col_head"></th>
         </tr>
         <?php foreach ($productList as $row): ?>
-            <tr>
-                <td>
-                    <form action="admin_portal.php" method="post">
-                                             
-                </td>
-                <td class="col-data"><?php echo $row['productID']; ?></td>
-                <td class="col-data"><?php echo $row['productName']; ?></td>
-                <td class="col-data"><?php echo $row['categoryID']; ?></td>
-                <td class="col-data"><?php echo $row['colorID'];?></td>
-                <td class="col-data"><?php echo $row['productSize']; ?></td>
-                <td class="col-data"><?php echo $row['productQuantity']; ?></td>
-                <td><a href="update.php?action=Update&productID=<?= $row['productID'] ?>" styyle="color: red;">Edit</a></td> 
-                <td class="col_data"><a href="#"  style="color: red;">Delete</a></td>
-                </form> 
-                <!--Removed links-->
+        <tr>                       
+            <td class="col-data" style="contents: hidden;"><?php echo $row['productID']; ?></td>
+            <td class="col-data"><a href="update.php" style="color: blue;"><?php echo $row['productName']; ?></a></td>
+            <td class="col-data"><?php echo $row['categoryID']; ?></td>
+            <td class="col-data"><?php echo $row['colorID'];?></td>
+            <td class="col-data"><?php echo $row['productSize']; ?></td>
+            <td class="col-data"><?php echo $row['productQuantity']; ?></td>
+            <td class="col_data"><i class="fa-solid fa-trash-can"></i></td>
                 
                 
-            </tr>
+        </tr>  
         <?php endforeach; ?>
-        <tr>
-            <td class="col_data">this</td>
-            <td class="col_data">is</td>
-            <td class="col_data">all</td>
-            <td class="col_data">placeholder</td>
-            <td class="col_data">data</td>
-            <td class="col_data">no</td>
-            <td class="col_data">value</td>
-            <td class="col_data"><a href="update.html" style="color: red;">Edit</a></td>
-            <td class="col_data"><a href="#" style="color: red;">Delete</a></td>
-        </tr>
     </table>
 
 
-    </div>
+    
     </div><!--END OF INVENTORY-->
 </body>
 </html>
