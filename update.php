@@ -152,7 +152,12 @@
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">
-                <img src="#" class="prod-pic">
+              <form class="imgUpload">
+                <label>Upload Image: </label>
+                <input type="file" accept="image/*">
+                <input type="submit">
+              </form>
+                <img src="#" class="prod-pic"><p>this needs JS to display after upload</p>
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
@@ -160,8 +165,8 @@
               <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h2>
               
               <h3 class="prod-price"><input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h3>
-                <!-- <div class="colorpick">
-                    <p class="pick">Choose A Color</p>
+               <div class="colorpick">
+              <!--<p class="pick">Choose A Color</p>
                     <label class="edit_color">pink
                         <input type="radio" name="rdo_color">
                         <span class="checkmark"></span>
@@ -186,7 +191,7 @@
                       <a href="#" class="menu">Black</a>
                     </div><!--END OF DROPDOWN-CONTENT-->
 
-                <!-- </div>END OF COLORPICK -->
+                 </div> <!--END OF COLORPICK -->
 
                 <div class="sizepick">
                     <button class="size">XS</button>

@@ -1,52 +1,52 @@
 <?php
 
-    // Include functions
-    include_once __DIR__ . '/include/functions.php';
+    // // Include functions
+    // include_once __DIR__ . '/include/functions.php';
 
-    // include AdminLogin Class
-    include_once __DIR__ . '/model/admin_login.php';
+    // // include AdminLogin Class
+    // include_once __DIR__ . '/model/admin_login.php';
 
-    // set logged in to false
-    $_SESSION['loggedIn'] = false;
+    // // set logged in to false
+    // $_SESSION['loggedIn'] = false;
     
     
-    $message = "";
-    if (postRequest()) 
-    {
-        // get _POST form fields
-        $username = filter_input(INPUT_POST, 'username');
-        $password = filter_input(INPUT_POST, 'password');
+    // $message = "";
+    // if (postRequest()) 
+    // {
+    //     // get _POST form fields
+    //     $username = filter_input(INPUT_POST, 'username');
+    //     $password = filter_input(INPUT_POST, 'password');
         
-        // Set up configuration file and create database
-        $configFile = __DIR__ . '/model/dbconfig.ini';
-        try 
-        {
-            $loginLookup = new AdminLogin($configFile);
+    //     // Set up configuration file and create database
+    //     $configFile = __DIR__ . '/model/dbconfig.ini';
+    //     try 
+    //     {
+    //         $loginLookup = new AdminLogin($configFile);
             
-        } 
-        catch ( Exception $error ) 
-        {
+    //     } 
+    //     catch ( Exception $error ) 
+    //     {
             
-            echo "<h2>" . $error->getMessage() . "</h2>";
-        }   
+    //         echo "<h2>" . $error->getMessage() . "</h2>";
+    //     }   
     
         
-        // check to see if user credentials are valid.
-        if ($loginLookup->validateCredentials($username, $password))
-        {
+    //     // check to see if user credentials are valid.
+    //     if ($loginLookup->validateCredentials($username, $password))
+    //     {
             
-            // set logged in to TRUE
-            $_SESSION['loggedIn'] = true;
-            // Redirect to admin_portal page
-            header ('Location: admin_portal.html');
-        } 
-        else 
-        {
+    //         // set logged in to TRUE
+    //         $_SESSION['loggedIn'] = true;
+    //         // Redirect to admin_portal page
+    //         header ('Location: admin_portal.html');
+    //     } 
+    //     else 
+    //     {
             
-           // error message
-           $message = "You did not enter the correct login credentials.";
-        }
-    }
+    //        // error message
+    //        $message = "You did not enter the correct login credentials.";
+    //     }
+    // }
 
 ?>
 
@@ -70,13 +70,14 @@
 
             <p class="login-text">
                 <label class="login-lbl" for="">Username: </label>  
-                <input class="login-input" type="text" name="username"> 
+                <input class="login-input" type="text" name="username" required> 
             </p>
             </br>
 
             <p class="login-text">
                 <label class="login-lbl" for="">Category: </label> 
                 <input class="login-input" type="password" name="password"> 
+                <a onclick="#">Show Password</a>
             </p>
             </br>
 

@@ -1,31 +1,31 @@
 <?php
 
-    include_once __DIR__ . '/model/product.php';
-    include_once __DIR__ . '/include/functions.php';
+    // include_once __DIR__ . '/model/product.php';
+    // include_once __DIR__ . '/include/functions.php';
 
-    // Set up configuration file and create database
-    $configFile = __DIR__ . '/model/dbconfig.ini';
+    // // Set up configuration file and create database
+    // $configFile = __DIR__ . '/model/dbconfig.ini';
 
-    if (!loggedIn())
-    {
-        header ('Location: login.php');
-    }
+    // if (!loggedIn())
+    // {
+    //     header ('Location: login.php');
+    // }
 
-    try 
-    {
-        $productDatabase = new Product($configFile);
-    } 
-    catch ( Exception $error ) 
-    {
-        echo "<h2>" . $error->getMessage() . "</h2>";
-    }   
-    // If POST, delete the requested car before listing all
-    if (postRequest()) {
-        $product_id = filter_input(INPUT_POST, 'productID');
-        $productDatabase->deleteProduct($product_id);
+    // try 
+    // {
+    //     $productDatabase = new Product($configFile);
+    // } 
+    // catch ( Exception $error ) 
+    // {
+    //     echo "<h2>" . $error->getMessage() . "</h2>";
+    // }   
+    // // If POST, delete the requested car before listing all
+    // if (postRequest()) {
+    //     $product_id = filter_input(INPUT_POST, 'productID');
+    //     $productDatabase->deleteProduct($product_id);
 
-    }
-    $productList = $productDatabase->getProduct();
+    // }
+    // $productList = $productDatabase->getProduct();
     
 ?>
 
@@ -38,6 +38,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3ed3e280c1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
     <title>Inventory</title>
 </head>
@@ -73,7 +74,7 @@
             <td class="col_data">no</td>
             <td class="col_data">value</td>
             <td class="col_data"><a href="update.php" style="color: red;">Edit</a></td>
-            <td class="col_data"><a href="#" style="color: red;">Delete</a></td>
+            <td class="col_data"><i class="fa-solid fa-trash-can fa-sm" style="color: red;"></i></td>
         </tr>
     </table>
 
