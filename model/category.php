@@ -1,6 +1,9 @@
 <?php
 
-class Category{
+
+
+class Category
+{
 
 
     private $categoryData;
@@ -70,7 +73,7 @@ class Category{
 
     }
 
-     public function getCategory($category_id)
+    public function getOneCategory($category_id)
     {
         $results = [];
         $categoryTable = $this->categoryData;

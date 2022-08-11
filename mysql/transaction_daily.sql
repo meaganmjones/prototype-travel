@@ -3,7 +3,7 @@ transactionID INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
         userID INT NOT NULL,
         productID INT NOT NULL,
         loginID INT NOT NULL,
-        cartTotal MONEY NOT NULL,
+        cartTotal FLOAT(13,2) NOT NULL,
         transactionDate DATETIME
         
         

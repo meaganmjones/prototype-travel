@@ -592,6 +592,7 @@ p{
 .col_data{
   padding: 20px;
   text-align: center;
+  height: 300px;
 }
 
 /* .col_data:nth-child(even){
