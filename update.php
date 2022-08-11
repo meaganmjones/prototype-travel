@@ -1,56 +1,46 @@
 <?php
 
-  include_once __DIR__ . '/model/product.php'; //include Product Class
+  include_once __DIR__ . '/model/product.php';
 
-  include_once __DIR__ . '/model/category.php'; //include Category Class (child of Product Class)
-
-  include_once __DIR__ . '/model/color.php'; //inlcude Color Class (child of Product Class)
-
-  include_once __DIR__ . '/include/functions.php'; //include functions
+  include_once __DIR__ . '/include/functions.php';
   
   // Set up configuration file and create database
   $configFile = __DIR__ . '/model/dbconfig.ini';
 
-  // if (!loggedIn()) //if user not logged in:
+  // if (!loggedIn())
   //   {
-  //       header ('Location: login.php'); //redirect to login page
+  //       header ('Location: login.php');
   //   }
 
   try 
   {
-      $productData = new Product($configFile); //new instance of Product Class
+      $productData = new Product($configFile);
   } 
   catch ( Exception $error ) 
   {
-      echo "<h2>" . $error->getMessage() . "</h2>"; //show error message
+      echo "<h2>" . $error->getMessage() . "</h2>";
   }   
    
   // If it is a GET, we are coming from admin_portal.php
   // let's figure out if we're doing update or add
-  if (isset($_GET['action'])) //if an action is sent over:
+  if (isset($_GET['action'])) 
   {
-      $action = filter_input(INPUT_GET, 'action'); //store what the action is
-      $product_id = filter_input(INPUT_GET, 'id', ); //store the product 
-
-      //echo $product_id; 
-
-      if ($action == "Update") //if the action is update:
+      $action = filter_input(INPUT_GET, 'action');
+      $product_id = filter_input(INPUT_GET, 'id', );
+      if ($action == "Update") 
       {
-        $row = $productData->getOneProduct($product_id); //query the product_lookup table, store as $row
-        var_dump($row);
+        $row = $productData->getOneProduct($product_id);
+        //var_dump($row);
 
-        $key = array_keys($row);
-
-        var_dump($key);
-          //store data respectively 
-          //$product_name = $row['productName'];
-          //$product_price = $row['productPrice'];
-          //$product_size = $row['productSize'];
-          //$row = $categoryData->getOneCategory($category_id);
-          //$product_quantity = $row['productQuantity'];
-          //$product_image = $row['productImage'];
+        var_dump(array_keys($row));
+        $product_name = $row['productName'];
+        $product_price = $row['productPrice'];
+        $product_size = $row['productSize'];
+        $product_quantity = $row['productQuantity'];
+        $product_image = $row['productImage'];
       } 
-      else //else it is Add and the user will enter info
+      //else it is Add and the user will enter info
+      else 
       {
           $product_name = "";
           $product_price = "";
@@ -64,7 +54,6 @@
   // we need to determine action, then return to admin_portal.php
   elseif (isset($_POST['action'])) 
   {
-    //POST - grab from html body
       $action = filter_input(INPUT_POST, 'action');
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
@@ -73,16 +62,17 @@
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
 
-      if ($action == "Add") //if action is add:
+      if ($action == "Add") 
       {
-          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image); //query product_lookup w/ INSERT
+          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image);
       } 
-      elseif ($action == "Update") //if action is update:
+      elseif ($action == "Update") 
       {
-          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image); //query product_lookup w/ UPDATE
+          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image);
       }
-      
-      header('Location: admin_portal.php'); // Redirect to admin_portal page
+
+      // Redirect to admin_portal page
+      header('Location: admin_portal.php');
   } // end if POST
 
   // If it is neither POST nor GET, we go to admin_portal.php
