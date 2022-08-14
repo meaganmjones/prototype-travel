@@ -45,6 +45,7 @@
           $color_id = $row['colorID'];
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
+          var_dump($row['productImage']);
       } 
       //else it is Add and the user will enter info
       else 
@@ -183,11 +184,21 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
                      alert('Invalid Image File');  
                      $('#image').val('');  
                      return false;  
-                }  
+                }   
            }  
       });  
  });  
  </script> -->
+    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+    <p><img id="output" width="200" /></p>
+
+    <script>
+    var loadFile = function(event) {
+	  var image = document.getElementById('output');
+	  image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
 
               <img src="<?php echo $product_image?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
