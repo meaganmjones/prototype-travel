@@ -30,7 +30,7 @@
       if ($action == "Update") 
       {
         $row = $productData->getOneProduct($product_id);
-        //var_dump($row);
+        var_dump($row);
 
         var_dump(array_keys($row));
         $product_name = $row['productName'];
