@@ -65,15 +65,19 @@
         </tr>
     </thead>
         <?php foreach ($productList as $row): ?>
-        <tr>                       
+
+        <tr>
+            <td> 
+                <form action="admin_portal.php" method="post">
+            </td>                       
             <td class="col-data" style="contents: hidden;"><?php echo $row['productID']; ?></td>
-            <td class="col-data"><a href="update.php?action=Update&id=<?php echo $row['productID']; ?>" style="color: blue;"><?php echo $row['productName']; ?></a></td>
+            <td class="col-data"><a href="update.php?action=Update&productID=<?php echo $row['productID']; ?>" style="color: blue;"><?php echo $row['productName']; ?></a></td>
             <td class="col-data"><?php echo $row['categoryID']; ?></td>
             <td class="col-data"><?php echo $row['colorID'];?></td>
             <td class="col-data"><?php echo $row['productSize']; ?></td>
             <td class="col-data"><?php echo $row['productQuantity']; ?></td>
             <td class="col_data"><i class="fa-solid fa-trash-can"></i></td>
-                
+        </form><!--end post form-->   
                 
         </tr>  
         <?php endforeach; ?>

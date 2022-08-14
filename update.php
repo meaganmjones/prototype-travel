@@ -1,11 +1,15 @@
 <?php
 
-  include_once __DIR__ . '/model/product.php';
+  include_once __DIR__ . '\model\product.php';
 
-  include_once __DIR__ . '/include/functions.php';
+  include_once __DIR__ . '\model\category.php';
+
+  include_once __DIR__ . '\model\color.php';
+
+  include_once __DIR__ . '\include\functions.php';
   
   // Set up configuration file and create database
-  $configFile = __DIR__ . '/model/dbconfig.ini';
+  $configFile = __DIR__ . '\model\dbconfig.ini';
 
   // if (!loggedIn())
   //   {
@@ -14,6 +18,7 @@
 
   try 
   {
+      $categoryData = new Category($configFile);
       $productData = new Product($configFile);
   } 
   catch ( Exception $error ) 
@@ -26,18 +31,20 @@
   if (isset($_GET['action'])) 
   {
       $action = filter_input(INPUT_GET, 'action');
-      $product_id = filter_input(INPUT_GET, 'id', );
+      //echo $action;
+      $product_id = filter_input(INPUT_GET, 'productID', );
+       
+      
       if ($action == "Update") 
       {
-        $row = $productData->getOneProduct($product_id);
-        var_dump($row);
-
-        var_dump(array_keys($row));
-        $product_name = $row['productName'];
-        $product_price = $row['productPrice'];
-        $product_size = $row['productSize'];
-        $product_quantity = $row['productQuantity'];
-        $product_image = $row['productImage'];
+          $row = $productData->getOneProduct($product_id);          
+          $product_name = $row['productName'];
+          $product_price = $row['productPrice'];
+          $product_size = $row['productSize'];
+          $category_id = $row['categoryID'];
+          $color_id = $row['colorID'];
+          $product_quantity = $row['productQuantity'];
+          $product_image = $row['productImage'];
       } 
       //else it is Add and the user will enter info
       else 
@@ -80,8 +87,8 @@
   else
   {
     header('Location: admin_portal.php');  
-  }
-      
+  } 
+ 
 ?>
     <!--Creating the form to be used to update or add a product to the database-->
 
@@ -154,23 +161,44 @@
 <div id="pp-main">
     <div class="desc">
         <div class="prod-pg-left">
-            <div class="pic">
-              <form class="imgUpload">
-                <label>Upload Image: </label>
-                <input type="file" >
-                <input type="submit">
-              </form>
-                <img src="<?php echo $product_image; ?>" class="prod-pic"><p>this needs JS to display after upload</p>
+            <div class="pic">              
+
+              <!-- need to add slashes to the image file when it comes out of the database -->
+<!-- $file = addslashes(file_get_contents($_FILES["productImage"]["tmp_name"]));  
+$stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE productID = :productID";
+<script>  
+ $(document).ready(function(){  
+      $('#insert').click(function(){  
+           var image_name = $('#image').val();  
+           if(image_name == '')  
+           {  
+                alert("Please Select Image");  
+                return false;  
+           }  
+           else  
+           {  
+                var extension = $('#image').val().split('.').pop().toLowerCase();  
+                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
+                {  
+                     alert('Invalid Image File');  
+                     $('#image').val('');  
+                     return false;  
+                }  
+           }  
+      });  
+ });  
+ </script> -->
+
+              <img src="<?php echo $product_image?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
             <div class="text">
-              <input placeholder="<?php echo $product_id ?>">
-              <h2 class="prod-title"><input value="<?php echo $product_name?>" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h2>
+              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
               
-              <h3 class="prod-price"><input value="<?php echo $product_price?>" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;"></h3>
-               <div class="colorpick">
-              <!--<p class="pick">Choose A Color</p>
+              <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
+                <div class="colorpick">
+                    <p class="pick">Choose A Color</p>
                     <label class="edit_color">pink
                         <input type="radio" name="rdo_color">
                         <span class="checkmark"></span>
@@ -182,7 +210,7 @@
                   <label class="edit_color">blue
                     <input type="radio" name="rdo_color">
                     <span class="checkmark"></span>
-                </label> -->
+                </label>
                     <!-- <i class="fas fa-circle fa-lg" style="color: hotpink;"></i>
                     <i class="fas fa-circle fa-lg" style="color: grey;"></i>
                     <i class="fas fa-circle fa-lg" style="color: black;"></i> -->
@@ -193,9 +221,10 @@
                       <a href="#" class="menu">White</a>
                       <a href="#" class="menu">Grey</a>
                       <a href="#" class="menu">Black</a>
+                      <a href="#" class="menu" value=<?php echo $color_id;?>></a>
                     </div><!--END OF DROPDOWN-CONTENT-->
 
-                 </div> <!--END OF COLORPICK -->
+                </div><!--END OF COLORPICK-->
 
                 <div class="sizepick">
                     <button class="size">XS</button>
@@ -204,8 +233,8 @@
                     <button class="size">L</button>
                     <button class="size">XL</button>
                 </div><!--END OF SIZEPICK-->
-                <div class="addbtn">
-                    <button onclick="cartBtn()"><?php echo $action; ?></button>
+                <div class="addbtn"><?php echo $action; ?>
+                    <button onclick="cartBtn()">Add To Cart</button>
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->

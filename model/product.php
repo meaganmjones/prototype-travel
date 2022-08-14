@@ -47,19 +47,21 @@ class Product
          return ($results);
     }
 
-    public function getOneProduct($id) {
+    public function getOneProduct ($product_id)
+    {
         $results = [];
         $productTable = $this->productData;
 
-        $stmt = $productTable->prepare("SELECT * FROM product_lookup WHERE productID = :id");
+        $stmt = $productTable->prepare("SELECT productID, productName, productPrice, categoryID, colorID, productSize, productQuantity, productImage FROM product_lookup WHERE productID = :productID");
 
-        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':productID', $product_id);
 
-        if($stmt->execute() && $stmt->rowCount() >0){
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
         }
-        return ($results);
-
+        return $results;
     }
 
     //Add to database
