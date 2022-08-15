@@ -20,6 +20,7 @@
   {
       $categoryData = new Category($configFile);
       $productData = new Product($configFile);
+      $colorData = new Color($configFile);
   } 
   catch ( Exception $error ) 
   {
@@ -45,7 +46,9 @@
           $color_id = $row['colorID'];
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
-          var_dump($row['productImage']);
+
+          $color = $colorData->getColor($color_id);
+          var_dump($color[2]);
       } 
       //else it is Add and the user will enter info
       else 
@@ -189,9 +192,11 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
       });  
  });  
  </script> -->
+ <form action="Update.php" method="post">
+
     <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
     <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
-    <p><img id="output" width="200" /></p>
+    <p style="color: grey;"><img id="output" width="200" /></p>
 
     <script>
     var loadFile = function(event) {
@@ -209,26 +214,11 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
               
               <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
                 <div class="colorpick">
-                    <p class="pick">Choose A Color</p>
-                    <label class="edit_color">pink
-                        <input type="radio" name="rdo_color">
-                        <span class="checkmark"></span>
-                    </label>
-                    <label class="edit_color">grey
-                      <input type="radio" name="rdo_color">
-                      <span class="checkmark"></span>
-                  </label>
-                  <label class="edit_color">blue
-                    <input type="radio" name="rdo_color">
-                    <span class="checkmark"></span>
-                </label>
-                    <!-- <i class="fas fa-circle fa-lg" style="color: hotpink;"></i>
-                    <i class="fas fa-circle fa-lg" style="color: grey;"></i>
-                    <i class="fas fa-circle fa-lg" style="color: black;"></i> -->
+                  <p>Color: <?php echo $color['colorDesc']; ?></p>
                 <div class="dropdown">
                     <button onclick="dropDown()">Choose Color</button>
-                      <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
                     <div class="dropdown-content">
+
                       <a href="#" class="menu">White</a>
                       <a href="#" class="menu">Grey</a>
                       <a href="#" class="menu">Black</a>
@@ -244,8 +234,9 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
                     <button class="size">L</button>
                     <button class="size">XL</button>
                 </div><!--END OF SIZEPICK-->
-                <div class="addbtn"><?php echo $action; ?>
-                    <button onclick="cartBtn()">Add To Cart</button>
+                <div class="addbtn">
+                    <button type="submit"><?php echo $action; ?></button>
+  </form><!--END OF FORM-->
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->

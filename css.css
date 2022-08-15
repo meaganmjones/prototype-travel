@@ -591,9 +591,9 @@ p{
   padding: 20px;
 }
 .col_data{
-  text-align: center;
-  width: auto;
-  margin-right: 20px;
+  /*text-align: center;*/
+  /*width: auto;*/
+  align-self: left;
 }
 
 /* .col_data:nth-child(even){

@@ -103,6 +103,9 @@ class Product
         $stmt->bindValue(':productQuantity', $product_quantity);
         $stmt->bindValue(':productImage', $product_image);
 
+    $updateSuccessful = $stmt->execute();
+
+    return $updateSuccessful;
         
     }
 

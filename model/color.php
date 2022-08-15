@@ -26,11 +26,13 @@ class Color{
         }
     }//end constructor
 
-    public function getColor() {
+    public function getColor($id) {
         $results = [];
-        $colorTable = $this->ColorData;
+        $colorTable = $this->colorData;
 
-        $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookuop ORDER BY colorID");
+        $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookup WHERE colorID = :id");
+
+        $stmt->bindValue(":id", $id);
         
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
         {
