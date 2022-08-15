@@ -55,7 +55,7 @@
     <table class="inv_tbl">
     <thead>
         <tr>
-            <th class="col_head">ID</th>
+            <th class="col_head" style="display: none;">ID</th>
             <th class="col_head">Product Name</th>
             <th class="col_head">Category</th>
             <th class="col_head">Color</th>
@@ -70,7 +70,7 @@
             <td> 
                 <form action="admin_portal.php" method="post">
             </td>                       
-            <td class="col-data" style="contents: hidden;"><?php echo $row['productID']; ?></td>
+            <td class="col-data" style="display: none;"><?php echo $row['productID']; ?></td>
             <td class="col-data"><a href="update.php?action=Update&productID=<?php echo $row['productID']; ?>" style="color: blue;"><?php echo $row['productName']; ?></a></td>
             <td class="col-data"><?php echo $row['categoryID']; ?></td>
             <td class="col-data"><?php echo $row['colorID'];?></td>
