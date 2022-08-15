@@ -7,6 +7,7 @@
   include_once __DIR__ . '\model\color.php';
 
   include_once __DIR__ . '\include\functions.php';
+
   
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
@@ -18,7 +19,8 @@
 
   try 
   {
-      $categoryData = new Category($configFile);
+      //$colorData = new Color($configFile);
+      //$categoryData = new Category($configFile);
       $productData = new Product($configFile);
   } 
   catch ( Exception $error ) 
@@ -31,7 +33,7 @@
   if (isset($_GET['action'])) 
   {
       $action = filter_input(INPUT_GET, 'action');
-      //echo $action;
+      echo $action;
       $product_id = filter_input(INPUT_GET, 'productID', );
        
       
@@ -45,6 +47,7 @@
           $color_id = $row['colorID'];
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
+          //var_dump($row['product_id']);
       } 
       //else it is Add and the user will enter info
       else 
@@ -52,6 +55,8 @@
           $product_name = "";
           $product_price = "";
           $product_size = "";
+          $category_id = "";
+          $color_id = "";
           $product_quantity = "";
           $product_image = "";
       }
@@ -65,18 +70,22 @@
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
       $product_price = filter_input(INPUT_POST, 'productPrice');
+      $category_id = filter_input(INPUT_POST, 'categoryID');
+      $color_id = filter_input(INPUT_POST, 'colorID');
       $product_size = filter_input(INPUT_POST, 'productSize');
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
 
       if ($action == "Add") 
       {
-          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image);
+          $result = $productData->addProduct ($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
       } 
       elseif ($action == "Update") 
       {
-          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image);
+          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
       }
+
+
 
       // Redirect to admin_portal page
       header('Location: admin_portal.php');
@@ -106,8 +115,8 @@
     <title>EDIT | Travel</title>
 </head>
 <body>
-<div id="container">
-  <div id="nav" class="navbar">
+<div product_id="container">
+  <div product_id="nav" class="navbar">
     <div class="logo">
       <a href="index.php"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
     </div><!--END OF LOGO-->
@@ -158,7 +167,7 @@
 
 
 </div><!--END OF NAV-->
-<div id="pp-main">
+<div product_id="pp-main">
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">              
@@ -183,64 +192,87 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
                      alert('Invalid Image File');  
                      $('#image').val('');  
                      return false;  
-                }  
+                }   
            }  
       });  
  });  
  </script> -->
+ <form action="update.php" method="post">
+  <h2 class="form-group"><input class="form-control" placeholder="Image" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_image; ?>></h2>
+    <!-- <p><input type="file"  folder="image/*" name="image" product_id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><label for="file" style="cursor: pointer;">Upload Image</label></p> -->
 
-              <img src="<?php echo $product_image?>" class="prod-pic" alt="<?php echo $product_name?>">              
+    <!-- <script>
+    var loadFile = function(event) {
+	  var image = document.getElementById('output');
+	  image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script> -->
+      
+
+              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
-        <div class="prod-pg-right">
+        <div class="form-group">
+      <label class="control-label col-sm-2" for="productID">ID:</label>
+      <div class="col-sm-10">
+        <input type=" " value="<?= $product_id; ?>">
+        </div>
+        <div class="form-group">
             <div class="text">
-              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
+              <h2 class="form-group"><input class="form-control" placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
               
-              <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
-                <div class="colorpick">
-                    <p class="pick">Choose A Color</p>
-                    <label class="edit_color">pink
+              <h3 class="form-group">$<input class="form-control" placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
+
+              <!-- <h3 class="prod-price"><input placeholder="Category" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $category_id; ?>></h3> -->
+                <!-- <div class="colorpick"> -->
+
+                  <!-- <h2 class="prod-color"><input placeholder="Color" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $color_id; ?>></h2> -->
+                    <p class="form-group">Choose A Color</p>
+                    <label class="form-control">pink
                         <input type="radio" name="rdo_color">
                         <span class="checkmark"></span>
                     </label>
-                    <label class="edit_color">grey
+                    <label class="form-control">grey
                       <input type="radio" name="rdo_color">
                       <span class="checkmark"></span>
                   </label>
-                  <label class="edit_color">blue
+                  <label class="form-control">blue
                     <input type="radio" name="rdo_color">
                     <span class="checkmark"></span>
                 </label>
-                    <!-- <i class="fas fa-circle fa-lg" style="color: hotpink;"></i>
+                     <i class="fas fa-circle fa-lg" style="color: hotpink;"></i>
                     <i class="fas fa-circle fa-lg" style="color: grey;"></i>
-                    <i class="fas fa-circle fa-lg" style="color: black;"></i> -->
+                    <i class="fas fa-circle fa-lg" style="color: black;"></i>
                 <div class="dropdown">
                     <button onclick="dropDown()">Choose Color</button>
-                      <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
-                    <div class="dropdown-content">
+                       <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
+                    <div class="form-group">
                       <a href="#" class="menu">White</a>
                       <a href="#" class="menu">Grey</a>
                       <a href="#" class="menu">Black</a>
                       <a href="#" class="menu" value=<?php echo $color_id;?>></a>
-                    </div><!--END OF DROPDOWN-CONTENT-->
+                    </div><!--END OF DROPDOWN-CONTENT -->
 
                 </div><!--END OF COLORPICK-->
 
-                <div class="sizepick">
-                    <button class="size">XS</button>
-                    <button class="size">S</button>
-                    <button class="size">M</button>
-                    <button class="size">L</button>
-                    <button class="size">XL</button>
+                <div class="form-group">
+                    <h3 class="prod-size"><input class="form-control" type="text" placeholder="Size" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_size; ?>></h3>
                 </div><!--END OF SIZEPICK-->
-                <div class="addbtn"><?php echo $action; ?>
-                    <button onclick="cartBtn()">Add To Cart</button>
+                <div>
+                  <h3 class="form-group"><input class="form-control" type="number" placeholder="Quantity" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_quantity; ?>></h3>
+                
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-default"><?php echo $action; ?> Product</button>
+                  <input type="hidden" name="action" value="<?php $action;?>">
+  
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
-
+</form>
 <footer>
     <div class="ftwords">
       <div class="ftleft">

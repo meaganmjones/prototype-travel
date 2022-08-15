@@ -23,4 +23,6 @@ function loggedIn()
     return (array_key_exists('loggedIn', $_SESSION) && ($_SESSION['loggedIn']));
 }
 
+//function uploadImage()
+
 ?>
