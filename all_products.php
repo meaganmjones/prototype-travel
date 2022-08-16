@@ -1,3 +1,42 @@
+<?php
+
+  include_once __DIR__ . '\model\product.php';
+
+  include_once __DIR__ . '\model\category.php';
+
+  include_once __DIR__ . '\model\color.php';
+
+  include_once __DIR__ . '\include\functions.php';
+  
+  // Set up configuration file and create database
+  $configFile = __DIR__ . '\model\dbconfig.ini';
+
+  try 
+  {
+      $productData = new Product($configFile);
+  } 
+  catch ( Exception $error ) 
+  {
+      echo "<h2>" . $error->getMessage() . "</h2>";
+  }   
+   
+  // If it is a GET, we are coming from admin_portal.php
+  // let's figure out if we're doing update or add
+  if (isset($_POST)) 
+  {
+
+    $productList = $productData->getProduct();
+    // $product_name = $row['productName'];
+    // $product_price = $row['productPrice'];
+    // $product_image = $row['productImage'];
+
+    $path = "upload/";
+
+
+  }
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,84 +88,21 @@
         <div class="hero">
             
         </div><!--END OF HERO-->
-    
-        <div class="prod_all">
-            <div class="prodTitle">
-                <h1>All Products</h1>
-            </div><!--END OF PRODTITLE-->
-        <div class="prod-line-1">
-            <div class="prodimg">
-                <img src="image/ProductPhotos/Travel-Purple-Hood_.png">
-                <p>Travel Hoodie</p>
-                <p>$45</p>
-            </div><!--END OF PRODIMG1-->
-            <div class="prodimg">
-                <img src="image/ProductPhotos/WomensMarledCacoonSweater.png">
-                <p>Womens Marled Cacoon Sweater</p>
-                <p>$45</p>
-            </div><!--END OF PRODIMG2-->
-            <div class="prodimg">
-                <img src="image/ProductPhotos/WomensCoralTee.png">
-                <p>Globe</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG3-->
-            <div class="prodimg">
-                <img src="image/ProductPhotos/DocumentPurpleTshirt.png">
-                <p>Document Tshirt</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG4-->
-        </div><!--END OF PROD-line-1-->
 
-        <div class="prod-line-2">
+        <div class="prodTitle">
+            <h1>All Products</h1>
+        </div><!--END OF PRODTITLE-->
+        <div class="prod">
+            <?php foreach ($productList as $row): ?>
+            <div class="prodResult">
             <div class="prodimg">
-                <img src="image/ProductPhotos/FavelaGreyTshirt.png">
-                <p>Favela</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG5-->
-            <div class="prodimg">
-                <img src="image/ProductPhotos/Grey-Tshirt.png">
-                <p>Lonely Samurai</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG6-->
-            <div class="prodimg">
-                <img src="image/ProductPhotos/Purple-Tshirt.png">
-                <p>Deepthroat Psychadelic</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG7-->
-        
-            <div class="prodimg">
-                <img src="image/ProductPhotos/PurpleBoxMapShirt.png">
-                <p>Box Map</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG8-->
-        </div><!--END OF PROD-LINE-2-->
-
-        <div class="prod-line-3">
-            <div class="prodimg">
-                <img src="image/ProductPhotos/WomensCoralTee.png">
-                <p>Globe</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG9-->
-            <div class="prodimg">
-                <img src="image/ProductPhotos/WomensCottonVneck.png">
-                <p>Victorian Woman</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG10-->
-            <div class="prodimg">
-                <img src="image/ProductPhotos/WhitePurpleSocks.jpg">
-                <p>Socks</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG11-->
-        
-            <div class="prodimg">
-                <img src="image/ProductPhotos/PurpleBoxMapShirt.png">
-                <p>Box Map</p>
-                <p>$25</p>
-            </div><!--END OF PRODIMG12-->
-        </div><!--END OF PROD-LINE-3-->
-        
-        </div><!--END OF PROD-->
-        
+                <img src="<?php echo $path.$row['productImage']; ?>">
+            </div><!--END OF PRODIMG-->
+                <p><?php echo $row['productName']; ?></p>
+                <p>$<?php echo $row['productPrice']; ?></p>
+            </div><!--END OF ITEM-->
+            <?php endforeach ?>
+            </div><!--END OF PROD-->
     </div><!--END OF MAIN-->
     <footer>
         <div class="ftwords">
