@@ -45,7 +45,7 @@ class Color{
         $addSuccessful = false;
         $colorTable = $this->colorData;
 
-        $stmt = $colorTable->prepare("INSERT INTO color_lookup SET color_hex = :colorHex, color_desc = :colorDesc");
+        $stmt = $colorTable->prepare("INSERT INTO color_lookup SET colorHex = :colorHex, colorDesc = :colorDesc");
 
         $boundColor = array (
             ":colorHex" => $color_hex,
@@ -61,7 +61,7 @@ class Color{
         $updateSuccessful = false;
         $colorTable = $this->categoryData;
 
-        $stmt = $colorTable->prepare("UPDATE color_lookup SET color_hex = :colorHex, color_desc = :colorDesc WHERE color_id = :colorID");
+        $stmt = $colorTable->prepare("UPDATE color_lookup SET colorHex = :colorHex, colorDesc = :colorDesc WHERE colorID = :colorID");
 
         $stmt->bindvalue(':colorID', $color_id);
         $stmt->bindvalue(':colorHex', $color_hex);
@@ -73,7 +73,7 @@ class Color{
         $results = [];
         $colorTable = $this->ColorData;
 
-        $stmt = $colorTable->prepare("SELECT colorDesc FROM color_lookup WHERE color_id = :colorID");
+        $stmt = $colorTable->prepare("SELECT colorDesc FROM color_lookup WHERE colorID = :colorID");
 
         $stmt->bindvalue(':colorID', $color_id);
 

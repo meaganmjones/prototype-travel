@@ -77,6 +77,7 @@
             <td class="col-data"><?php echo $row['productSize']; ?></td>
             <td class="col-data"><?php echo $row['productQuantity']; ?></td>
             <td class="col_data"><i class="fa-solid fa-trash-can"></i></td>
+            
         </form><!--end post form-->   
                 
         </tr>  

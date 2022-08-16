@@ -84,7 +84,7 @@
       }
 
       // Redirect to admin_portal page
-      //header('Location: admin_portal.php');
+      header('Location: admin_portal.php');
       
   } // end if POST
 
@@ -141,6 +141,7 @@
         </div><!--END OF DROPDOWN-CONTENT-->
       </div><!--END OF DROPDOWN-->
       </div><!--END OF BUTTONS-->
+      
 
       <div class="account">
         <div class="dropdown">
@@ -172,7 +173,7 @@
             <div class="pic">              
 
 <div class="container">
- <form action="Update.php" method="post">
+  <form action="Update.php" method="post">
     <div>
       
     </div>
@@ -184,8 +185,8 @@
 
     <script>
     var loadFile = function(event) {
-	  var image = document.getElementById('output');
-	  image.src = URL.createObjectURL(event.target.files[0]);
+	    var image = document.getElementById('output');
+	    image.src = URL.createObjectURL(event.target.files[0]);
     };
     </script>
              
@@ -194,8 +195,8 @@
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
 
-            <div class="text">
-              <p><label for="productID">ID:</label></p>
+          <div class="text">
+            <p><label for="productID">ID:</label></p>
               <h2 class="prod-id" name="productID" id="productID" ><input value=<?php echo $product_id?>></h2>
             </div>
               <!-- <h2 class="action"><input value=<?php echo $action?>></h2> -->
@@ -213,7 +214,7 @@
             <div class="form-group">
               <p><label for="productSize">Size</label></p>
               <h3 class="prod-size"><input placeholder="Size" name="productSize" id="productSize" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_size; ?>></h3>
-            
+            </div><!--END OF FORM GROUP-->
 
                 <div class="colorpick">
                   <p>Color: <?php //echo $color['colorDesc']; ?></p>
@@ -240,13 +241,15 @@
                   <div class="addbtn">
                     <button type="submit" class="btn btn-default"><?php echo $action; ?></button>
                     <input type="hidden" name="action" value="<?php $action; ?>">
+                    
+   </form><!--END OF FORM-->
                   </div><!--END OF ADDBTN-->
-                </div>
+                </div><!--END of FORM GROUP-->
             </div><!--END OF TEXT-->
-          </div><!--END OF PROD-PG-RIGHT-->
+        </div><!--END OF PROD-PG-RIGHT-->
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
-</form><!--END OF FORM-->
+
 
 <footer>
     <div class="ftwords">
