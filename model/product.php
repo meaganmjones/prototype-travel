@@ -82,7 +82,7 @@ class Product
         $updateSuccessful = false;
         $productTable = $this->productData;
         
-        $stmt = $productTable->prepare("UPDATE product_lookup SET product_name = :productName, product_price = :productPrice, category_id = :categoryID, color_id = :color_id, product_size = :productSize, product_quantity = :productQuantity, product_image = :productImage WHERE product_id = :productID");
+        $stmt = $productTable->prepare("UPDATE product_lookup SET productName = :productName, productPrice = :productPrice, categoryID = categoryID, colorID = :colorID, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage WHERE productID = :productID");
 
         $stmt->bindValue(':productID', $product_id);
         $stmt->bindValue(':productName', $product_name);
@@ -95,11 +95,8 @@ class Product
 
         $updateSuccessful = ($stmt->execute() && $stmt->rowCount() > 0);
 
-        
+        return $updateSuccessful;
 
-         return $updateSuccessful;
-
-        
     }
 
 //Delete from the database
@@ -108,7 +105,7 @@ class Product
         $deleteSuccessful = false;
         $productTable = $this->productData;
 
-        $stmt = $productTable->prepare("DELETE FROM product_lookup WHERE product_id = :productID");
+        $stmt = $productTable->prepare("DELETE FROM product_lookup WHERE productID = :productID");
 
         $stmt->bindValue(':productID', $product_id);
 
@@ -124,10 +121,9 @@ class Product
         $results = [];
         $productTable = $this->productData;
 
-        $stmt = $productTable->prepare("SELECT * FROM product_lookup WHERE product_id = :productID");
+        $stmt = $productTable->prepare("SELECT productID, productName, productPrice, categoryID, colorID, productSize, productQuantity, productImage FROM product_lookup WHERE productID = :productID");
 
         $stmt->bindValue(':productID', $product_id);
-        
 
         if ($stmt->execute() && $stmt->rowCount() > 0)
         {
@@ -144,35 +140,6 @@ class Product
         return $this->productData;
     }
 
-
-    public function store_image()
-    {
-        $upload_image = $_FILES["image"]["name"];
-
-        $folder = "/xampp/htdocs/capstone/prototype-travel/image";
-
-        move_uploaded_file($_FILES["image"]["tmp_name"], "$folder".$_FILES["image"]["name"]);
-
-        $stmt = $imageTable->prepare("INSERT INTO product_lookup SET productImage = $folder . $upload_image WHERE product_id = :productID");
-
-        $stmt = bindValue(':productID', $product_id);
-        $stmt = bindValue(':productImage', $product_image);
-
-
-    }
-
-    public function fetch_image()
-    {
-        $sqlQuery = "SELECT productImage FROM product_lookup WHERE product_id = :productID";
-
-        $var = mysql_query($sqlQuery);
-
-        while($row=mysql_fetch_array($var)){
-
-        $product_image = $row["productImage"];
-
-        echo "img src=".$productImage ." width=100 height=100";}
-    }
 
 }//end product class
 ?>

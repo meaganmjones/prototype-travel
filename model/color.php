@@ -28,7 +28,7 @@ class Color{
 
     public function getColor() {
         $results = [];
-        $colorTable = $this->ColorData;
+        $colorTable = $this->colorData;
 
         $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookuop ORDER BY colorID");
         
