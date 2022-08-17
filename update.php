@@ -192,7 +192,7 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
               <input name="productID" value="<?php echo $product_id; ?>">
               <h2 class="prod-title"><input placeholder="Title" name="productName" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_name; ?>"></h2>
               
-              <h3 class="prod-price"><input placeholder="Price" name="productPrice" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo "$".$product_price; ?>"></h3>
+              <h3 class="prod-price"><input placeholder="Price" name="productPrice" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_price; ?>"></h3>
               <h2><input placeholder="Quantity" name="productQuantity" style="font-size: 20px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_quantity; ?>"> </h2>
               
               <div class="colorpick">
