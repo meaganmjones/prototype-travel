@@ -94,7 +94,7 @@ class Product
         $updateSuccessful = false;
         $productTable = $this->productData;
         
-        $stmt = $productTable->prepare("UPDATE product_lookup SET product_name = :productName, product_price = :productPrice, product_size = :productSize, product_quantity = :productQuantity, product_image = :productImage WHERE product_id = :productID");
+        $stmt = $productTable->prepare("UPDATE product_lookup SET product_name = :productName, product_price = :productPrice, product_size = :productSize, product_quantity = :productQuantity, product_image = :productImage WHERE productID = :productID");
 
         $stmt->bindValue(':id', $product_id);
         $stmt->bindValue(':productName', $product_name);
