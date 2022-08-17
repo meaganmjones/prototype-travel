@@ -1,60 +1,55 @@
 <?php
-
-    // Include helper utility functions
+    // Include functions
     include_once __DIR__ . '/include/functions.php';
 
-    // Include user database definitions
+    // include AdminLogin Class
     include_once __DIR__ . '/model/admin_login.php';
 
-    // This loads HTML header and starts our session if it has not been started
-    //include_once __DIR__ . "/include/header.php";
-
     // set logged in to false
-    $_SESSION['isLoggedIn'] = false;
+    $_SESSION['loggedIn'] = false;
     
-    // If this is a POST, check to see if user credentials are valid.
-    // First we need to gab the crednetials form the form 
-    //      and create a user database object
+    
     $message = "";
     if (postRequest()) 
     {
-        //echo "made it";
         // get _POST form fields
         $username = filter_input(INPUT_POST, 'username');
         $password = filter_input(INPUT_POST, 'password');
-        //echo "made it 5";
+        
         // Set up configuration file and create database
         $configFile = __DIR__ . '/model/dbconfig.ini';
         try 
         {
-            $userDatabase = new Users($configFile);
-            //echo "made it 6";
+            $loginLookup = new AdminLogin($configFile);
+            
         } 
         catch ( Exception $error ) 
         {
-            //echo "made it 4";
+            
             echo "<h2>" . $error->getMessage() . "</h2>";
         }   
     
         
-        // Now we can check to see if use credentials are valid.
-        if ($userDatabase->validateCredentials($username, $password))
+        // check to see if user credentials are valid.
+        if ($loginLookup->validateCredentials($username, $password))
         {
-            //echo "made it 2";
-            // If so, set logged in to TRUE
-            $_SESSION['isLoggedIn'] = true;
-            // Redirect to team listing page
-            header ('Location: carList.php');
+            
+            // set logged in to TRUE
+            $_SESSION['loggedIn'] = true;
+            // Redirect to admin_portal page
+            header ('Location: admin_portal.html');
         } 
         else 
         {
-            //echo "made it 3";
-           // Whoops! Incorrect login. Tell user and stay on this page.
+            
+           // error message
            $message = "You did not enter the correct login credentials.";
         }
     }
+>>>>>>>>> Temporary merge branch 2:login.html
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,13 +71,14 @@
 
             <p class="login-text">
                 <label class="login-lbl" for="">Username: </label>  
-                <input class="login-input" type="text" name="username"> 
+                <input class="login-input" type="text" name="username" required> 
             </p>
             </br>
 
             <p class="login-text">
-                <label class="login-lbl" for="">Category: </label> 
+                <label class="login-lbl" for="">Password: </label> 
                 <input class="login-input" type="password" name="password"> 
+                <a onclick="#">Show Password</a>
             </p>
             </br>
 
