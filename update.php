@@ -1,6 +1,6 @@
 <?php
 
-  include_once __DIR__ . '\model\product.php';
+include_once __DIR__ . '\model\product.php';
 
   include_once __DIR__ . '\model\category.php';
 
@@ -8,6 +8,8 @@
 
   include_once __DIR__ . '\include\functions.php';
   
+  include_once __DIR__ . '\header.php';
+
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
 
@@ -18,9 +20,9 @@
 
   try 
   {
-      $categoryData = new Category($configFile);
+      //$categoryData = new Category($configFile);
       $productData = new Product($configFile);
-      $colorData = new Color($configFile);
+      //$colorData = new Color($configFile);
   } 
   catch ( Exception $error ) 
   {
@@ -28,9 +30,11 @@
   }   
    
   // If it is a GET, we are coming from admin_portal.php
-  // let's figure out if we're doing update or add
-  if (isset($_GET['action'])) 
-  {
+  // update or add
+  if (getRequest()){
+
+    if (isset($_GET['action'])) 
+    {
       $action = filter_input(INPUT_GET, 'action');
       //echo $action;
       $product_id = filter_input(INPUT_GET, 'productID', );
@@ -47,8 +51,8 @@
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
 
-          $color = $colorData->getColor($color_id);
-          var_dump($color[2]);
+          //$color = $colorData->getColor($color_id);
+          //var_dump($color[2]);
       } 
       //else it is Add and the user will enter info
       else 
@@ -59,37 +63,57 @@
           $product_quantity = "";
           $product_image = "";
       }
-  } // end if GET
+    } // end if GET
+
+  }
+  
 
   // If it is a POST, we are coming from update.php
   // we need to determine action, then return to admin_portal.php
-  elseif (isset($_POST['action'])) 
-  {
+  elseif (postRequest()){
+
+    if (isset($_POST['action'])) 
+    {
+
+      echo("made it");
       $action = filter_input(INPUT_POST, 'action');
+      //echo $action;
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
       $product_price = filter_input(INPUT_POST, 'productPrice');
+      $category_id = filter_input(INPUT_POST, 'categoryID');
+      $color_id = filter_input(INPUT_POST, 'colorID');
       $product_size = filter_input(INPUT_POST, 'productSize');
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
+      echo("made it 2");
 
       if ($action == "Add") 
       {
-          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image);
+        echo("made it 4");
+        $result = $productData->addProduct($product_name, $product_size, $category_id, $color_id, $product_price, $product_quantity, $product_image);
       } 
       elseif ($action == "Update") 
       {
-          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image);
+        echo("made it 3");   
+        $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        var_dump($result);
       }
-
+      
       // Redirect to admin_portal page
       header('Location: admin_portal.php');
-  } // end if POST
+      
+    } // end if POST
+
+  }
+  
 
   // If it is neither POST nor GET, we go to admin_portal.php
   // This page should not be loaded directly
   else
   {
+    //echo ("skipped if's");
+    //var_dump($results);
     header('Location: admin_portal.php');  
   } 
  
@@ -111,57 +135,7 @@
 </head>
 <body>
 <div id="container">
-  <div id="nav" class="navbar">
-    <div class="logo">
-      <a href="index.php"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
-    </div><!--END OF LOGO-->
-    <div class="buttons">
-      <div class="new">
-        <button class="btn">New</button>
-      </div><!--END OF NEW-->
-      <div class="clothing">
-        <button onclick="dropDown()" class="btn">Clothing</button>
-        <div class="dropdown-content">
-          <a href="shirts.html" class="menu">T Shirts</a>
-          <a href="hoodies.html" class="menu">Hoodies</a>
-          <a href="socks.html" class="menu">Socks</a>
-          <a href="all_products.html" class="menu">Shop All</a>
-        </div><!--END OF DROPDOWN-CONTENT-->
-    </div><!--END OF CLOTHING-->
-    <div class="dropdown">
-        <button onclick="dropDown()" class="btn">Accessories</button>
-        <div class="dropdown-content">
-          <a href="#" class="menu">Hats</a>
-          <a href="#" class="menu">Bags</a>
-          <a href="#" class="menu">Stickers</a>
-        </div><!--END OF DROPDOWN-CONTENT-->
-      </div><!--END OF DROPDOWN-->
-      </div><!--END OF BUTTONS-->
 
-      <div class="account">
-        <div class="dropdown">
-          <a style="text-decoration: none;" href="login.php" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
-          <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
-          <div class="dropdown-content">
-            <a href="#" class="menu">Account</a>
-            <a href="#" class="menu">Logout</a>
-            <!-- <a href="#" class="menu"></a> -->
-          </div><!--END OF DROPDOWN-CONTENT-->
-        </div><!--END OF DROPDOWN-->
-      </div><!--END OF ACCOUNT-->
-
-
-    <div class="search">
-        <div class="topnav">
-            <input type="text" placeholder="Search" class="search_input">
-            <i class="fas fa-search fa-xs"></i>
-
-            
-          </div><!--END OF TOPNAV-->
-        </div><!--END OF SEARCH-->
-
-
-</div><!--END OF NAV-->
 <div id="pp-main">
     <div class="desc">
         <div class="prod-pg-left">
