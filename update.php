@@ -81,11 +81,15 @@ include_once __DIR__ . '\model\product.php';
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
       $product_price = filter_input(INPUT_POST, 'productPrice');
-      $category_id = filter_input(INPUT_POST, 'categoryID');
-      $color_id = filter_input(INPUT_POST, 'colorID');
-      $product_size = filter_input(INPUT_POST, 'productSize');
+      //$category_id = filter_input(INPUT_POST, 'categoryID');
+      $category_id = 1;
+      //$color_id = filter_input(INPUT_POST, 'colorID');
+      $color_id = 1;
+      //$product_size = filter_input(INPUT_POST, 'productSize');
+      $product_size = "L";
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
+
       echo("made it 2");
 
       if ($action == "Add") 
@@ -168,7 +172,7 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
  </script> -->
  <form action="Update.php" method="post">
 
-    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><input type="file"  accept="image/*" name="productImage" id="file"  onchange="loadFile(event)" style="display: none;"></p>
     <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
     <p style="color: grey;"><img id="output" width="200" /></p>
 
@@ -179,16 +183,20 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
     };
     </script>
 
-              <img src="<?php echo $product_image?>" class="prod-pic" alt="<?php echo $product_name?>">              
+              <img src="<?php echo $product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
             <div class="text">
-              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
+              <input name="action" value="<?php echo $action; ?>">
+              <input name="productID" value="<?php echo $product_id; ?>">
+              <h2 class="prod-title"><input placeholder="Title" name="productName" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_name; ?>"></h2>
               
-              <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
-                <div class="colorpick">
-                  <p>Color: <?php echo $color['colorDesc']; ?></p>
+              <h3 class="prod-price"><input placeholder="Price" name="productPrice" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo "$".$product_price; ?>"></h3>
+              <h2><input placeholder="Quantity" name="productQuantity" style="font-size: 20px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_quantity; ?>"> </h2>
+              
+              <div class="colorpick">
+                  <!--<p>Color: <?php //echo $color['colorDesc']; ?></p>-->
                 <div class="dropdown">
                     <button onclick="dropDown()">Choose Color</button>
                     <div class="dropdown-content">
@@ -196,7 +204,7 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
                       <a href="#" class="menu">White</a>
                       <a href="#" class="menu">Grey</a>
                       <a href="#" class="menu">Black</a>
-                      <a href="#" class="menu" value=<?php echo $color_id;?>></a>
+                      <a href="#" class="menu" value=<?php //echo $color_id;?>></a>
                     </div><!--END OF DROPDOWN-CONTENT-->
 
                 </div><!--END OF COLORPICK-->
