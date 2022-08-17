@@ -1,3 +1,35 @@
+<?php
+    include_once __DIR__ . '/model/product.php';
+    include_once __DIR__ . '/model/search.php';
+    include_once __DIR__ . '/model/category.php';
+    include_once __DIR__ . '/include/functions.php';
+
+    $configFile = __DIR__ . '/model/dbconfig.ini';
+
+    try 
+    {
+        $productDatabase = new Product($configFile);
+        //$colorDatabase = new Color($configFile);
+        $categoryDatabase = new Category($configFile);
+        $searchDatabase = new ProductSearch($configFile);
+    } 
+    catch ( Exception $error ) 
+    {
+        echo "<h2>" . $error->getMessage() . "</h2>";
+    }   
+
+  if(postRequest()){
+    if(isset($_POST['searchString']))
+    {
+      $searchString = filter_input(INPUT_POST, 'searchString');
+    }
+    else{
+      echo 'no post request ig';
+    }
+  }
+?> 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,9 +78,16 @@
                   <a href="logoff.php" class="menu">Logout</a>
                 </div><!--END OF DROPDOWN-CONTENT-->
               </div><!--END OF DROPDOWN-->
-  
-                  <input type="text" placeholder="Search" class="search_input">
-                  <i class="fas fa-search fa-xs"></i>
+                <form method="post">
+                  <input placeholder="Search" class="search_input" name="searchString">
+                  <a type="submit" class="fas fa-search fa-xs" id="searchbtn" href="all_products.php?query=<?php echo $searchString ?>"></a>
+                  <!-- <script type="text/javascript">
+                    document.getElementById("searchBtn").onclick = function () 
+                    {
+                    location.href = "all_products.php?query=<?php //echo $searchString ?>";
+                    };
+                  </script> -->
+                </form>
               </div><!--END OF SEARCH-->
 </div><!--END OF RNAV-->
           </div>
