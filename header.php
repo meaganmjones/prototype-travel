@@ -43,7 +43,7 @@
                 <a style="text-decoration: none;" href="login.php" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
                 <div class="dropdown-content">
                   <a href="#" class="menu">Account</a>
-                  <a href="#" class="menu">Logout</a>
+                  <a href="logoff.php" class="menu">Logout</a>
                 </div><!--END OF DROPDOWN-CONTENT-->
               </div><!--END OF DROPDOWN-->
   

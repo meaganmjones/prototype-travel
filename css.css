@@ -154,29 +154,19 @@ h1{
   
   .sml:hover{color: coral;}
 
+
+.rnav{
+  
+}
 .account{
   width:auto;
   height: auto;
-  display: flex;
-  margin-top: 2%;
-  margin-left: 15%;
+  margin-right: 20px;
 }
-
-/* .top-nav{
-  display: flex;
-  width: 500px;
-  padding: 50%;
-  margin: 0 auto;
-  position: absolute;
-
-} */
 
 .fa-search{
   color: #7C6990;
-}
-
-.thisisdumb{
-  justify-content: flex-end;
+  margin-top: 3%;
 }
 
 .search{
@@ -189,6 +179,7 @@ h1{
   border-style: none;
   border-radius: 10px;
   background-color: #e5e5e7;
+  margin-left: 20px;
 }
 
 
@@ -279,8 +270,7 @@ footer{
   background-color: black;
   color: white;
   width: 100%;
-  height: 160px;
-  
+  height: auto;
 }
 a{
   color:white;
@@ -293,16 +283,13 @@ a{
   height: 90%;
   margin-left: 5%;
 }
-.ftleft{
+ .ftleft{
   margin: 1% 5% 1% 1%;
   width: 20%;
-  display: block;
 }
 .ftright{
-  margin: 1% 1% 1% 1%;
-  width: 20%;
-  display: inline-block;
-}
+   margin: 1% 1% 1% 1%; 
+} 
 .bold{
   font-family:'Courier New', Courier, monospace, bold;
   font-size: 20px;
@@ -377,66 +364,24 @@ p{
   margin-left: 10%;
   margin-top: 1%;
   height: auto;
+  justify-content: space-between;
   filter: drop-shadow(0px 0px 4px #8b8691);
 }
 
 .prodResult{
   align-self: center;
-  width: 300px; 
+  width: 200px; 
   height: auto; 
   text-align: center; 
   align-content: flex-start;
 }
 
-/* .prod-line-1{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-1 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-  margin-top: 1%;
-}
-.prod-line-2{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-2 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-}
-.prod-line-3{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-3 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-}
-*/
 .prodimg{
-  width: 300px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   align-self:center;
 }
+
 /*-------------------All PROD---------------------------*/
 .prod_all{
   display: block;
