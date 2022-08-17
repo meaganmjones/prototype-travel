@@ -8,6 +8,8 @@
 
   include_once __DIR__ . '\include\functions.php';
   
+  include_once __DIR__ . '\include\header.php';
+
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
 
@@ -29,8 +31,10 @@
    
   // If it is a GET, we are coming from admin_portal.php
   // update or add
-  if (isset($_GET['action'])) 
-  {
+  if (getRequest()){
+
+    if (isset($_GET['action'])) 
+    {
       $action = filter_input(INPUT_GET, 'action');
       //echo $action;
       $product_id = filter_input(INPUT_GET, 'productID', );
@@ -59,34 +63,50 @@
           $product_quantity = "";
           $product_image = "";
       }
-  } // end if GET
+    } // end if GET
+
+  }
+  
 
   // If it is a POST, we are coming from update.php
   // we need to determine action, then return to admin_portal.php
-  elseif (isset($_POST['action'])) 
-  {
+  elseif (postRequest()){
+
+    if (isset($_POST['action'])) 
+    {
+
+      echo("made it");
       $action = filter_input(INPUT_POST, 'action');
-      echo $action;
+      //echo $action;
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
       $product_price = filter_input(INPUT_POST, 'productPrice');
+      $category_id = filter_input(INPUT_POST, 'categoryID');
+      $color_id = filter_input(INPUT_POST, 'colorID');
       $product_size = filter_input(INPUT_POST, 'productSize');
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
+      echo("made it 2");
 
       if ($action == "Add") 
       {
-          $results = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image);
+        echo("made it 4");
+        $result = $productData->addProduct($product_name, $product_size, $category_id, $color_id, $product_price, $product_quantity, $product_image);
       } 
       elseif ($action == "Update") 
       {
-          $results = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image);
+        echo("made it 3");   
+        $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        var_dump($result);
       }
-
+      
       // Redirect to admin_portal page
       header('Location: admin_portal.php');
       
-  } // end if POST
+    } // end if POST
+
+  }
+  
 
   // If it is neither POST nor GET, we go to admin_portal.php
   // This page should not be loaded directly
@@ -100,104 +120,35 @@
 ?>
     <!--Creating the form to be used to update or add a product to the database-->
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css.css">
-    <script src="jss.js"></script>
-    <script src="https://kit.fontawesome.com/3ed3e280c1.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <title>EDIT | Travel</title>
-</head>
-<body>
-<div id="container">
-  <div id="nav" class="navbar">
-    <div class="logo">
-      <a href="index.php"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
-    </div><!--END OF LOGO-->
-    <div class="buttons">
-      <div class="new">
-        <button class="btn">New</button>
-      </div><!--END OF NEW-->
-      <div class="clothing">
-        <button onclick="dropDown()" class="btn">Clothing</button>
-        <div class="dropdown-content">
-          <a href="shirts.html" class="menu">T Shirts</a>
-          <a href="hoodies.html" class="menu">Hoodies</a>
-          <a href="socks.html" class="menu">Socks</a>
-          <a href="all_products.html" class="menu">Shop All</a>
-        </div><!--END OF DROPDOWN-CONTENT-->
-    </div><!--END OF CLOTHING-->
-    <div class="dropdown">
-        <button onclick="dropDown()" class="btn">Accessories</button>
-        <div class="dropdown-content">
-          <a href="#" class="menu">Hats</a>
-          <a href="#" class="menu">Bags</a>
-          <a href="#" class="menu">Stickers</a>
-        </div><!--END OF DROPDOWN-CONTENT-->
-      </div><!--END OF DROPDOWN-->
-      </div><!--END OF BUTTONS-->
-      
-
-      <div class="account">
-        <div class="dropdown">
-          <a style="text-decoration: none;" href="login.php" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
-          <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
-          <div class="dropdown-content">
-            <a href="#" class="menu">Account</a>
-            <a href="#" class="menu">Logout</a>
-            <!-- <a href="#" class="menu"></a> -->
-          </div><!--END OF DROPDOWN-CONTENT-->
-        </div><!--END OF DROPDOWN-->
-      </div><!--END OF ACCOUNT-->
-
-
-    <div class="search">
-        <div class="topnav">
-            <input type="text" placeholder="Search" class="search_input">
-            <i class="fas fa-search fa-xs"></i>
-
-            
-          </div><!--END OF TOPNAV-->
-        </div><!--END OF SEARCH-->
-
-
-</div><!--END OF NAV-->
 <div id="pp-main">
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">              
 
-<div class="container">
-  <form action="Update.php" method="post">
-    <div>
-      
-    </div>
+              <div class="container">
+                <form action="update.php" method="POST">
+                  <div class="form-group">
+                    <p><label for="productImage" style="cursor: pointer;">Upload Image</label></p>
+                    <p><input type="file"  accept="image/*" name="productImage" id="productImage"  onchange="loadFile(event)" style="display: none;"></p>
+                    <p style="color: grey;"><img id="output" width="200" /></p>
 
-    <div class="form-group">
-      <p><label for="productImage" style="cursor: pointer;">Upload Image</label></p>
-    <p><input type="file"  accept="image/*" name="productImage" id="productImage"  onchange="loadFile(event)" style="display: none;"></p>
-    <p style="color: grey;"><img id="output" width="200" /></p>
-
-    <script>
-    var loadFile = function(event) {
-	    var image = document.getElementById('output');
-	    image.src = URL.createObjectURL(event.target.files[0]);
-    };
-    </script>
+                    <script>
+                        var loadFile = function(event) {
+	                          var image = document.getElementById('output');
+	                          image.src = URL.createObjectURL(event.target.files[0]);
+                          };
+                      </script>
              
-              <img src="<?php echo $product_image?>" name="productImage" id="productImage" class="prod-pic" alt="<?php echo $product_name?>">              
-            </div><!--END OF PIC-->
-        </div><!--END OF PROD-PG-LEFT-->
+                      <img src="<?php echo $product_image?>" name="productImage" id="productImage" class="prod-pic form-control" alt="<?php echo $product_name?>">              
+              </div><!--END OF PIC-->
+          </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
 
           <div class="text">
-            <p><label for="productID">ID:</label></p>
-              <h2 class="prod-id" name="productID" id="productID" ><input value=<?php echo $product_id?>></h2>
+            <div class="form-group">
+
+              <p><label for="productID">ID:</label></p>
+              <h2 class="prod-id"  ><input name="productID" id="productID" class="form-control" value=<?php echo $product_id?>></h2>
             </div>
               <!-- <h2 class="action"><input value=<?php echo $action?>></h2> -->
 
@@ -208,15 +159,30 @@
 
             <div class="form-group">
               <p><label for="productPrice">Price</label></p>
-              <h3 class="prod-price">$<input placeholder="Price" name="productPrice" id="productPrice"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
+              <h3 class="prod-price">$<input placeholder="Price" class="form-control" name="productPrice" id="productPrice"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
             </div>
 
             <div class="form-group">
               <p><label for="productSize">Size</label></p>
-              <h3 class="prod-size"><input placeholder="Size" name="productSize" id="productSize" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_size; ?>></h3>
+              <h3 class="prod-size"><input placeholder="Size" name="productSize" class="form-control" id="productSize" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_size; ?>></h3>
             </div><!--END OF FORM GROUP-->
 
-                <div class="colorpick">
+            <div class="form-group">
+              <p><label for="productQuantity">Quantity</label></p>
+              <h3 class="prod-quantity"><input placeholder="Quantity" class="form-control" name="productQuantity" id="productQuantity" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_quantity; ?>></h3>
+            </div><!--END OF FORM GROUP-->
+
+            <div class="form-group">
+              <p><label for="categoryID">Category</label></p>
+              <h3 class="prod-price"><input placeholder="Category" class="form-control" name="categoryID" id="categoryID"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $category_id; ?>></h3>
+            </div>
+
+            <div class="form-group">
+              <p><label for="colorID">Color</label></p>
+              <h3 class="prod-price"><input placeholder="Color" class="form-control" name="colorID" id="colorID"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $color_id; ?>></h3>
+            </div>
+
+                <!-- <div class="colorpick">
                   <p>Color: <?php //echo $color['colorDesc']; ?></p>
                 <div class="dropdown">
                     <button onclick="dropDown()">Choose Color</button>
@@ -226,67 +192,31 @@
                       <a href="#" class="menu">Grey</a>
                       <a href="#" class="menu">Black</a>
                       <a href="#" class="menu" name="colorID" id="colorID" value=<?php echo $color_id;?>></a>
-                    </div><!--END OF DROPDOWN-CONTENT-->
+                    </div>END OF DROPDOWN-CONTENT -->
 
-                </div><!--END OF COLORPICK-->
+                <!-- </div>END OF COLORPICK -->
 
-                <div class="sizepick">
+                <!-- <div class="sizepick">
                     <button class="size">XS</button>
                     <button class="size">S</button>
                     <button class="size">M</button>
                     <button class="size">L</button>
-                    <button class="size">XL</button>
-                </div><!--END OF SIZEPICK-->
+                    <button class="size">XL</button> -->
+                <!-- </div>END OF SIZEPICK -->
                 <div class="form-group">
                   <div class="addbtn">
                     <button type="submit" class="btn btn-default"><?php echo $action; ?></button>
-                    <input type="hidden" name="action" value="<?php $action; ?>">
+                    <input type="hidden" class="form-control" name="action" value="<?php echo $action; ?>">
                     
-   </form><!--END OF FORM-->
+                </form><!--END OF FORM-->
                   </div><!--END OF ADDBTN-->
                 </div><!--END of FORM GROUP-->
-            </div><!--END OF TEXT-->
+          </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
 
-
-<footer>
-    <div class="ftwords">
-      <div class="ftleft">
-        <a href="#" class="bold">Get Help</a>
-        <a href="#" class="sml">Order Status</a>
-        <a href="#" class="sml">Customer Service</a>
-        <a href="#" class="sml">Shipping & Delivery</a>
-        <a href="#" class="sml">Returns</a>
-      </div><!--END OF FTLEFT-->
-      <div class="ftright">
-        <a href="#" class="bold">About Us</a>
-        <a href="#" class="sml">Contact Us</a>
-        <a href="#" class="sml">About Travel</a>
-        <a href="#" class="sml">The Blog</a>
-        <a href="#" class="sml">Travel Team Page</a>
-      </div><!--END OF RIGHT-->
-    </div><!--END OF FTWORDS-->
-      <div class="rightfoot">
-        <p>Connect With Us</p>
-        <div class="connect">
-          <input type="text" placeholder="Email">
-          <!--<button class="emailbtn">Submit</button>-->
-          <i class="fas fa-check-square" class="check"></i>
-        </div><!--END OF CONNECT-->
-        
-          <div class="info">
-            <i class="fab fa-twitter-square" class="icon"></i>
-            <i class="fab fa-instagram" class="icon"></i>
-            <i class="fab fa-facebook-square" class="icon"></i>
-          </div><!--END OF INFO-->
-
-          <p class="tiny">&copyTravel 2018</p>
-    
-      </div><!--END OF RIGHTFOOT-->
-
-</footer><!--END OF FOOTER-->
 </div><!--END OF CONTAINER-->
 </body>
 </html>
+<?php include_once __DIR__ . '\include\footer.php';?>

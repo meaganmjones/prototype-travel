@@ -82,13 +82,14 @@ class Product
         $updateSuccessful = false;
         $productTable = $this->productData;
         
-        $stmt = $productTable->prepare("UPDATE product_lookup SET productName = :productName, productPrice = :productPrice, categoryID = categoryID, colorID = :colorID, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage WHERE productID = :productID");
+        $stmt = $productTable->prepare("UPDATE product_lookup SET productName = :productName, productPrice = :productPrice, categoryID = :categoryID, colorID = :colorID, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage WHERE productID = :productID");
+        
 
         $stmt->bindValue(':productID', $product_id);
         $stmt->bindValue(':productName', $product_name);
-        $stmt->bindvalue(':productPrice', $product_price);
-        $stmt->bindvalue(':categoryID', $category_id);
-        $stmt->bindvalue(':colorID', $color_id);
+        $stmt->bindValue(':productPrice', $product_price);
+        $stmt->bindValue(':categoryID', $category_id);
+        $stmt->bindValue(':colorID', $color_id);
         $stmt->bindValue(':productSize', $product_size);
         $stmt->bindValue(':productQuantity', $product_quantity);
         $stmt->bindValue(':productImage', $product_image);
