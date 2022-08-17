@@ -1,6 +1,7 @@
 *{
   box-sizing: border-box;
 }
+
 title{
   display: none;
 }
@@ -64,14 +65,15 @@ h1{
 .navbar{
   background-color: white;
   display: flex;
-  float:center;
-  width: auto;
+  width: 100%;
+  justify-content: space-between;
 }
 
 
 .logo{
   margin-left: 5%;
   margin-top: 1%;
+  justify-content: flex-start;
   width: auto;
   height: auto;
 }
@@ -81,9 +83,9 @@ h1{
   height: auto;
   overflow: hidden;
 }
+
 /* Button */
 .btn {
-    display: flex;
     background-color: white;
     color: black;
     font-family:'Courier New', Courier, monospace, bold;
@@ -93,6 +95,7 @@ h1{
     border: none;
     
   }
+
 .buttons{
   display: flex;
   justify-content: left;
@@ -106,6 +109,7 @@ h1{
     display: inline-block;
     font-family:'Courier New', Courier, monospace, bold;
   }
+
   .clothing {
     position: relative;
     display: inline-block;
@@ -143,39 +147,28 @@ h1{
   .dropdown:hover .dropdown-content {display: block;}
   .clothing:hover .dropdown-content {display: block;}
   /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  .dropdown:hover .dropbtn {background-color: #ddd;}
 
   .btn:hover{background-color: #ddd;}
 
   
   .sml:hover{color: coral;}
 
+
 .account{
   width:auto;
   height: auto;
-  display: flex;
-  margin-top: 2%;
-  margin-left: 15%;
+  margin-right: 20px;
 }
-
-.topnav{
-    display: flex;
-    width: auto;
-    padding: 0 auto;
-    margin: 0 auto;
-    position: absolute;
-  }
 
 .fa-search{
   color: #7C6990;
+  margin-top: 3%;
 }
 
 .search{
-  width: auto;
-  margin-left: 5%;
-  margin-right: 2%;
-  margin-top: 2%;
-  height: auto
+  display: flex;
+  justify-self: flex-end;
 }
 
 .search_input{
@@ -183,14 +176,10 @@ h1{
   border-style: none;
   border-radius: 10px;
   background-color: #e5e5e7;
-  
+  margin-left: 20px;
 }
 
-.topnav i{
-  position: absolute;
-  padding: 8px;
-  right: 2%;
-}
+
 
 /* ####### MAIN ####### */
 #main{
@@ -278,8 +267,7 @@ footer{
   background-color: black;
   color: white;
   width: 100%;
-  height: 160px;
-  
+  height: auto;
 }
 a{
   color:white;
@@ -292,16 +280,13 @@ a{
   height: 90%;
   margin-left: 5%;
 }
-.ftleft{
+ .ftleft{
   margin: 1% 5% 1% 1%;
   width: 20%;
-  display: block;
 }
 .ftright{
-  margin: 1% 1% 1% 1%;
-  width: 20%;
-  display: inline-block;
-}
+   margin: 1% 1% 1% 1%; 
+} 
 .bold{
   font-family:'Courier New', Courier, monospace, bold;
   font-size: 20px;
@@ -369,60 +354,31 @@ p{
   padding-left: 15%;
 }
 .prod{
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   background-color: white;
   width: 80%;
   margin-left: 10%;
   margin-top: 1%;
   height: auto;
+  justify-content: space-between;
   filter: drop-shadow(0px 0px 4px #8b8691);
 }
-.prod-line-1{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
+
+.prodResult{
+  align-self: center;
+  width: 200px; 
+  height: auto; 
+  text-align: center; 
+  align-content: flex-start;
 }
-.prod-line-1 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-  margin-top: 1%;
-}
-.prod-line-2{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-2 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-}
-.prod-line-3{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-3 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-}
+
 .prodimg{
-  width: 11.5%;
+  width: 200px;
+  height: 200px;
+  align-self:center;
 }
+
 /*-------------------All PROD---------------------------*/
 .prod_all{
   display: block;
@@ -447,6 +403,7 @@ p{
   width: 50%;
   border: 2px solid red;
   height: 400px;
+
 }
 .pic{
   width: 50%;
@@ -490,13 +447,18 @@ p{
   color: #cecdcd;
 }
 .addbtn{
+  padding-top: 2%;
+}
+.addbtntxt{
+  
   background-color: #7C6990;
   color:#cecdcd;
   width:30%;
   text-align: center;
 }
-.addbtntxt{
-  padding: 5%;
+
+.addbtntxt:hover{
+  cursor: pointer;
 }
 
 /*--------------Contact Us Page------------------*/
@@ -559,7 +521,7 @@ p{
   display: table-cell;
 }
 
-/*----------INVENTORY-----------------*/
+/*----------ADMIN PORTAL-----------------*/
 .inventory{
   width: 100%;
   text-align: center;
@@ -585,8 +547,9 @@ p{
   padding: 20px;
 }
 .col_data{
-  padding: 20px;
-  text-align: center;
+  /*text-align: center;*/
+  /*width: auto;*/
+  align-self: left;
 }
 
 /* .col_data:nth-child(even){

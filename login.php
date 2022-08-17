@@ -1,7 +1,7 @@
 <?php
 
-<<<<<<< HEAD
-=======
+<<<<<<<<< Temporary merge branch 1:login.php
+=========
     // Include functions
     include_once __DIR__ . '/include/functions.php';
 
@@ -49,7 +49,7 @@
            $message = "You did not enter the correct login credentials.";
         }
     }
->>>>>>> 86e8956a120291baf07dcb90f282708ccb7e3e76
+>>>>>>>>> Temporary merge branch 2:login.html
 
 ?>
 
@@ -74,20 +74,21 @@
 
             <p class="login-text">
                 <label class="login-lbl" for="">Username: </label>  
-                <input class="login-input" type="text" name="username"> 
+                <input class="login-input" type="text" name="username" required> 
             </p>
             </br>
 
             <p class="login-text">
-                <label class="login-lbl" for="">Category: </label> 
+                <label class="login-lbl" for="">Password: </label> 
                 <input class="login-input" type="password" name="password"> 
+                <a onclick="#">Show Password</a>
             </p>
             </br>
 
 
             <div class="login-btn">
                 <button type="submit" class="login-btn">Login</button> 
-                <a href="admin_portal.html" style="color:blue">PROTOTYPE LOGIN</a>
+                <a href="admin_portal.php" style="color:blue">PROTOTYPE LOGIN</a>
                 <a href="index.html" class="login-home" style="color:#7C6990"><p>Site Home</p></a>
             </div><!--END OF LOGIN-BTN-->
         </form><!--END OF FORM-->

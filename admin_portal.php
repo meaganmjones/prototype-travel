@@ -6,10 +6,10 @@
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
 
-    if (!loggedIn())
-    {
-        header ('Location: login.php');
-    }
+    // if (!loggedIn())
+    // {
+    //     header ('Location: login.php');
+    // }
 
     try 
     {
@@ -38,47 +38,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3ed3e280c1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
     <title>Inventory</title>
 </head>
 <body>
     <div id="inventory">
         <div class="inv-btn">
-            <a href="update.html"><button class="btn" >Add Product</button></a>
-            <a href="index.html"><button class="btn" >Site Home</button></a>
+            <a href="update.php?action=Add"><button class="btn" >Add Product</button></a>
+            <a href="index.php"><button class="btn" >Site Home</button></a>
         </div><!--END OF INV-BTN-->
     </br>
-    <div>
+    
         <a href="index.html"><image src="image/TravelLogo_2.jpg" class="top-img"></a>
     </br>
     <table class="inv_tbl">
+    <thead>
         <tr>
-            <th class="col_head">ID</th>
+            <th class="col_head" style="display: none;">ID</th>
             <th class="col_head">Product Name</th>
             <th class="col_head">Category</th>
             <th class="col_head">Color</th>
             <th class="col_head">Size</th>
             <th class="col_head">Quantity</th>
-            <th class="col_head">Image</th>
-            <th class="col_head">Update</th>
-            <th class="col_head">Delete</th>
+            <th class="col_head"></th>
         </tr>
+    </thead>
+        <?php foreach ($productList as $row): ?>
 
         <tr>
-            <td class="col_data">this</td>
-            <td class="col_data">is</td>
-            <td class="col_data">all</td>
-            <td class="col_data">placeholder</td>
-            <td class="col_data">data</td>
-            <td class="col_data">no</td>
-            <td class="col_data">value</td>
-            <td class="col_data"><a href="update.html" style="color: red;">Edit</a></td>
-            <td class="col_data"><a href="#" style="color: red;">Delete</a></td>
-        </tr>
+            <td> 
+                <form action="admin_portal.php" method="post">
+            </td>                       
+            <td class="col-data" style="display: none;"><?php echo $row['productID']; ?></td>
+            <td class="col-data"><a href="update.php?action=Update&productID=<?php echo $row['productID']; ?>" style="color: blue;"><?php echo $row['productName']; ?></a></td>
+            <td class="col-data"><?php echo $row['categoryID']; ?></td>
+            <td class="col-data"><?php echo $row['colorID'];?></td>
+            <td class="col-data"><?php echo $row['productSize']; ?></td>
+            <td class="col-data"><?php echo $row['productQuantity']; ?></td>
+            <td class="col_data"><i class="fa-solid fa-trash-can"></i></td>
+        </form><!--end post form-->   
+                
+        </tr>  
+        <?php endforeach; ?>
     </table>
 
 
-    </div>
+    
     </div><!--END OF INVENTORY-->
 </body>
 </html>
