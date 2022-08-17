@@ -55,12 +55,12 @@ class Product
         $productTable = $this->productData;
         
 
-        $stmt = $productTable->prepare("INSERT INTO product_lookup SET product_name = :productName, product_price =: productPrice, category_id = :categoryID, color_id = :colorID, product_size= :productSize, product_quantity = :productQuantity, product_image = :productImage");
+        $stmt = $productTable->prepare("INSERT INTO product_lookup SET productName = :productName, productPrice = :productPrice, categoryID = :categoryID, colorID = :colorID, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage");
         
         
 
         $boundProduct = array(
-            ":ProductName" => $product_name,
+            ":productName" => $product_name,
             ":productPrice" => $product_price,
             ":categoryID" => $category_id,
             ":colorID" => $color_id,

@@ -59,6 +59,8 @@
       {
           $product_name = "";
           $product_price = "";
+          $category_id = "";
+          $color_id = "";
           $product_size = "";
           $product_quantity = "";
           $product_image = "";
@@ -91,13 +93,13 @@
       if ($action == "Add") 
       {
         echo("made it 4");
-        $result = $productData->addProduct($product_name, $product_size, $category_id, $color_id, $product_price, $product_quantity, $product_image);
+        $result = $productData->addProduct($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
       } 
       elseif ($action == "Update") 
       {
-        echo("made it 3");   
+          
         $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
-        var_dump($result);
+        
       }
       
       // Redirect to admin_portal page
@@ -126,7 +128,7 @@
             <div class="pic">              
 
               <div class="container">
-                <form action="update.php" method="POST">
+                <form action="update.php" class="form-horizantal" method="POST">
                   <div class="form-group">
                     <p><label for="productImage" style="cursor: pointer;">Upload Image</label></p>
                     <p><input type="file"  accept="image/*" name="productImage" id="productImage"  onchange="loadFile(event)" style="display: none;"></p>
