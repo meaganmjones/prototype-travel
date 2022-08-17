@@ -12,7 +12,7 @@
 <div id="nav" class="navbar" style="align-items: center;">
     <div class="lnav" style="display: flex;">
         <div class="logo">
-          <a href="index.html"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
+          <a href="index.php"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
         </div><!--END OF LOGO-->
         <div class="buttons">
           <div class="new">
@@ -21,10 +21,10 @@
           <div class="clothing">
             <button onclick="dropDown()" class="btn">Clothing</button>
             <div class="dropdown-content">
-              <a href="shirts.html" class="menu">T Shirts</a>
-              <a href="hoodies.html" class="menu">Hoodies</a>
-              <a href="socks.html" class="menu">Socks</a>
-              <a href="all_products.html" class="menu">Shop All</a>
+              <a href="all_products.php" class="menu">T Shirts</a>
+              <a href="all_products.php" class="menu">Hoodies</a>
+              <a href="all_products.php" class="menu">Socks</a>
+              <a href="all_products.php" class="menu">Shop All</a>
             </div><!--END OF DROPDOWN-CONTENT-->
         </div><!--END OF CLOTHING-->
         <div class="dropdown">
