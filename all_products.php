@@ -100,9 +100,9 @@
             </div><!--END OF PRODIMG-->
                 <p><?php echo $row['productName']; ?></p>
                 <p>$<?php echo $row['productPrice']; ?></p>
-            </div><!--END OF ITEM-->
+            </div><!--END OF PRODRESULT-->
             <?php endforeach ?>
-            </div><!--END OF PROD-->
+        </div><!--END OF PROD-->
     </div><!--END OF MAIN-->
     <footer>
         <div class="ftwords">
