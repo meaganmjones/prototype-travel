@@ -115,7 +115,7 @@ class Product
         $deleteSuccessful = false;
         $productTable = $this->productData;
 
-        $stmt = $productTable->prepare("DELETE FROM product_lookup WHERE product_id = :productID");
+        $stmt = $productTable->prepare("DELETE FROM product_lookup WHERE productID = :productID");
 
         $stmt->bindValue(':productID', $product_id);
 

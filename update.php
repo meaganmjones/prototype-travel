@@ -22,7 +22,7 @@ include_once __DIR__ . '\model\product.php';
   {
       //$categoryData = new Category($configFile);
       $productData = new Product($configFile);
-      //$colorData = new Color($configFile);
+      $colorDatabase = new Color($configFile);
   } 
   catch ( Exception $error ) 
   {
@@ -51,8 +51,20 @@ include_once __DIR__ . '\model\product.php';
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
 
-          //$color = $colorData->getColor($color_id);
-          //var_dump($color[2]);
+          if($category_id == 1){
+            $category_desc = "shirt";
+          }
+          elseif($category_id == 2){
+            $category_desc = "hoodie";
+          }
+          elseif($category_id == 3){
+            $category_desc = "socks";
+          }
+          else{
+            $category_desc = "";
+          }
+
+          $colorList = $colorDatabase->getColor($color_id);
       } 
       //else it is Add and the user will enter info
       else 
@@ -74,8 +86,6 @@ include_once __DIR__ . '\model\product.php';
 
     if (isset($_POST['action'])) 
     {
-
-      echo("made it");
       $action = filter_input(INPUT_POST, 'action');
       //echo $action;
       $product_id = filter_input(INPUT_POST, 'productID');
@@ -90,18 +100,18 @@ include_once __DIR__ . '\model\product.php';
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
 
-      echo("made it 2");
+           
+      $colorList = $colorDatabase->getColor($row['colorID']);
+ 
+                
 
       if ($action == "Add") 
       {
-        echo("made it 4");
         $result = $productData->addProduct($product_name, $product_size, $category_id, $color_id, $product_price, $product_quantity, $product_image);
       } 
       elseif ($action == "Update") 
       {
-        echo("made it 3");   
         $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
-        var_dump($result);
       }
       
       // Redirect to admin_portal page
@@ -200,11 +210,12 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
                 <div class="dropdown">
                     <button onclick="dropDown()">Choose Color</button>
                     <div class="dropdown-content">
-
-                      <a href="#" class="menu">White</a>
-                      <a href="#" class="menu">Grey</a>
-                      <a href="#" class="menu">Black</a>
-                      <a href="#" class="menu" value=<?php //echo $color_id;?>></a>
+                    <?php foreach($colorList as $colorRow):
+                        $colorDesc = $colorRow['colorDesc']; ?>
+                        <a class="menu" ><?php echo $colorDesc; ?></a>
+                    <?php   
+                        endforeach;  
+                    ?> 
                     </div><!--END OF DROPDOWN-CONTENT-->
 
                 </div><!--END OF COLORPICK-->
