@@ -1,7 +1,4 @@
 <?php
-
-<<<<<<<<< Temporary merge branch 1:login.php
-=========
     // Include functions
     include_once __DIR__ . '/include/functions.php';
 
