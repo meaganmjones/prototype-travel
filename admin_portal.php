@@ -36,13 +36,6 @@
         echo "No Post Request";
     }
     $productList = $productDatabase->getProduct();
-    // if (postRequest()) {
-    //     $product_id = filter_input(INPUT_POST, 'productID');
-    //     $productDatabase->deleteProduct($product_id);
-    //     $productDatabase->getProduct();
-
-    // }
-
 
 
     
@@ -99,6 +92,15 @@
             }
             elseif($row['categoryID'] == 3){
                 $category_desc = "socks";
+            }
+            elseif($row['categoryID'] == 4){
+                $category_desc = "bag";
+            }
+            elseif($row['categoryID'] == 5){
+                $category_desc = "hat";
+            }
+            elseif($row['categoryID'] == 6){
+                $category_desc = "sticker";
             }
             else{
                 $category_desc = "";
