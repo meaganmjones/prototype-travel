@@ -18,10 +18,13 @@
         echo "<h2>" . $error->getMessage() . "</h2>";
     }   
 
-  if(postRequest()){
+    $searchString = "";
+
+   if(postRequest()){
     if(isset($_POST['searchString']))
     {
       $searchString = filter_input(INPUT_POST, 'searchString');
+      //$searchResult = $searchDatabase->searchProducts($searchString);
     }
     else{
       echo 'no post request ig';
@@ -78,15 +81,9 @@
                   <a href="logoff.php" class="menu">Logout</a>
                 </div><!--END OF DROPDOWN-CONTENT-->
               </div><!--END OF DROPDOWN-->
-                <form method="post">
-                  <input placeholder="Search" class="search_input" name="searchString">
+                <form action="all_products.php" method="POST">
+                  <input type='search' id='search' placeholder="Search" class="search_input" name="searchString">
                   <a type="submit" class="fas fa-search fa-xs" id="searchbtn" href="all_products.php?query=<?php echo $searchString ?>"></a>
-                  <!-- <script type="text/javascript">
-                    document.getElementById("searchBtn").onclick = function () 
-                    {
-                    location.href = "all_products.php?query=<?php //echo $searchString ?>";
-                    };
-                  </script> -->
                 </form>
               </div><!--END OF SEARCH-->
 </div><!--END OF RNAV-->

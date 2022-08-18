@@ -125,6 +125,30 @@ class Product
     }
 
 
+    function searchProducts ($searchString) 
+    {
+        
+        $results = [];
+        $productTable = $this->productData;
+
+        $sqlQuery = "SELECT * FROM product_lookup WHERE productName LIKE CONCAT('%' , :searchString1  ,'%')";
+        // $sqlQuery = "SELECT * FROM product_lookup, category_lookup WHERE productName LIKE CONCAT('%' , :searchString1  ,'%') OR categoryType LIKE CONCAT('%' , :searchString2  ,'%') "; //the sql query
+
+        $stmt = $productTable->prepare($sqlQuery);
+
+        $stmt->bindValue(':searchString1', $searchString); //bind searchstring with user input value
+        //$stmt->bindValue(':searchString2', $searchString); //bind searchstring with user input value
+
+        
+        
+
+        if ($stmt->execute() && $stmt->rowCount() > 0) //if it executes and the rowcount is more than 0:
+        {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC); //grab what's in the db
+        }
+        return $results; //return results
+    }
+
 //Get listing from the database
     // public function getProduct ($product_id)
     // {

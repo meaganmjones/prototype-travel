@@ -103,7 +103,7 @@ include_once __DIR__ . '\model\product.php';
            
       $colorList = $colorDatabase->getColor($row['colorID']);
  
-                
+      $path = "upload/";
 
       if ($action == "Add") 
       {
@@ -193,7 +193,7 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
     };
     </script>
 
-              <img src="<?php echo $product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
+              <img src="<?php echo $path.$product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">

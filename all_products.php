@@ -8,7 +8,7 @@
 
   include_once __DIR__ . '\include\functions.php';
 
-  include_once __DIR__ . '\model\search.php';
+  //include_once __DIR__ . '\model\search.php';
 
   include_once 'header.php';
   
@@ -19,33 +19,44 @@
   {
       $productData = new Product($configFile);
 
-      $searchData = new ProductSearch($configFile);
+      //$searchData = new ProductSearch($configFile);
   } 
   catch ( Exception $error ) 
   {
       echo "<h2>" . $error->getMessage() . "</h2>";
   }  
+  
+  $path = "upload/";
 
-if(getRequest()){
+//if(getRequest()){
     if(isset ($_GET['query'])){
         $query = filter_input(INPUT_GET, 'query');
 
-        if($query != ''){
-            $productList = $searchData->SearchProducts($query);
-            $path = "upload/";
+        if($query == ''){
+          
+          $productList = $productData->getProduct();
+          
+        }
+        else{
+
+          $productList = $productData->searchProducts($query);
+          var_dump($productList);
+          
         }
     }
-}
+//}
    
-elseif (isset($_POST)) 
+//elseif((postRequest())){
+  if(isset($_POST)) 
   {
 
-    $productList = $productData->getProduct();
+    //$productList = $productData->getProduct();
 
     $path = "upload/";
 
 
   }
+//}
  
 ?>
 
