@@ -25,6 +25,7 @@
     {
       $searchString = filter_input(INPUT_POST, 'searchString');
       echo $searchString;
+      header('Location: all_products.php?query='.$searchString);
       //$searchResult = $searchDatabase->searchProducts($searchString);
     }
     else{
@@ -84,7 +85,7 @@
               </div><!--END OF DROPDOWN-->
                 <form action="header.php" method="POST">
                   <input type='search' id='search' placeholder="Search" class="search_input" name="searchString">
-                  <a type="submit" class="fas fa-search fa-xs" id="searchbtn" href="header.php?query=<?php echo $searchString ?>"></a>
+                  <a type="submit" class="fas fa-search fa-xs" id="searchbtn" ></a>
                 </form>
               </div><!--END OF SEARCH-->
 </div><!--END OF RNAV-->
