@@ -29,15 +29,15 @@ class ProductSearch extends Product
     }
 
     // Allows user to search
-    function searchProducts ($searchString) 
+    public function searchProducts ($searchString) 
     {
         
         $results = [];    //make results an array                     
         $searchTable = $this->getDatabaseRef();   //get db info
 
-        $query = "SELECT * FROM product_lookup, category_lookup WHERE productName OR categoryType LIKE CONCAT('%' , :searchString  ,'%') "; //the sql query
+        $stmt = $searchTable->prepare("SELECT * FROM product_lookup, category_lookup WHERE productName OR categoryType LIKE CONCAT('%' , :searchString  ,'%') "); //the sql query
 
-        $stmt = $searchTable->prepare($query);
+        //$stmt = $searchTable->prepare($query);
 
         $stmt->bindValue(':searchString', $searchString); //bind searchstring with user input value
 

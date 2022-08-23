@@ -7,10 +7,10 @@
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
 
-    // if (!loggedIn())
-    // {
-    //     header ('Location: login.php');
-    // }
+    if (!loggedIn())
+    {
+        header ('Location: login.php');
+    }
 
     try 
     {

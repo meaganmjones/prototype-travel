@@ -8,9 +8,6 @@ class AdminLogin
     // This data field represents the database
     private $loginData;
 
-    // Used to salt user password
-    const PASSWORD_SALT = "school-salt";
-
     
     public function __construct($configFile) 
     {
@@ -89,7 +86,7 @@ class AdminLogin
         $loginLookup = $this->loginData;   
 
         // Create query object with username and password
-        $stmt = $loginLookup->prepare("SELECT userPassword, loginSalt FROM login_lookup WHERE username = :userName");
+        $stmt = $loginLookup->prepare("SELECT userPassword FROM login_lookup WHERE userName = :userName");
  
         // Bind query parameter values
         $stmt->bindValue(':userName', $username);
@@ -98,12 +95,10 @@ class AdminLogin
 
         if ($foundUser)
         {
-            $results = $stmt->fetch(PDO::FETCH_ASSOC); 
-            $hashedPassword = sha1( $results['loginSalt'] . $password);
-            $validUser = ($hashedPassword == $results['userPassword']);
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
         }
         
-        return $validUser;
+        return $results;
     }
  
 } // end class AdminLogin
