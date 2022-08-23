@@ -586,6 +586,7 @@ p{
 .inv_tbl{
   width: 100%; 
   border: 2px solid black;
+  justify-content: space-between;
 }
 .inv_tbl:nth-child(even){
   background-color: #3e8e41;
