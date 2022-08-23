@@ -33,7 +33,7 @@
             <div class="login-btn">
                 <button type="submit" class="login-btn">Login</button> 
                 <a href="admin_portal.php" style="color:blue">PROTOTYPE LOGIN</a>
-                <a href="index.html" class="login-home" style="color:#7C6990"><p>Site Home</p></a>
+                <a href="index.php" class="login-home" style="color:#7C6990"><p>Site Home</p></a>
             </div><!--END OF LOGIN-BTN-->
         </form><!--END OF FORM-->
         

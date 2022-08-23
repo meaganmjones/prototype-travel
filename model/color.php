@@ -30,7 +30,7 @@ class Color{
         $results = [];
         $colorTable = $this->colorData;
 
-        $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookuop ORDER BY colorID");
+        $stmt = $colorTable->prepare("SELECT colorID, colorHex, colorDesc FROM color_lookup ORDER BY colorID");
         
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
         {

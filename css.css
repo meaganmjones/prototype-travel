@@ -366,7 +366,7 @@ p{
 }
 
 .prodResult{
-<<<<<<< HEAD
+/* <<<<<<< HEAD */
   width: 300px; 
   height: auto; 
   background-color: red; 
@@ -420,7 +420,7 @@ p{
 */
 .prodimg{
   width: 300px;
-=======
+/* ======= */
   align-self: center;
   width: 200px; 
   height: auto; 
@@ -431,7 +431,7 @@ p{
 .prodimg{
   width: 200px;
   height: 200px;
->>>>>>> 1bc218b76a468312c1e50475105c4c00d9dab8b5
+/* >>>>>>> 1bc218b76a468312c1e50475105c4c00d9dab8b5 */
   align-self:center;
 }
 

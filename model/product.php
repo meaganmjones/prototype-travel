@@ -141,6 +141,26 @@ class Product
         return $this->productData;
     }
 
+    public function searchProducts ($searchString) 
+    {
+        
+        $results = [];                         
+        $productTable = $this->getDatabaseRef();   
+
+        $stmt = $productTable->prepare("SELECT * FROM product_lookup, category_lookup WHERE productName LIKE '%:searchString%' OR categoryType LIKE '%:searchString%'");
+
+        //$stmt = $productTable->prepare($sqlQuery);
+
+        $stmt->bindValue(':searchString', $searchString);
+
+        if ($stmt->execute() && $stmt->rowCount() > 0) 
+        {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $results;
+    }
+
+
 
 }//end product class
 ?>
