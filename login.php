@@ -6,6 +6,9 @@
     // Include user database definitions
     include_once __DIR__ . '/model/admin_login.php';
 
+
+    session_start();
+
     // set logged in to false
     $_SESSION['isLoggedIn'] = false;
     
@@ -25,7 +28,7 @@
         $configFile = __DIR__ . '/model/dbconfig.ini';
         try 
         {
-            $loginData = new Users($configFile);
+            $loginData = new AdminLogin($configFile);
             //echo "made it 6";
         } 
         catch ( Exception $error ) 
@@ -38,15 +41,15 @@
         // Now we can check to see if use credentials are valid.
         if ($loginData->validateCredentials($username, $password))
         {
-            //echo "made it 2";
+            echo "made it 2";
             // If so, set logged in to TRUE
-            $_SESSION['loggedIn'] = true;
-            // Redirect to team list page
+            $_SESSION['isLoggedIn'] = true;
+            // Redirect to portal page
             header ('Location: admin_portal.php');
         } 
         else 
         {
-            //echo "made it 3";
+            echo "made it 3";
            // Whoops! Incorrect login. Tell user and stay on this page.
            $message = "You did not enter the correct login credentials.";
         }
@@ -69,8 +72,16 @@
     <div id="login">
     </br>
     <div>
-        <a href="index.html"><img src="image/TravelLogo_2.jpg"></a>
-        <form class="login">
+        <a href="index.php"><img src="image/TravelLogo_2.jpg"></a>
+        <form class="login" method="post" action="login.php">
+
+            <?php
+            if ($message)
+            {   ?>
+            <div style="background-color: yellow; padding: 10px; border: solid 1px black;"> 
+           <?php echo $message; ?>
+           </div>
+        <?php } ?>
 
             <p class="login-text">
                 <label class="login-lbl" for="">Username: </label>  
@@ -84,10 +95,9 @@
                 <a onclick="#">Show Password</a>
             </p>
             </br>
-
-
+            
             <div class="login-btn">
-                <button href="admin_portal.php" type="submit" class="login-btn">Login</button> 
+                <button type="submit" name="login" class="login-btn">Login</button>
                 <a href="admin_portal.php" style="color:blue">PROTOTYPE LOGIN</a>
                 <a href="index.php" class="login-home" style="color:#7C6990"><p>Site Home</p></a>
             </div><!--END OF LOGIN-BTN-->

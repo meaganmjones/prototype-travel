@@ -7,4 +7,4 @@ CREATE TABLE  IF NOT EXISTS login_lookup (
   
   )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
   
-  INSERT INTO login_lookup SET userName = "", userPassword = sha1(CONCAT("school-salt","")), loginSalt = "school-salt";
+  INSERT INTO login_lookup SET userName = "", userPassword = sha1(CONCAT("school-salt","")), loginSalt = "school-salt", userPermissions = "";

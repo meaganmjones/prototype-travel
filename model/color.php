@@ -34,7 +34,7 @@ class Color{
         
         if ( $stmt->execute() && $stmt->rowCount() > 0 ) 
         {
-             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                  
          }
          

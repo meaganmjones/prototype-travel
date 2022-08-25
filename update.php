@@ -123,66 +123,61 @@
     <!--Creating the form to be used to update or add a product to the database-->
 
 <div id="pp-main">
-    <div class="desc">
-        <div class="prod-pg-left">
-            <div class="pic">              
-
-              <div class="container">
-                <form action="update.php" class="form-horizantal" method="POST">
-                  <div class="form-group">
-                    <p><label for="productImage" style="cursor: pointer;">Upload Image</label></p>
-                    <p><input type="file"  accept="image/*" name="productImage" id="productImage"  onchange="loadFile(event)" style="display: none;"></p>
-                    <p style="color: grey;"><img id="output" width="200" /></p>
-
-                    <script>
-                        var loadFile = function(event) {
-	                          var image = document.getElementById('output');
-	                          image.src = URL.createObjectURL(event.target.files[0]);
-                          };
-                      </script>
-             
-                      <img src="<?php echo $product_image?>" name="productImage" id="productImage" class="prod-pic form-control" alt="<?php echo $product_name?>">              
-              </div><!--END OF PIC-->
-          </div><!--END OF PROD-PG-LEFT-->
-        <div class="prod-pg-right">
-
-          <div class="text">
+  <div class="desc">
+    <div class="prod-pg-left">
+      <div class="pic">
+        <div class="container">
+          <form action="update.php" class="form-horizantal" method="POST">
             <div class="form-group">
-
-              <p><label for="productID">ID:</label></p>
-              <h2 class="prod-id"  ><input name="productID" id="productID" class="form-control" value=<?php echo $product_id?>></h2>
-            </div>
+              <p><label for="productImage" style="cursor: pointer;">Upload Image</label></p>
+              <p><input type="file"  accept="image/*" name="productImage" id="productImage"  onchange="loadFile(event)" style="display: none;"></p>
+              <p style="color: grey;"><img id="output" width="200" /></p>
+              <script>
+                var loadFile = function(event) {
+	              var image = document.getElementById('output');
+	              image.src = URL.createObjectURL(event.target.files[0]);
+                };
+              </script>
+              <img src="<?php echo $product_image?>" name="productImage" id="productImage" class="prod-pic form-control" alt="<?php echo $product_name?>">              
+        </div><!--END OF PIC-->
+    </div><!--END OF PROD-PG-LEFT-->
+    <div class="prod-pg-right">
+      <div class="text">
+        <div class="form-group">
+          <p><label for="productID">ID:</label></p>
+          <h2 class="prod-id"  ><input name="productID" id="productID" class="form-control" value=<?php echo $product_id?>></h2>
+        </div>
               <!-- <h2 class="action"><input value=<?php echo $action?>></h2> -->
 
-            <div class="form-group">
-              <p><label for="productName">Name</label></p>
-              <h2 class="prod-title"><input placeholder="Title" type="text" class="form-control" name="productName" id="productName" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
-            </div>
+        <div class="form-group">
+          <p><label for="productName">Name</label></p>
+          <h2 class="prod-title"><input placeholder="Title" type="text" class="form-control" name="productName" id="productName" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
+        </div>
 
-            <div class="form-group">
-              <p><label for="productPrice">Price</label></p>
-              <h3 class="prod-price">$<input placeholder="Price" class="form-control" name="productPrice" id="productPrice"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
-            </div>
+        <div class="form-group">
+          <p><label for="productPrice">Price</label></p>
+          <h3 class="prod-price">$<input placeholder="Price" class="form-control" name="productPrice" id="productPrice"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
+        </div>
 
-            <div class="form-group">
-              <p><label for="productSize">Size</label></p>
-              <h3 class="prod-size"><input placeholder="Size" name="productSize" class="form-control" id="productSize" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_size; ?>></h3>
-            </div><!--END OF FORM GROUP-->
+        <div class="form-group">
+          <p><label for="productSize">Size</label></p>
+          <h3 class="prod-size"><input placeholder="Size" name="productSize" class="form-control" id="productSize" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_size; ?>></h3>
+        </div><!--END OF FORM GROUP-->
 
-            <div class="form-group">
-              <p><label for="productQuantity">Quantity</label></p>
-              <h3 class="prod-quantity"><input placeholder="Quantity" class="form-control" name="productQuantity" id="productQuantity" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_quantity; ?>></h3>
-            </div><!--END OF FORM GROUP-->
+        <div class="form-group">
+          <p><label for="productQuantity">Quantity</label></p>
+          <h3 class="prod-quantity"><input placeholder="Quantity" class="form-control" name="productQuantity" id="productQuantity" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_quantity; ?>></h3>
+        </div><!--END OF FORM GROUP-->
 
-            <div class="form-group">
-              <p><label for="categoryID">Category</label></p>
-              <h3 class="prod-price"><input placeholder="Category" class="form-control" name="categoryID" id="categoryID"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $category_id; ?>></h3>
-            </div>
+        <div class="form-group">
+          <p><label for="categoryID">Category</label></p>
+          <h3 class="prod-price"><input placeholder="Category" class="form-control" name="categoryID" id="categoryID"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $category_id; ?>></h3>
+        </div>
 
-            <div class="form-group">
-              <p><label for="colorID">Color</label></p>
-              <h3 class="prod-price"><input placeholder="Color" class="form-control" name="colorID" id="colorID"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $color_id; ?>></h3>
-            </div>
+        <div class="form-group">
+          <p><label for="colorID">Color</label></p>
+          <h3 class="prod-price"><input placeholder="Color" class="form-control" name="colorID" id="colorID"  style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $color_id; ?>></h3>
+        </div>
 
                 <!-- <div class="colorpick">
                   <p>Color: <?php //echo $color['colorDesc']; ?></p>
@@ -205,10 +200,10 @@
                     <button class="size">L</button>
                     <button class="size">XL</button> -->
                 <!-- </div>END OF SIZEPICK -->
-                <div class="form-group">
-                  <div class="addbtn">
-                    <button type="submit" class="btn btn-default"><?php echo $action; ?></button>
-                    <input type="hidden" class="form-control" name="action" value="<?php echo $action; ?>">
+          <div class="form-group">
+            <div class="addbtn">
+              <button type="submit" class="btn btn-default"><?php echo $action; ?></button>
+              <input type="hidden" class="form-control" name="action" value="<?php echo $action; ?>">
                     
                 </form><!--END OF FORM-->
                   </div><!--END OF ADDBTN-->
