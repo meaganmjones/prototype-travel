@@ -68,14 +68,14 @@ class Color{
         $stmt->bindvalue(':colorDesc', $color_desc);
     }
 
-    public function getOneColor($color_id){
+    public function getOneColor($color_hex){
 
         $results = [];
-        $colorTable = $this->ColorData;
+        $colorTable = $this->colorData;
 
-        $stmt = $colorTable->prepare("SELECT colorDesc FROM color_lookup WHERE colorID = :colorID");
+        $stmt = $colorTable->prepare("SELECT * FROM color_lookup WHERE colorHex = :color_hex");
 
-        $stmt->bindvalue(':colorID', $color_id);
+        $stmt->bindvalue(':color_hex', $color_hex);
 
         if($stmt->execute() && $stmt->rowcount() > 0)
         {

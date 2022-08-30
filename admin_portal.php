@@ -32,8 +32,8 @@
             
         }
     }else{
-        //$productList = $productDatabase->getProduct();
-        echo "No Post Request";
+        $productList = $productDatabase->getProduct();
+        //echo "No Post Request";
     }
     $productList = $productDatabase->getProduct();
 

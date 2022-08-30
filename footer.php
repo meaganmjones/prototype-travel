@@ -16,7 +16,7 @@
         <a href="#" class="sml">Returns</a>
       </div><!--END OF FTLEFT-->
       <div class="ftright">
-        <a href="#" class="sml">About Travel</a>
+        <a href="aboutUs.php" class="sml">About Travel</a>
         <a href="#" class="sml">Travel Team Page</a>
       </div><!--END OF RIGHT-->
     </div><!--END OF FTWORDS-->
