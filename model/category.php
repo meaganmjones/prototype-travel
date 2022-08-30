@@ -49,7 +49,7 @@ class Category
         $categoryTable = $this->categoryData;
         
 
-        $stmt = $categoryTable->prepare("INSERT INTO category_lookup SET categoryType = :categoryType");
+        $stmt = $categoryTable->prepare("INSERT INTO category_lookup SET category_type = :categoryType");
         
 
         $boundCategory = array (
@@ -66,7 +66,7 @@ class Category
         $updateSuccessful = false;
         $categoryTable = $this->CategoryDate;
 
-        $stmt = $categoryTable->prepare("UPDATE category_lookup SET categoryType = :categoryType WHERE categoryID = :categoryID");
+        $stmt = $categoryTable->prepare("UPDATE category_lookup SET category_type = :categoryType WHERE category_id = :categoryID");
 
         $stmt->bindValue(':categoryID', $category_id);
         $stmt->bindValue(':categoryType', $category_type);
@@ -78,7 +78,7 @@ class Category
         $results = [];
         $categoryTable = $this->categoryData;
 
-        $stmt = $categoryTable->prepare("SELECT categoryType FROM category_lookup WHERE categoryID = :categoryID");
+        $stmt = $categoryTable->prepare("SELECT categoryID, categoryType FROM category_lookup WHERE category_id = :categoryID");
 
         $stmt->bindValue(':categoryID', $category_id);
 

@@ -8,7 +8,9 @@ class AdminLogin
     // This data field represents the database
     private $loginData;
 
-    const PASSWORD_SALT = 'school-salt';
+    // Used to salt user password
+    const PASSWORD_SALT = "school-salt";
+
     
     public function __construct($configFile) 
     {
@@ -67,7 +69,7 @@ class AdminLogin
     public function getLogin($id) 
     {
         $results = [];                  
-        $loginLookup = $this->loginData;   
+        $loginKookup = $this->loginData;   
 
         
         return $results;
@@ -83,31 +85,22 @@ class AdminLogin
     // Validates credentials user entered on form
     function validateCredentials($username, $password)
     {
-        $results = [];
         $validUser = false;
-        $loginTable = $this->loginData;   
+        $loginLookup = $this->loginData;   
 
         // Create query object with username and password
-        $stmt = $loginTable->prepare("SELECT loginSalt, userPassword FROM login_lookup WHERE userName = :userName");
-        //echo ("got here vC");
+        $stmt = $loginLookup->prepare("SELECT userPassword, loginSalt FROM login_lookup WHERE username = :userName");
+ 
         // Bind query parameter values
         $stmt->bindValue(':userName', $username);
-        //echo "made it past bind value";
-        $foundUser = ($stmt->execute() && $stmt->rowCount() > 0);
-        //var_dump($foundUser);
 
-        
+        $foundUser = ($stmt->execute() && $stmt->rowCount() > 0);
+
         if ($foundUser)
         {
-            //echo "hey";
             $results = $stmt->fetch(PDO::FETCH_ASSOC); 
-            //var_dump($results);
-            $hashedPassword = sha1($results['loginSalt'] . $password);
-            var_dump($hashedPassword);
+            $hashedPassword = sha1( $results['loginSalt'] . $password);
             $validUser = ($hashedPassword == $results['userPassword']);
-            var_dump($validUser);
-            //echo "what it do";
-            
         }
         
         return $validUser;

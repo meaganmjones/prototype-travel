@@ -27,7 +27,7 @@ include_once __DIR__ . '/header.php';
                 </br>
                 <p style="font-size:20px"><b>PHONE: 223-555-4567</b></p>
                 </br>
-                <p style="font-size:20px"><b>EMAIL: trvlco@gmail.com</b></p>
+                <p style="font-size:20px"><b>EMAIL: trvlco@dotmatrix.com</b></p>
             </div>
 
         </div><!--END OF prod_all-->

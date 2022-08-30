@@ -23,22 +23,22 @@ include_once 'header.php';
 
     <div id="main">
       <div class="hero">
-        <a href="shirts.html"><img src="image/MountainBanner_2.png" class="heroimg"></a>
+        <a href="all_products.php"><img src="image/MountainBanner_2.png" class="heroimg"></a>
       </div><!--END OF HERO-->
       <div class="break">
   
       </div><!--END OF BREAK-->
     <div class="center">
       <div class="left">
-       <a href="shirts.html"><img src="image/TravelSidewalkBanner_1.png" class="leftimg"></a>
+       <a href="all_products.php"><img src="image/TravelSidewalkBanner_1.png" class="leftimg"></a>
         <div class="overlay">
-          <a href="shirts.html" class="overlay"></a>
+          <a href="all_products.php" class="overlay"></a>
         </div><!--END OF OVERLAYLF-->
       </div><!--END OF LEFT-->
       <div class="right">
-         <a href="hoodies.html"><img src="image/TravelHikeOuterwear_1.png" class="rightimg"></a>
+         <a href="all_products.php"><img src="image/TravelHikeOuterwear_1.png" class="rightimg"></a>
           <div class="overlay">
-            <a href="hoodies.html" class="overlay"></a>
+            <a href="all_products.php" class="overlay"></a>
           </div><!--END OF OVERLAY-->
       </div><!--END OF RIGHT-->
     </div><!--END OF CENTER-->

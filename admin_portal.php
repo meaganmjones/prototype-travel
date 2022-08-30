@@ -7,10 +7,10 @@
     // Set up configuration file and create database
     $configFile = __DIR__ . '/model/dbconfig.ini';
 
-    if (!isLoggedIn())
-    {
-        header ('Location: login.php');
-    }
+    // if (!loggedIn())
+    // {
+    //     header ('Location: login.php');
+    // }
 
     try 
     {
@@ -62,12 +62,12 @@
         </div><!--END OF INV-BTN-->
     </br>
     
-        <a href="index.php"><image src="image/TravelLogo_2.jpg" class="top-img"></a>
+        <a href="index.html"><image src="image/TravelLogo_2.jpg" class="top-img"></a>
     </br>
     <table class="inv_tbl">
     <thead>
         <tr>
-            <th class="col_head">ID</th>
+           
             <th class="col_head">Product Name</th>
             <th class="col_head">Category</th>
             <th class="col_head">Color</th>
@@ -79,9 +79,7 @@
         <?php foreach ($productList as $row): ?>
 
         <tr>
-            <td> 
-                </td>                       
-                <td class="col-data"  name="productID"><?php echo $row['productID']; ?></td>
+                      
                 <td class="col-data"><a href="update.php?action=Update&productID=<?php echo $row['productID']; ?>" style="color: blue;"><?php echo $row['productName']; ?></a></td>
                 <td class="col-data"><?php     
             if($row['categoryID'] == 1){

@@ -10,7 +10,7 @@
 
   //include_once __DIR__ . '\model\search.php';
 
-  include_once __DIR__ . 'header.php';
+  include_once 'header.php';
   
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
@@ -29,21 +29,21 @@
   $path = "upload/";
 
 //if(getRequest()){
-if(isset ($_GET['query'])){
-    $query = filter_input(INPUT_GET, 'query');
+    if(isset ($_GET['query'])){
+        $query = filter_input(INPUT_GET, 'query');
 
-    if($query == ""){
+        if($query == ''){
           
-        $productList = $productData->getProduct();
+          $productList = $productData->getProduct();
           
-    }
-    else{
+        }
+        else{
 
-        $productList = $productData->searchProducts($query);
-        var_dump($productList);
+          $productList = $productData->searchProducts($query);
+          //var_dump($productList);
           
+        }
     }
-}
 //}
    
 //elseif((postRequest())){
@@ -88,7 +88,7 @@ if(isset ($_GET['query'])){
                 <img src="<?php echo $path.$row['productImage']; ?>" >
             </div><!--END OF PRODIMG-->
                 <p style="color: black;"><?php echo $row['productName']; ?></p>
-                <p style="color: black;">$<?php echo $row['productPrice']; ?></p>
+                <p style="color: black;"><?php echo '$'.$row['productPrice']; ?></p>
             </div><!--END OF PRODRESULT-->
             </a>
             <?php endforeach ?>
