@@ -67,7 +67,7 @@
     <table class="inv_tbl">
     <thead>
         <tr>
-            <th class="col_head" style="display: none;">ID</th>
+           
             <th class="col_head">Product Name</th>
             <th class="col_head">Category</th>
             <th class="col_head">Color</th>
@@ -79,9 +79,7 @@
         <?php foreach ($productList as $row): ?>
 
         <tr>
-            <td> 
-                </td>                       
-                <td class="col-data" style="display: none;" name="productID"><?php //echo $row['productID']; ?></td>
+                      
                 <td class="col-data"><a href="update.php?action=Update&productID=<?php echo $row['productID']; ?>" style="color: blue;"><?php echo $row['productName']; ?></a></td>
                 <td class="col-data"><?php     
             if($row['categoryID'] == 1){

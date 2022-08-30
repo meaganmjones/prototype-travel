@@ -150,7 +150,7 @@
       
     } // end if POST
 
-  }
+  
   
 
   // If it is neither POST nor GET, we go to admin_portal.php
