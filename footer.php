@@ -13,11 +13,10 @@
       <div class="ftleft">
         <a href="https://tools.usps.com/go/TrackConfirmAction_input" class="sml">Order Status</a>
         <a href="https://capstonecompanion.herokuapp.com/" target="_blank" rel="noreferrer noopener" style="color: red">Capstone Companion Site</a>
-        <a href="#" class="sml">Returns</a>
+        <!-- <a href="#" class="sml">Returns</a> -->
       </div><!--END OF FTLEFT-->
       <div class="ftright">
         <a href="aboutUs.php" class="sml">About Travel</a>
-        <a href="#" class="sml">Travel Team Page</a>
       </div><!--END OF RIGHT-->
     </div><!--END OF FTWORDS-->
       <div class="rightfoot">
