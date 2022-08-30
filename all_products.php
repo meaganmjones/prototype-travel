@@ -40,7 +40,7 @@
         else{
 
           $productList = $productData->searchProducts($query);
-          var_dump($productList);
+          //var_dump($productList);
           
         }
     }
@@ -50,7 +50,7 @@
   if(isset($_POST)) 
   {
 
-    //$productList = $productData->getProduct();
+    $productList = $productData->getProduct();
 
     $path = "upload/";
 
@@ -88,7 +88,7 @@
                 <img src="<?php echo $path.$row['productImage']; ?>" >
             </div><!--END OF PRODIMG-->
                 <p style="color: black;"><?php echo $row['productName']; ?></p>
-                <p style="color: black;">$<?php echo $row['productPrice']; ?></p>
+                <p style="color: black;"><?php echo '$'.$row['productPrice']; ?></p>
             </div><!--END OF PRODRESULT-->
             </a>
             <?php endforeach ?>

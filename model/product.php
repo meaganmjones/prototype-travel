@@ -65,17 +65,19 @@ class Product
     }
 
     //Add to database
-    public function addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image) {
+    public function addProduct ($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image) {
         $addSuccessful = false;
         $productTable = $this->productData;
         
 
-        $stmt = $productTable->prepare("INSERT INTO product_lookup SET product_name = :ProductName, product_price = :productPrice, product_size = :productSize, product_quantity = :productQuantity, product_image = :productImage");
+        $stmt = $productTable->prepare("INSERT INTO product_lookup SET productName = :ProductName, productPrice = :productPrice, categoryID = :categoryID, colorID = :colorID, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage");
         
 
         $boundProduct = array(
             ":ProductName" => $product_name,
             ":productPrice" => $product_price,
+            ":categoryID" => $category_id,
+            ":colorID" => $color_id,
             ":productSize" => $product_size,
             ":productQuantity" => $product_quantity,
             ":productImage" => $product_image

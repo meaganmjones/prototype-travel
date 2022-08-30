@@ -24,12 +24,12 @@
     if(isset($_POST['searchString']))
     {
       $searchString = filter_input(INPUT_POST, 'searchString');
-      echo $searchString;
+      //echo $searchString;
       header('Location: all_products.php?query='.$searchString);
       //$searchResult = $searchDatabase->searchProducts($searchString);
     }
     else{
-      echo 'no post request ig';
+      //echo 'no post request ig';
     }
   }
 ?> 

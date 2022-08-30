@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . '\model\product.php';
+  include_once __DIR__ . '\model\product.php';
 
   include_once __DIR__ . '\model\category.php';
 
@@ -8,7 +8,7 @@ include_once __DIR__ . '\model\product.php';
 
   include_once __DIR__ . '\include\functions.php';
   
-  include_once __DIR__ . '\header.php';
+  include_once 'header.php';
 
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
@@ -20,9 +20,9 @@ include_once __DIR__ . '\model\product.php';
 
   try 
   {
-      //$categoryData = new Category($configFile);
+      $categoryData = new Category($configFile);
       $productData = new Product($configFile);
-      $colorDatabase = new Color($configFile);
+      $colorData = new Color($configFile);
   } 
   catch ( Exception $error ) 
   {
@@ -51,26 +51,16 @@ include_once __DIR__ . '\model\product.php';
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
 
-          if($category_id == 1){
-            $category_desc = "shirt";
-          }
-          elseif($category_id == 2){
-            $category_desc = "hoodie";
-          }
-          elseif($category_id == 3){
-            $category_desc = "socks";
-          }
-          else{
-            $category_desc = "";
-          }
-
-          $colorList = $colorDatabase->getColor($color_id);
+          //$color = $colorData->getColor($color_id);
+          //var_dump($color[2]);
       } 
       //else it is Add and the user will enter info
       else 
       {
           $product_name = "";
           $product_price = "";
+          $category_id = "";
+          $color_id = "";
           $product_size = "";
           $product_quantity = "";
           $product_image = "";
@@ -86,36 +76,77 @@ include_once __DIR__ . '\model\product.php';
 
     if (isset($_POST['action'])) 
     {
+
+      //echo("made it");
       $action = filter_input(INPUT_POST, 'action');
       //echo $action;
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
       $product_price = filter_input(INPUT_POST, 'productPrice');
-      //$category_id = filter_input(INPUT_POST, 'categoryID');
-      $category_id = 1;
-      //$color_id = filter_input(INPUT_POST, 'colorID');
-      $color_id = 1;
-      //$product_size = filter_input(INPUT_POST, 'productSize');
-      $product_size = "L";
+      $category_id = filter_input(INPUT_POST, 'category');
+      $color_hex = filter_input(INPUT_POST, 'color');
+      $color_desc = filter_input(INPUT_POST, 'colorDesc');
+      $product_size = filter_input(INPUT_POST, 'size');
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
+      //echo("made it 2");
 
-           
-      $colorList = $colorDatabase->getColor($row['colorID']);
- 
-      $path = "upload/";
+      //echo $color_id;
+
+    //   if($category_id == "shirt"){
+    //     $$category_id = 1;
+    // }
+    // elseif($category_id == "hoodie"){
+    //     $$category_id = 2;
+    // }
+    // elseif($category_id == "socks"){
+    //   $category_id = 3;
+    // }
+    // elseif($category_id == "bag"){
+    //     $category_id = 4;
+    // }
+    // elseif($category_id == "hat"){
+    //     $category_id = 5;
+    // }
+    // elseif($category_id == "sticker"){
+    //   $category_id = 7;
+    // }
+    // else{
+    //     $category_id = 8;
+    // }
 
       if ($action == "Add") 
       {
-        $result = $productData->addProduct($product_name, $product_size, $category_id, $color_id, $product_price, $product_quantity, $product_image);
+        $color = $colorData->getAllColor();
+        //var_dump($color);
+        //echo $color[0]['colorDesc'];
+    
+        foreach($color as $colorRow):
+          if($colorRow['colorHex'] == $color_hex){
+            $color_id = $colorRow['colorID'];
+          }
+        endforeach;  
+          $addColor = $colorData->addColor($color_hex, $color_desc);
+          $oneColor = $colorData->getOneColor($color_hex);
+          $color_id = $oneColor['colorID'];
+          $result = $productData->addProduct($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        }
+        else{
+          $oneColor = $colorData->getOneColor($color_hex);
+          $color_id = $oneColor['colorID'];
+          $result = $productData->addProduct($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        }
+
       } 
       elseif ($action == "Update") 
       {
+          
         $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        
       }
       
       // Redirect to admin_portal page
-      header('Location: admin_portal.php');
+      //header('Location: admin_portal.php');
       
     } // end if POST
 
@@ -205,27 +236,40 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
               <h3 class="prod-price"><input placeholder="Price" name="productPrice" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_price; ?>"></h3>
               <h2><input placeholder="Quantity" name="productQuantity" style="font-size: 20px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_quantity; ?>"> </h2>
               
+              <div class='category'>
+              <span>Choose a Cateogry</span>
+                    <input type='checkbox' class="category" name="category" value=1>Shirt
+                    <input type='checkbox' class="category" name="category" value=2>Hoodie
+                    <input type='checkbox' class="category" name="category" value=3>Socks
+                    <input type='checkbox' class="category" name="category" value=4>Misc
+              </div>
+
               <div class="colorpick">
+                <input type='color' name='color'><span>Click here to select color</span>
+  </br>
+  </br>
+                <input type='text' name='colorDesc'><span>Color Description</span>
                   <!--<p>Color: <?php //echo $color['colorDesc']; ?></p>-->
-                <div class="dropdown">
+                <!-- <div class="dropdown">
                     <button onclick="dropDown()">Choose Color</button>
                     <div class="dropdown-content">
-                    <?php foreach($colorList as $colorRow):
-                        $colorDesc = $colorRow['colorDesc']; ?>
-                        <a class="menu" ><?php echo $colorDesc; ?></a>
+                    <?php //foreach($colorList as $colorRow):
+                        //$colorDesc = $colorRow['colorDesc']; ?>
+                        <a class="menu" ><?php //echo $colorDesc; ?></a>
                     <?php   
-                        endforeach;  
+                       // endforeach;  
                     ?> 
-                    </div><!--END OF DROPDOWN-CONTENT-->
-
+                    </div>END OF DROPDOWN-CONTENT -->
+                    
                 </div><!--END OF COLORPICK-->
-
+                    </br>
+                <span>Select Size</span>
                 <div class="sizepick">
-                    <button class="size">XS</button>
-                    <button class="size">S</button>
-                    <button class="size">M</button>
-                    <button class="size">L</button>
-                    <button class="size">XL</button>
+                    <input type='checkbox' value='XS' class="size" name="size">XS
+                    <input type='checkbox' value='S' class="size" name="size">S
+                    <input type='checkbox' value='M' class="size" name="size">M
+                    <input type='checkbox' value='L' class="size" name="size">L
+                    <input type='checkbox' value='XL' class="size" name="size">XL
                 </div><!--END OF SIZEPICK-->
                 <div class="addbtn">
                     <button type="submit"><?php echo $action; ?></button>
@@ -236,42 +280,9 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
 
-<footer>
-    <div class="ftwords">
-      <div class="ftleft">
-        <a href="#" class="bold">Get Help</a>
-        <a href="#" class="sml">Order Status</a>
-        <a href="#" class="sml">Customer Service</a>
-        <a href="#" class="sml">Shipping & Delivery</a>
-        <a href="#" class="sml">Returns</a>
-      </div><!--END OF FTLEFT-->
-      <div class="ftright">
-        <a href="#" class="bold">About Us</a>
-        <a href="#" class="sml">Contact Us</a>
-        <a href="#" class="sml">About Travel</a>
-        <a href="#" class="sml">The Blog</a>
-        <a href="#" class="sml">Travel Team Page</a>
-      </div><!--END OF RIGHT-->
-    </div><!--END OF FTWORDS-->
-      <div class="rightfoot">
-        <p>Connect With Us</p>
-        <div class="connect">
-          <input type="text" placeholder="Email">
-          <!--<button class="emailbtn">Submit</button>-->
-          <i class="fas fa-check-square" class="check"></i>
-        </div><!--END OF CONNECT-->
-        
-          <div class="info">
-            <i class="fab fa-twitter-square" class="icon"></i>
-            <i class="fab fa-instagram" class="icon"></i>
-            <i class="fab fa-facebook-square" class="icon"></i>
-          </div><!--END OF INFO-->
-
-          <p class="tiny">&copyTravel 2018</p>
-    
-      </div><!--END OF RIGHTFOOT-->
-
-</footer><!--END OF FOOTER-->
+<?php
+include_once 'footer.php';
+?>
 </div><!--END OF CONTAINER-->
 </body>
 </html>
