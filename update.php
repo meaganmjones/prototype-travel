@@ -49,7 +49,7 @@
           $category_id = $row['categoryID'];
           $color_id = $row['colorID'];
           $product_quantity = $row['productQuantity'];
-          $product_image = $row['productImage'];
+          $product_image = $row['productImage'];          
 
           //$color = $colorData->getColor($color_id);
           //var_dump($color[2]);
@@ -68,6 +68,9 @@
     } // end if GET
 
   }
+
+// Check if image file is a actual image or fake image
+
   
 
   // If it is a POST, we are coming from update.php
@@ -76,6 +79,25 @@
 
     if (isset($_POST['action'])) 
     {
+
+      echo "made it";
+
+      define("UPLOAD_DIRECTORY", "upload");
+      
+      if(isset($_FILES['fileToUpload']))
+      {
+        var_dump($_FILES);
+
+        $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
+
+        $tmpName = $_FILES['fileToUpload']['tmp_name'];
+
+        $targetFileName = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
+
+        move_uploaded_file($tmpName, $targetFileName);
+
+        echo "made it 2";
+      }
 
       //echo("made it");
       $action = filter_input(INPUT_POST, 'action');
@@ -89,6 +111,8 @@
       $product_size = filter_input(INPUT_POST, 'size');
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
+
+      
       //echo("made it 2");
 
       //echo $color_id;
@@ -120,6 +144,8 @@
         $color = $colorData->getAllColor();
         //var_dump($color);
         //echo $color[0]['colorDesc'];
+
+        
     
         foreach($color as $colorRow):
           if($colorRow['colorHex'] == $color_hex){
@@ -140,6 +166,8 @@
       } 
       elseif ($action == "Update") 
       {
+
+        
           
         $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
         
@@ -185,46 +213,22 @@
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">              
-
-              <!-- need to add slashes to the image file when it comes out of the database -->
-<!-- $file = addslashes(file_get_contents($_FILES["productImage"]["tmp_name"]));  
-$stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE productID = :productID";
-<script>  
- $(document).ready(function(){  
-      $('#insert').click(function(){  
-           var image_name = $('#image').val();  
-           if(image_name == '')  
-           {  
-                alert("Please Select Image");  
-                return false;  
-           }  
-           else  
-           {  
-                var extension = $('#image').val().split('.').pop().toLowerCase();  
-                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
-                {  
-                     alert('Invalid Image File');  
-                     $('#image').val('');  
-                     return false;  
-                }   
-           }  
-      });  
- });  
- </script> -->
  <form action="Update.php" method="post">
 
-    <p><input type="file"  accept="image/*" name="productImage" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+
+    <script>
+      var loadFile = function(event) {
+	      var image = document.getElementById('output');
+	      image.src = URL.createObjectURL(event.target.files[0]);
+      };
+      
+    </script>
+
+    <p><input type="file" name="fileToUpload" id="file" enctype="multipart/form-data" onchange="loadFile(event)" style="display: none;"></p>
     <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
     <p style="color: grey;"><img id="output" width="200" /></p>
 
-    <script>
-    var loadFile = function(event) {
-	  var image = document.getElementById('output');
-	  image.src = URL.createObjectURL(event.target.files[0]);
-    };
-    </script>
-
-              <img src="<?php echo $path.$product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
+              <img src="<?php echo $product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
@@ -272,12 +276,13 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
                 </div><!--END OF SIZEPICK-->
                 <div class="addbtn">
                     <button type="submit"><?php echo $action; ?></button>
-  </form><!--END OF FORM-->
+  
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
+</form><!--END OF FORM-->
 
 <?php
 include_once 'footer.php';
