@@ -84,9 +84,9 @@
             <?php foreach ($productList as $row): ?>
             <a href="singleprod.php?action=view&productID=<?php echo $row['productID'] ?>">
             <div class="prodResult">
-            <div class="prodimg">
-                <img src="<?php echo $path.$row['productImage']; ?>" >
-            </div><!--END OF PRODIMG-->
+                <div class="prodimg">
+                    <img style="width:200px; height:200px;" src="<?php echo $path.$row['productImage']; ?>" >
+                </div><!--END OF PRODIMG-->
                 <p style="color: black;"><?php echo $row['productName']; ?></p>
                 <p style="color: black;"><?php echo '$'.$row['productPrice']; ?></p>
             </div><!--END OF PRODRESULT-->

@@ -366,72 +366,16 @@ p{
 }
 
 .prodResult{
-/* <<<<<<< HEAD */
-  width: 300px; 
-  height: auto; 
-  background-color: red; 
-  text-align: center; 
-  align-content: center;
-  
-}
-/* .prod-line-1{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-1 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-  margin-top: 1%;
-}
-.prod-line-2{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-2 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-}
-.prod-line-3{
-  width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-}
-.prod-line-3 > div{
-  background-color: white;
-  margin: 1%;
-  padding: 20px;
-  font-size: 30px;
-  height: 250px;
-  justify-content: center;
-}
-*/
-.prodimg{
-  width: 300px;
-/* ======= */
   align-self: center;
-  width: 200px; 
+  width: auto; 
   height: auto; 
   text-align: center; 
   align-content: flex-start;
 }
 
 .prodimg{
-  width: 200px;
-  height: 200px;
-/* >>>>>>> 1bc218b76a468312c1e50475105c4c00d9dab8b5 */
+  width: 20px;
+  height: 20px;
   align-self:center;
 }
 
@@ -457,14 +401,12 @@ p{
 }
 .prod-pg-left{
   width: 50%;
-  border: 2px solid red;
   height: 400px;
 
 }
 .pic{
   width: 50%;
   height: 400px;
-  border: 2px solid green;
 }
 .prod-pic{
   width: 100%;
@@ -473,7 +415,6 @@ p{
 .prod-pg-right{
   width: 50%;
   height: 600px;
-  border: 2px solid hotpink;
 }
 .size{
   color: #838383;
@@ -550,13 +491,6 @@ p{
 .abt{
   margin-left: 5%;
   margin-right: 5%;
-  display: block;
-  background-color: white;
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 1%;
-  height: 1000px;
-  filter: drop-shadow(0px 0px 4px #8b8691);
 }
 
 /*----------LOGIN-------------------*/
@@ -608,12 +542,12 @@ p{
 }
 
 .col_head{
+  text-align: center;
   padding: 20px;
 }
 .col_data{
-  /*text-align: center;*/
+  text-align: center;
   /*width: auto;*/
-  align-self: left;
 }
 
 /* .col_data:nth-child(even){

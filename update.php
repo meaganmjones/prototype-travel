@@ -49,7 +49,7 @@
           $category_id = $row['categoryID'];
           $color_id = $row['colorID'];
           $product_quantity = $row['productQuantity'];
-          $product_image = $row['productImage'];          
+          $product_image = $row['productImage'];
 
           //$color = $colorData->getColor($color_id);
           //var_dump($color[2]);
@@ -68,9 +68,6 @@
     } // end if GET
 
   }
-
-// Check if image file is a actual image or fake image
-
   
 
   // If it is a POST, we are coming from update.php
@@ -80,26 +77,6 @@
     if (isset($_POST['action'])) 
     {
 
-      // echo "made it";
-      $path = "upload/";
-
-      // define("UPLOAD_DIRECTORY", "upload");
-      
-      // if(isset($_FILES['fileToUpload']))
-      // {
-      //   var_dump($_FILES);
-
-      //   $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
-
-      //   $tmpName = $_FILES['fileToUpload']['tmp_name'];
-
-      //   $targetFileName = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
-
-      //   move_uploaded_file($tmpName, $targetFileName);
-
-      //   echo "made it 2";
-      // }
-    
       //echo("made it");
       $action = filter_input(INPUT_POST, 'action');
       //echo $action;
@@ -113,40 +90,12 @@
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
 
-      
-      //echo("made it 2");
-
-      //echo $color_id;
-
-    //   if($category_id == "shirt"){
-    //     $$category_id = 1;
-    // }
-    // elseif($category_id == "hoodie"){
-    //     $$category_id = 2;
-    // }
-    // elseif($category_id == "socks"){
-    //   $category_id = 3;
-    // }
-    // elseif($category_id == "bag"){
-    //     $category_id = 4;
-    // }
-    // elseif($category_id == "hat"){
-    //     $category_id = 5;
-    // }
-    // elseif($category_id == "sticker"){
-    //   $category_id = 7;
-    // }
-    // else{
-    //     $category_id = 8;
-    // }
 
       if ($action == "Add") 
       {
         $color = $colorData->getAllColor();
         //var_dump($color);
         //echo $color[0]['colorDesc'];
-
-        
     
         foreach($color as $colorRow):
           if($colorRow['colorHex'] == $color_hex){
@@ -167,8 +116,6 @@
       } 
       elseif ($action == "Update") 
       {
-
-        
           
         $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
         
@@ -214,30 +161,34 @@
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">              
+
+              
  <form action="Update.php" method="post">
 
-
-    <script>
-      var loadFile = function(event) {
-	      var image = document.getElementById('output');
-	      image.src = URL.createObjectURL(event.target.files[0]);
-      };
-      
-    </script>
-
-    <p><input type="file" name="productImage" id="" enctype="multipart/form-data" onchange="loadFile(event)" style="display: none;"></p>
+    <p><input type="file"  accept="image/*" name="productImage" id="file"  onchange="loadFile(event)" style="display: none;"></p>
     <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
     <p style="color: grey;"><img id="output" width="200" /></p>
+
+    <script>
+    var loadFile = function(event) {
+	  var image = document.getElementById('output');
+	  image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
 
               <img src="<?php echo $path.$product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
             <div class="text">
+              <input name="action" value="<?php echo $action; ?>">
+
               <input name="productID" value="<?php echo $product_id; ?>">
+
               <h2 class="prod-title"><input placeholder="Title" name="productName" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_name; ?>"></h2>
               
               <h3 class="prod-price"><input placeholder="Price" name="productPrice" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_price; ?>"></h3>
+
               <h2><input placeholder="Quantity" name="productQuantity" style="font-size: 20px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_quantity; ?>"> </h2>
               
               <div class='category'>
@@ -277,13 +228,12 @@
                 </div><!--END OF SIZEPICK-->
                 <div class="addbtn">
                     <button type="submit"><?php echo $action; ?></button>
-  
+  </form><!--END OF FORM-->
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
-</form><!--END OF FORM-->
 
 <?php
 include_once 'footer.php';
@@ -291,3 +241,24 @@ include_once 'footer.php';
 </div><!--END OF CONTAINER-->
 </body>
 </html>
+
+<?php
+
+// define("UPLOAD_DIRECTORY", "upload");
+      
+      // if(isset($_FILES['fileToUpload']))
+      // {
+      //   var_dump($_FILES);
+
+      //   $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
+
+      //   $tmpName = $_FILES['fileToUpload']['tmp_name'];
+
+      //   $targetFileName = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
+
+      //   move_uploaded_file($tmpName, $targetFileName);
+
+      //   echo "made it 2";
+      // }
+
+?>
