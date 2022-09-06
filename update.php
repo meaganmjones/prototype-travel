@@ -29,6 +29,8 @@
       echo "<h2>" . $error->getMessage() . "</h2>";
   }   
    
+
+  $path = "/upload";
   // If it is a GET, we are coming from admin_portal.php
   // update or add
   if (getRequest()){
@@ -75,8 +77,22 @@
   elseif (postRequest()){
 
     if (isset($_POST['action'])) 
-    {
-
+    { 
+      define("UPLOAD_DIRECTORY", "upload");
+  
+      if (isset ($_FILES['fileToUpload'])) 
+      {
+  
+          $path = getcwd(). DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
+          $tmp_name = $_FILES['fileToUpload']['tmp_name']; 
+          $target_file = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
+  
+          move_uploaded_file($tmp_name, $target_file);
+          echo $target_file;
+  
+          //$insertSchool = $schoolDatabase->insertSchoolsFromFile($target_file);
+  
+      }
       //echo("made it");
       $action = filter_input(INPUT_POST, 'action');
       //echo $action;
@@ -93,27 +109,6 @@
 
       //echo $color_id;
 
-    //   if($category_id == "shirt"){
-    //     $$category_id = 1;
-    // }
-    // elseif($category_id == "hoodie"){
-    //     $$category_id = 2;
-    // }
-    // elseif($category_id == "socks"){
-    //   $category_id = 3;
-    // }
-    // elseif($category_id == "bag"){
-    //     $category_id = 4;
-    // }
-    // elseif($category_id == "hat"){
-    //     $category_id = 5;
-    // }
-    // elseif($category_id == "sticker"){
-    //   $category_id = 7;
-    // }
-    // else{
-    //     $category_id = 8;
-    // }
 
       if ($action == "Add") 
       {
@@ -144,6 +139,7 @@
         $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
         
       }
+
       
       // Redirect to admin_portal page
       //header('Location: admin_portal.php');

@@ -14,7 +14,7 @@
   
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
-
+  $productList = '';
   try 
   {
       $productData = new Product($configFile);
@@ -31,32 +31,24 @@
 //if(getRequest()){
     if(isset ($_GET['query'])){
         $query = filter_input(INPUT_GET, 'query');
-
-        if($query == ''){
-          
-          $productList = $productData->getProduct();
-          
+        $filter = filter_input(INPUT_GET, 'filter');
+        echo $filter;
+        if($filter != '0'){
+            $productList = $productData ->getCategory($filter);
+            //var_dump($productList);
+            
+        }
+        elseif($query != ''){
+            $productList = $productData->searchProducts($query);
+            
         }
         else{
-
-          $productList = $productData->searchProducts($query);
+            $productList = $productData->getProduct();
           //var_dump($productList);
           
         }
+
     }
-//}
-   
-//elseif((postRequest())){
-  if(isset($_POST)) 
-  {
-
-    $productList = $productData->getProduct();
-
-    $path = "upload/";
-
-
-  }
-//}
  
 ?>
 

@@ -64,6 +64,24 @@ class Product
         return $results;
     }
 
+    //get product by category only
+    public function getCategory ($category_id)
+    {
+        $results = [];
+        $productTable = $this->productData;
+
+        $stmt = $productTable->prepare("SELECT productID, productName, productPrice, categoryID, colorID, productSize, productQuantity, productImage FROM product_lookup WHERE categoryID = :categoryID");
+
+        $stmt->bindValue(':categoryID', $category_id);
+
+        if ($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $results;
+    }
+
     //Add to database
     public function addProduct ($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image) {
         $addSuccessful = false;

@@ -58,18 +58,18 @@
           <div class="clothing">
             <button onclick="dropDown()" class="btn">Clothing</button>
             <div class="dropdown-content">
-              <a href="all_products.php" class="menu">T Shirts</a>
-              <a href="all_products.php" class="menu">Hoodies</a>
-              <a href="all_products.php" class="menu">Socks</a>
+              <a href="all_products.php?filter=1&query=" class="menu">T Shirts</a>
+              <a href="all_products.php?filter=2&query=" class="menu">Hoodies</a>
+              <a href="all_products.php?filter=3&query=" class="menu">Socks</a>
               <a href="all_products.php" class="menu">Shop All</a>
             </div><!--END OF DROPDOWN-CONTENT-->
         </div><!--END OF CLOTHING-->
         <div class="dropdown">
             <button onclick="dropDown()" class="btn">Accessories</button>
             <div class="dropdown-content">
-              <a href="#" class="menu">Hats</a>
-              <a href="#" class="menu">Bags</a>
-              <a href="#" class="menu">Stickers</a>
+              <a href="all_products.php?filter=5&query=" class="menu">Hats</a>
+              <a href="all_products.php?filter=4&query=" class="menu">Bags</a>
+              <a href="all_products.php?filter=6&query=" class="menu">Stickers</a>
             </div><!--END OF DROPDOWN-CONTENT-->
           </div><!--END OF DROPDOWN-->
           </div><!--END OF BUTTONS-->
