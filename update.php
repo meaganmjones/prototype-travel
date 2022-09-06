@@ -80,25 +80,26 @@
     if (isset($_POST['action'])) 
     {
 
-      echo "made it";
+      // echo "made it";
+      $path = "upload/";
 
-      define("UPLOAD_DIRECTORY", "upload");
+      // define("UPLOAD_DIRECTORY", "upload");
       
-      if(isset($_FILES['fileToUpload']))
-      {
-        var_dump($_FILES);
+      // if(isset($_FILES['fileToUpload']))
+      // {
+      //   var_dump($_FILES);
 
-        $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
+      //   $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
 
-        $tmpName = $_FILES['fileToUpload']['tmp_name'];
+      //   $tmpName = $_FILES['fileToUpload']['tmp_name'];
 
-        $targetFileName = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
+      //   $targetFileName = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
 
-        move_uploaded_file($tmpName, $targetFileName);
+      //   move_uploaded_file($tmpName, $targetFileName);
 
-        echo "made it 2";
-      }
-
+      //   echo "made it 2";
+      // }
+    
       //echo("made it");
       $action = filter_input(INPUT_POST, 'action');
       //echo $action;
@@ -174,7 +175,7 @@
       }
       
       // Redirect to admin_portal page
-      //header('Location: admin_portal.php');
+      header('Location: admin_portal.php');
       
     } // end if POST
 
@@ -224,11 +225,11 @@
       
     </script>
 
-    <p><input type="file" name="fileToUpload" id="file" enctype="multipart/form-data" onchange="loadFile(event)" style="display: none;"></p>
+    <p><input type="file" name="productImage" id="" enctype="multipart/form-data" onchange="loadFile(event)" style="display: none;"></p>
     <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
     <p style="color: grey;"><img id="output" width="200" /></p>
 
-              <img src="<?php echo $product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
+              <img src="<?php echo $path.$product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
