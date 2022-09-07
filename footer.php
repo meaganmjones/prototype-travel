@@ -11,25 +11,25 @@
 <footer>
     <div class="ftwords">
       <div class="ftleft">
-        <a href="https://tools.usps.com/go/TrackConfirmAction_input" class="sml">Order Status</a>
-        <a href="https://capstonecompanion.herokuapp.com/" target="_blank" rel="noreferrer noopener" style="color: red">Capstone Companion Site</a>
+        <a href="https://tools.usps.com/go/TrackConfirmAction_input" class="sml" style="font-size:14px;">Order Status</a>
+        <a href="https://capstonecompanion.herokuapp.com/" target="_blank" rel="noreferrer noopener" style="color: red;font-size:14px;">Capstone Companion Site</a>
         <!-- <a href="#" class="sml">Returns</a> -->
       </div><!--END OF FTLEFT-->
       <div class="ftright">
-        <a href="aboutUs.php" class="sml">About Travel</a>
+        <a href="aboutUs.php" class="sml" style="font-size:14px;">About Travel</a>
       </div><!--END OF RIGHT-->
     </div><!--END OF FTWORDS-->
       <div class="rightfoot">
         <div class="ftinfo">
           <div class="info">
-            <i class="fab fa-twitter-square" class="icon"></i>
-            <i class="fab fa-instagram" class="icon"></i>
-            <i class="fab fa-facebook-square" class="icon"></i>
+            <a target="blank" href="https://twitter.com/"><i class="fab fa-twitter-square" class="icon"></i></a>
+            <a target="blank" href="https://www.instagram.com/"><i class="fab fa-instagram" class="icon"></i></a>
+            <a target="blank" href="https://www.facebook.com/"><i class="fab fa-facebook-square" class="icon"></i></a>
           </div><!--END OF INFO-->
 
-        <div class="copyright"></div>
-          <p class="tiny">&copyTravel 2018</p>
-      </div><!--END OF COPYRIGHT-->
+        <div class="copyright">
+          <p class="tiny" style="font-size:11px;">&copyTravel 2018</p>
+        </div><!--END OF COPYRIGHT-->
       </div><!--END OF RIGHTFOOT-->
     </div><!--END OF FTINFO-->
     

@@ -294,7 +294,7 @@ a{
 }
 .sml{
   font-family:'Courier New', Courier, monospace, bold;
-  font-size: 12px;
+  font-size: 14px;
 }
 .ftinfo{
   display: block;
@@ -325,7 +325,7 @@ p{
   font-size: 12px;
 }
 .fa-check-square{
-  margin-top: 2%;
+  margin-top: 6%;
 }
 .check{
   color:#dedede;
@@ -335,10 +335,10 @@ p{
   display: flex;
 }
 .tiny{
-  font-size: 8px;
+  font-size: 12px;
 }
 .copyright{
- margin-top: 20%;
+ margin-top: 10%;
 }
 
 .title{

@@ -41,7 +41,7 @@
         // Now we can check to see if use credentials are valid.
         if ($loginData->validateCredentials($username, $password))
         {
-            echo "made it 2";
+            //echo "made it 2";
             // If so, set logged in to TRUE
             $_SESSION['isLoggedIn'] = true;
             // Redirect to portal page
@@ -49,7 +49,7 @@
         } 
         else 
         {
-            echo "made it 3";
+            //echo "made it 3";
            // Whoops! Incorrect login. Tell user and stay on this page.
            $message = "You did not enter the correct login credentials.";
         }
