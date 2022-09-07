@@ -23,15 +23,15 @@
         <div class="ftinfo">
           <div class="info">
             <a target="blank" href="https://twitter.com/"><i class="fab fa-twitter-square" class="icon"></i></a>
-            <a target="blank" href="https://www.instagram.com/"><i class="fab fa-instagram" class="icon"></i></a>
+            <a target="blank" href="https://www.instagram.com/"><i class="fab fa-instagram" class="icon" style="padding-right:5px;padding-left:5px;"></i></a>
             <a target="blank" href="https://www.facebook.com/"><i class="fab fa-facebook-square" class="icon"></i></a>
           </div><!--END OF INFO-->
 
-        <div class="copyright">
-          <p class="tiny" style="font-size:11px;">&copyTravel 2018</p>
-        </div><!--END OF COPYRIGHT-->
+          <div class="copyright">
+            <p class="tiny" style="font-size:8px;">&copy Travel 2018</p>
+          </div><!--END OF COPYRIGHT-->
+        </div><!--END OF FTINFO-->
       </div><!--END OF RIGHTFOOT-->
-    </div><!--END OF FTINFO-->
     
 
 </footer><!--END OF FOOTER-->
