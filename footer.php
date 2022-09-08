@@ -11,7 +11,7 @@
 <footer>
     <div class="ftwords">
       <div class="ftleft">
-        <a href="https://tools.usps.com/go/TrackConfirmAction_input" class="sml" style="font-size:14px;">Order Status</a>
+        <a href="https://tools.usps.com/go/TrackConfirmAction_input" target="blank" class="sml" style="font-size:14px;">Order Status</a>
         <a href="https://capstonecompanion.herokuapp.com/" target="_blank" rel="noreferrer noopener" style="color: red;font-size:14px;">Capstone Companion Site</a>
         <!-- <a href="#" class="sml">Returns</a> -->
       </div><!--END OF FTLEFT-->
@@ -28,10 +28,8 @@
           </div><!--END OF INFO-->
 
           <div class="copyright">
-            <p class="tiny" style="font-size:8px;">&copy Travel 2018</p>
+            <p class="tiny" style="font-size:12px;">&copy Travel 2018</p>
           </div><!--END OF COPYRIGHT-->
         </div><!--END OF FTINFO-->
       </div><!--END OF RIGHTFOOT-->
-    
-
 </footer><!--END OF FOOTER-->
