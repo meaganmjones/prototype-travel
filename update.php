@@ -8,13 +8,15 @@
 
   include_once __DIR__ . '\include\functions.php';
   
+  include_once 'header.php';
+
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
 
-  // if (!loggedIn())
-  //   {
-  //       header ('Location: login.php');
-  //   }
+  if (!isLoggedIn())
+    {
+        header ('Location: login.php');
+    }
 
   try 
   {
@@ -28,9 +30,11 @@
   }   
    
   // If it is a GET, we are coming from admin_portal.php
-  // let's figure out if we're doing update or add
-  if (isset($_GET['action'])) 
-  {
+  // update or add
+  if (getRequest()){
+
+    if (isset($_GET['action'])) 
+    {
       $action = filter_input(INPUT_GET, 'action');
       //echo $action;
       $product_id = filter_input(INPUT_GET, 'productID', );
@@ -47,49 +51,90 @@
           $product_quantity = $row['productQuantity'];
           $product_image = $row['productImage'];
 
-          $color = $colorData->getColor($color_id);
-          var_dump($color[2]);
+          //$color = $colorData->getColor($color_id);
+          //var_dump($color[2]);
       } 
       //else it is Add and the user will enter info
       else 
       {
           $product_name = "";
           $product_price = "";
+          $category_id = "";
+          $color_id = "";
           $product_size = "";
           $product_quantity = "";
           $product_image = "";
       }
-  } // end if GET
+    } // end if GET
+
+  }
+  
 
   // If it is a POST, we are coming from update.php
   // we need to determine action, then return to admin_portal.php
-  elseif (isset($_POST['action'])) 
-  {
+  elseif (postRequest()){
+
+    if (isset($_POST['action'])) 
+    {
+
+      //echo("made it");
       $action = filter_input(INPUT_POST, 'action');
+      //echo $action;
       $product_id = filter_input(INPUT_POST, 'productID');
       $product_name = filter_input(INPUT_POST, 'productName');
       $product_price = filter_input(INPUT_POST, 'productPrice');
-      $product_size = filter_input(INPUT_POST, 'productSize');
+      $category_id = filter_input(INPUT_POST, 'category');
+      $color_hex = filter_input(INPUT_POST, 'color');
+      $color_desc = filter_input(INPUT_POST, 'colorDesc');
+      $product_size = filter_input(INPUT_POST, 'size');
       $product_quantity = filter_input(INPUT_POST, 'productQuantity');
       $product_image = filter_input(INPUT_POST, 'productImage');
 
+
       if ($action == "Add") 
       {
-          $result = $productData->addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image);
+        $color = $colorData->getAllColor();
+        //var_dump($color);
+        //echo $color[0]['colorDesc'];
+    
+        foreach($color as $colorRow):
+          if($colorRow['colorHex'] == $color_hex){
+            $color_id = $colorRow['colorID'];
+          }
+        endforeach;  
+          $addColor = $colorData->addColor($color_hex, $color_desc);
+          $oneColor = $colorData->getOneColor($color_hex);
+          $color_id = $oneColor['colorID'];
+          $result = $productData->addProduct($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        }
+        else{
+          $oneColor = $colorData->getOneColor($color_hex);
+          $color_id = $oneColor['colorID'];
+          $result = $productData->addProduct($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        }
+
       } 
       elseif ($action == "Update") 
       {
-          $result = $productData->updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image);
+          
+        $result = $productData->updateProduct($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image);
+        
       }
-
+      
       // Redirect to admin_portal page
       header('Location: admin_portal.php');
-  } // end if POST
+      
+    } // end if POST
+
+  
+  
 
   // If it is neither POST nor GET, we go to admin_portal.php
   // This page should not be loaded directly
   else
   {
+    //echo ("skipped if's");
+    //var_dump($results);
     header('Location: admin_portal.php');  
   } 
  
@@ -111,90 +156,16 @@
 </head>
 <body>
 <div id="container">
-  <div id="nav" class="navbar">
-    <div class="logo">
-      <a href="index.php"><img src="image/TravelLogo_2.jpg" class="logoimg"></a>
-    </div><!--END OF LOGO-->
-    <div class="buttons">
-      <div class="new">
-        <button class="btn">New</button>
-      </div><!--END OF NEW-->
-      <div class="clothing">
-        <button onclick="dropDown()" class="btn">Clothing</button>
-        <div class="dropdown-content">
-          <a href="shirts.html" class="menu">T Shirts</a>
-          <a href="hoodies.html" class="menu">Hoodies</a>
-          <a href="socks.html" class="menu">Socks</a>
-          <a href="all_products.html" class="menu">Shop All</a>
-        </div><!--END OF DROPDOWN-CONTENT-->
-    </div><!--END OF CLOTHING-->
-    <div class="dropdown">
-        <button onclick="dropDown()" class="btn">Accessories</button>
-        <div class="dropdown-content">
-          <a href="#" class="menu">Hats</a>
-          <a href="#" class="menu">Bags</a>
-          <a href="#" class="menu">Stickers</a>
-        </div><!--END OF DROPDOWN-CONTENT-->
-      </div><!--END OF DROPDOWN-->
-      </div><!--END OF BUTTONS-->
 
-      <div class="account">
-        <div class="dropdown">
-          <a style="text-decoration: none;" href="login.php" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
-          <!-- <button onclick="dropDown()" class="btn">Accessories</button> -->
-          <div class="dropdown-content">
-            <a href="#" class="menu">Account</a>
-            <a href="#" class="menu">Logout</a>
-            <!-- <a href="#" class="menu"></a> -->
-          </div><!--END OF DROPDOWN-CONTENT-->
-        </div><!--END OF DROPDOWN-->
-      </div><!--END OF ACCOUNT-->
-
-
-    <div class="search">
-        <div class="topnav">
-            <input type="text" placeholder="Search" class="search_input">
-            <i class="fas fa-search fa-xs"></i>
-
-            
-          </div><!--END OF TOPNAV-->
-        </div><!--END OF SEARCH-->
-
-
-</div><!--END OF NAV-->
 <div id="pp-main">
     <div class="desc">
         <div class="prod-pg-left">
             <div class="pic">              
 
-              <!-- need to add slashes to the image file when it comes out of the database -->
-<!-- $file = addslashes(file_get_contents($_FILES["productImage"]["tmp_name"]));  
-$stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE productID = :productID";
-<script>  
- $(document).ready(function(){  
-      $('#insert').click(function(){  
-           var image_name = $('#image').val();  
-           if(image_name == '')  
-           {  
-                alert("Please Select Image");  
-                return false;  
-           }  
-           else  
-           {  
-                var extension = $('#image').val().split('.').pop().toLowerCase();  
-                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
-                {  
-                     alert('Invalid Image File');  
-                     $('#image').val('');  
-                     return false;  
-                }   
-           }  
-      });  
- });  
- </script> -->
+              
  <form action="Update.php" method="post">
 
-    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><input type="file"  accept="image/*" name="productImage" id="file"  onchange="loadFile(event)" style="display: none;"></p>
     <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
     <p style="color: grey;"><img id="output" width="200" /></p>
 
@@ -205,34 +176,55 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
     };
     </script>
 
-              <img src="<?php echo $product_image?>" class="prod-pic" alt="<?php echo $product_name?>">              
+              <img src="<?php echo $path.$product_image; ?>" class="prod-pic" alt="<?php echo $product_name?>">              
             </div><!--END OF PIC-->
         </div><!--END OF PROD-PG-LEFT-->
         <div class="prod-pg-right">
             <div class="text">
-              <h2 class="prod-title"><input placeholder="Title" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_name; ?>></h2>
+              <input name="action" value="<?php echo $action; ?>">
+
+              <input name="productID" value="<?php echo $product_id; ?>">
+
+              <h2 class="prod-title"><input placeholder="Title" name="productName" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_name; ?>"></h2>
               
-              <h3 class="prod-price">$<input placeholder="Price" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value=<?php echo $product_price; ?>></h3>
-                <div class="colorpick">
-                  <p>Color: <?php echo $color['colorDesc']; ?></p>
-                <div class="dropdown">
+              <h3 class="prod-price"><input placeholder="Price" name="productPrice" style="font-size: 26px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_price; ?>"></h3>
+
+              <h2><input placeholder="Quantity" name="productQuantity" style="font-size: 20px; font-family: 'Courier New', Courier, monospace;" value="<?php echo $product_quantity; ?>"> </h2>
+              
+              <div class='category'>
+              <span>Choose a Cateogry</span>
+                    <input type='checkbox' class="category" name="category" value=1>Shirt
+                    <input type='checkbox' class="category" name="category" value=2>Hoodie
+                    <input type='checkbox' class="category" name="category" value=3>Socks
+                    <input type='checkbox' class="category" name="category" value=4>Misc
+              </div>
+
+              <div class="colorpick">
+                <input type='color' name='color'><span>Click here to select color</span>
+  </br>
+  </br>
+                <input type='text' name='colorDesc'><span>Color Description</span>
+                  <!--<p>Color: <?php //echo $color['colorDesc']; ?></p>-->
+                <!-- <div class="dropdown">
                     <button onclick="dropDown()">Choose Color</button>
                     <div class="dropdown-content">
-
-                      <a href="#" class="menu">White</a>
-                      <a href="#" class="menu">Grey</a>
-                      <a href="#" class="menu">Black</a>
-                      <a href="#" class="menu" value=<?php echo $color_id;?>></a>
-                    </div><!--END OF DROPDOWN-CONTENT-->
-
+                    <?php //foreach($colorList as $colorRow):
+                        //$colorDesc = $colorRow['colorDesc']; ?>
+                        <a class="menu" ><?php //echo $colorDesc; ?></a>
+                    <?php   
+                       // endforeach;  
+                    ?> 
+                    </div>END OF DROPDOWN-CONTENT -->
+                    
                 </div><!--END OF COLORPICK-->
-
+                    </br>
+                <span>Select Size</span>
                 <div class="sizepick">
-                    <button class="size">XS</button>
-                    <button class="size">S</button>
-                    <button class="size">M</button>
-                    <button class="size">L</button>
-                    <button class="size">XL</button>
+                    <input type='checkbox' value='XS' class="size" name="size">XS
+                    <input type='checkbox' value='S' class="size" name="size">S
+                    <input type='checkbox' value='M' class="size" name="size">M
+                    <input type='checkbox' value='L' class="size" name="size">L
+                    <input type='checkbox' value='XL' class="size" name="size">XL
                 </div><!--END OF SIZEPICK-->
                 <div class="addbtn">
                     <button type="submit"><?php echo $action; ?></button>
@@ -243,42 +235,31 @@ $stmt = "INSERT INTO product_lookup (productImage) VALUES ('$file') WHERE produc
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
 
-<footer>
-    <div class="ftwords">
-      <div class="ftleft">
-        <a href="#" class="bold">Get Help</a>
-        <a href="#" class="sml">Order Status</a>
-        <a href="#" class="sml">Customer Service</a>
-        <a href="#" class="sml">Shipping & Delivery</a>
-        <a href="#" class="sml">Returns</a>
-      </div><!--END OF FTLEFT-->
-      <div class="ftright">
-        <a href="#" class="bold">About Us</a>
-        <a href="#" class="sml">Contact Us</a>
-        <a href="#" class="sml">About Travel</a>
-        <a href="#" class="sml">The Blog</a>
-        <a href="#" class="sml">Travel Team Page</a>
-      </div><!--END OF RIGHT-->
-    </div><!--END OF FTWORDS-->
-      <div class="rightfoot">
-        <p>Connect With Us</p>
-        <div class="connect">
-          <input type="text" placeholder="Email">
-          <!--<button class="emailbtn">Submit</button>-->
-          <i class="fas fa-check-square" class="check"></i>
-        </div><!--END OF CONNECT-->
-        
-          <div class="info">
-            <i class="fab fa-twitter-square" class="icon"></i>
-            <i class="fab fa-instagram" class="icon"></i>
-            <i class="fab fa-facebook-square" class="icon"></i>
-          </div><!--END OF INFO-->
 
-          <p class="tiny">&copyTravel 2018</p>
-    
-      </div><!--END OF RIGHTFOOT-->
-
-</footer><!--END OF FOOTER-->
 </div><!--END OF CONTAINER-->
 </body>
 </html>
+<?php
+include_once 'footer.php';
+?>
+
+<?php
+
+// define("UPLOAD_DIRECTORY", "upload");
+      
+      // if(isset($_FILES['fileToUpload']))
+      // {
+      //   var_dump($_FILES);
+
+      //   $path = getcwd() . DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
+
+      //   $tmpName = $_FILES['fileToUpload']['tmp_name'];
+
+      //   $targetFileName = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
+
+      //   move_uploaded_file($tmpName, $targetFileName);
+
+      //   echo "made it 2";
+      // }
+
+?>

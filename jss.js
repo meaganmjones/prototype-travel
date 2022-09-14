@@ -25,4 +25,11 @@ function cartBtn(){
   });
 }
   
+
+
+function searchProd(){
+  var s = document.getElementById("search").value;
+
+  console.log(s);
+}
   

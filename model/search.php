@@ -5,108 +5,49 @@ include_once __DIR__ . '/product.php';
 // Extending the class to use the other file
 class ProductSearch extends Product
 {
+    private $searchData;
+
+    public function __construct($configFile){
+
+        if ($ini = parse_ini_file($configFile)){
+            
+            $searchPDO = new PDO ("mysql:host=" .$ini['servername'] . ";port=" .$ini['port'] . ";dbname=" . $ini['dbname'], $ini['username'], $ini['password']);
+
+            //dont emulate prepare statements
+            $searchPDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
+            //throw exceptions if there is a database error
+            $searchPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            //set our database to be newly created PDO
+            $this->searchData = $searchPDO;
+        }
+        else{
+            //things didnt go well, trow exception
+            throw new Exception("<h2>Creation of database object failed!</h2>", 0, null);
+        }
+    }
 
     // Allows user to search
-    function searchProducts ($product_name, $category_type) 
+    public function searchProducts ($searchString) 
     {
         
-        $results = array();             
-        $binds = array();               
-        $productTable = $this->getDatabaseRef();   
+        $results = [];    //make results an array                     
+        $searchTable = $this->getDatabaseRef();   //get db info
 
-        // Create base SQL statement that we can append
-        // specific restrictions to
-        $sqlQuery =  "SELECT * FROM  product_lookup AND category_lookup    ";
-        //$sqlQuery2 = "SELECT * FROM category_lookup     ";
-$isFirstClause = true;
-        // if the user has input, then append the value and bind the parameter
-        if ($product_name != "" || $category_type != "") {
-            if ($isFirstClause)
-            {
-                $sqlQuery .=  " WHERE ";
-                //$sqlQuery2 .= " WHERE ";
-                $isFirstClause = false;
-            }
-            else
-            {
-                $sqlQuery .= "WHERE ";
-                //$sqlQuery2 .= " WHERE ";
-                $isFirstClause = false;
-            }
-            $sqlQuery .= "  product_name OR category_typeLIKE :productName OR c:ategoryType";
-            $binds['productName, categoryType'] = '%'.$product_name.'%'.'OR'.'%'.$category_type.'%';
-            //$sqlQuery2 .= "  category_type LIKE :categoryType";
-            //$binds['categoryType'] = '%'.$category_type.'%';
-        }
+        $stmt = $searchTable->prepare("SELECT * FROM product_lookup, category_lookup WHERE productName OR categoryType LIKE CONCAT('%' , :searchString  ,'%') "); //the sql query
 
+        //$stmt = $searchTable->prepare($query);
 
-        // if ($carMake != "") {
-        //     if ($isFirstClause)
-        //     {
-        //         $sqlQuery .=  " WHERE ";
-        //         $isFirstClause = false;
-        //     }
-        //     else
-        //     {
-        //         $sqlQuery .= " AND ";
-        //     }
-        //     $sqlQuery .= "  carMake LIKE :carMake";
-        //     $binds['carMake'] = '%'.$carMake.'%';
-        // }
-    
-        
-        // if ($carModel != "") {
-        //     if ($isFirstClause)
-        //     {
-        //         $sqlQuery .=  " WHERE ";
-        //         $isFirstClause = false;
-        //     }
-        //     else
-        //     {
-        //         $sqlQuery .= " AND ";
-        //     }
-        //     $sqlQuery .= "  carModel LIKE :carModel";
-        //     $binds['carModel'] = '%'.$carModel.'%';
-        // }
-        
-        // if ($carTrans != ""){
-        //     if ($isFirstClause){
-        //         $sqlQuery .= " WHERE ";
-        //         $isFirstClause = false;
-        //     }
-        //     else{
-        //         $sqlQuery .= " AND ";
-        //     }
-        //     $sqlQuery .= " carTrans LIKE :carTrans";
-        //     $binds['carTrans'] = '%'.$carTrans.'%';
-        // }
+        $stmt->bindValue(':searchString', $searchString); //bind searchstring with user input value
 
-        // if ($carColor != "") {
-        //     if ($isFirstClause)
-        //     {
-        //         $sqlQuery .=  " WHERE ";
-        //         $isFirstClause = false;
-        //     }
-        //     else
-        //     {
-        //         $sqlQuery .= " AND ";
-        //     }
-        //     $sqlQuery .= "  carColor LIKE :carColor";
-        //     $binds['carColor'] = '%'.$carColor.'%';
-        // }
-
-        // Create query object from the table
-        $stmt = $productTable->prepare($sqlQuery);
-
-        // Perform query on the database
-        if ($stmt->execute($binds) && $stmt->rowCount() > 0) 
+        if ($stmt->execute() && $stmt->rowCount() > 0) //if it executes and the rowcount is more than 0:
         {
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC); //grab what's in the db
         }
-        
-        // Return results of the query
-        return $results;
-    } // end search
-}
+        return $results; //return results
+    }
+
+} // end search
 
 ?>

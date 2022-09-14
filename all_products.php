@@ -8,6 +8,8 @@
 
   include_once __DIR__ . '\include\functions.php';
 
+  //include_once __DIR__ . '\model\search.php';
+
   include_once 'header.php';
   
   // Set up configuration file and create database
@@ -16,26 +18,45 @@
   try 
   {
       $productData = new Product($configFile);
+
+      //$searchData = new ProductSearch($configFile);
   } 
   catch ( Exception $error ) 
   {
       echo "<h2>" . $error->getMessage() . "</h2>";
-  }   
+  }  
+  
+  $path = "upload/";
+
+//if(getRequest()){
+    if(isset ($_GET['query'])){
+        $query = filter_input(INPUT_GET, 'query');
+
+        if($query == ''){
+          
+          $productList = $productData->getProduct();
+          
+        }
+        else{
+
+          $productList = $productData->searchProducts($query);
+          //var_dump($productList);
+          
+        }
+    }
+//}
    
-  // If it is a GET, we are coming from admin_portal.php
-  // let's figure out if we're doing update or add
-  if (isset($_POST)) 
+//elseif((postRequest())){
+  if(isset($_POST)) 
   {
 
     $productList = $productData->getProduct();
-    // $product_name = $row['productName'];
-    // $product_price = $row['productPrice'];
-    // $product_image = $row['productImage'];
 
     $path = "upload/";
 
 
   }
+//}
  
 ?>
 
@@ -62,12 +83,10 @@
         <div class="prod">
             <?php foreach ($productList as $row): ?>
             <a href="singleprod.php?action=view&productID=<?php echo $row['productID'] ?>">
-            <div class="prodResult">
-            <div class="prodimg">
-                <img src="<?php echo $path.$row['productImage']; ?>" >
-            </div><!--END OF PRODIMG-->
+            <div style="align:center;background-color:white" class="prodResult">
+                    <img style="width:200px; height:200px;" src="<?php echo $path.$row['productImage']; ?>" >
                 <p style="color: black;"><?php echo $row['productName']; ?></p>
-                <p style="color: black;">$<?php echo $row['productPrice']; ?></p>
+                <p style="color: black;"><?php echo '$'.$row['productPrice']; ?></p>
             </div><!--END OF PRODRESULT-->
             </a>
             <?php endforeach ?>

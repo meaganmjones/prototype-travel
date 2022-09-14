@@ -26,6 +26,18 @@ class Color{
         }
     }//end constructor
 
+    public function getAllColor(){
+        //$results = [];
+        $colorTable = $this->colorData;
+
+        $stmt = $colorTable->prepare("SELECT * FROM color_lookup");
+
+        if($stmt->execute() && $stmt->rowCount() > 0){
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $results;
+    }
+
     public function getColor($id) {
         $results = [];
         $colorTable = $this->colorData;
@@ -47,11 +59,11 @@ class Color{
         $addSuccessful = false;
         $colorTable = $this->colorData;
 
-        $stmt = $colorTable->prepare("INSERT INTO color_lookup SET color_hex = :colorHex, color_desc = :colorDesc");
+        $stmt = $colorTable->prepare("INSERT INTO color_lookup SET colorHex = :color_hex, colorDesc = :color_desc");
 
         $boundColor = array (
-            ":colorHex" => $color_hex,
-            ":colorDesc" => $color_desc
+            ":color_hex" => $color_hex,
+            ":color_desc" => $color_desc
         );
 
         $addSuccessful = ($stmt->execute($boundColor) && $stmt->rowCount() > 0);
@@ -85,6 +97,21 @@ class Color{
     //     }
     //     return $results;
     // }
+
+    public function getOneColor($color_hex){
+        $results = [];
+        $colorTable = $this->colorData;
+
+        $stmt = $colorTable->prepare("SELECT * FROM color_lookup WHERE colorHex = :color_hex");
+        
+        $stmt->bindValue(':color_hex', $color_hex);
+
+        if($stmt->execute() && $stmt->rowCount() > 0){
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        return $results;
+
+    }
 
     protected function getDatabaseRef()
     {

@@ -65,17 +65,19 @@ class Product
     }
 
     //Add to database
-    public function addProduct ($product_name, $product_size, $product_price, $product_quantity, $product_image) {
+    public function addProduct ($product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image) {
         $addSuccessful = false;
         $productTable = $this->productData;
         
 
-        $stmt = $productTable->prepare("INSERT INTO product_lookup SET product_name = :ProductName, product_price = :productPrice, product_size = :productSize, product_quantity = :productQuantity, product_image = :productImage");
+        $stmt = $productTable->prepare("INSERT INTO product_lookup SET productName = :ProductName, productPrice = :productPrice, categoryID = :categoryID, colorID = :colorID, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage");
         
 
         $boundProduct = array(
             ":ProductName" => $product_name,
             ":productPrice" => $product_price,
+            ":categoryID" => $category_id,
+            ":colorID" => $color_id,
             ":productSize" => $product_size,
             ":productQuantity" => $product_quantity,
             ":productImage" => $product_image
@@ -89,28 +91,25 @@ class Product
 
 
 //update table into the database
-public function updateProduct ($product_id, $product_name, $product_price, $category_id, $color_id, $product_size, $product_quantity, $product_image)
-{
-    $updateSuccessful = false;
-    $productTable = $this->productData;
-    
-    $stmt = $productTable->prepare("UPDATE product_lookup SET productName = :productName, productPrice = :productPrice, categoryID = :categoryID, colorID = :colorID, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage WHERE productID = :productID");
-    
+    public function updateProduct ($product_id, $product_name, $product_price, $product_size, $product_quantity, $product_image)
+    {
+        $updateSuccessful = false;
+        $productTable = $this->productData;
+        
+        $stmt = $productTable->prepare("UPDATE product_lookup SET productName = :productName, productPrice = :productPrice, productSize = :productSize, productQuantity = :productQuantity, productImage = :productImage WHERE productID = :productID");
 
-    $stmt->bindValue(':productID', $product_id);
-    $stmt->bindValue(':productName', $product_name);
-    $stmt->bindValue(':productPrice', $product_price);
-    $stmt->bindValue(':categoryID', $category_id);
-    $stmt->bindValue(':colorID', $color_id);
-    $stmt->bindValue(':productSize', $product_size);
-    $stmt->bindValue(':productQuantity', $product_quantity);
-    $stmt->bindValue(':productImage', $product_image);
+        $stmt->bindValue(':productID', $product_id);
+        $stmt->bindValue(':productName', $product_name);
+        $stmt->bindvalue(':productPrice', $product_price);
+        $stmt->bindValue(':productSize', $product_size);
+        $stmt->bindValue(':productQuantity', $product_quantity);
+        $stmt->bindValue(':productImage', $product_image);
 
-    $updateSuccessful = ($stmt->execute() && $stmt->rowCount() > 0);
+    $updateSuccessful = $stmt->execute();
 
     return $updateSuccessful;
-
-}
+        
+    }
 
 //Delete from the database
     public function deleteProduct ($product_id)
@@ -127,6 +126,30 @@ public function updateProduct ($product_id, $product_name, $product_price, $cate
         return $deleteSuccessful;
     }
 
+
+    function searchProducts ($searchString) 
+    {
+        
+        $results = [];
+        $productTable = $this->productData;
+
+        $sqlQuery = "SELECT * FROM product_lookup WHERE productName LIKE CONCAT('%' , :searchString1  ,'%')";
+        // $sqlQuery = "SELECT * FROM product_lookup, category_lookup WHERE productName LIKE CONCAT('%' , :searchString1  ,'%') OR categoryType LIKE CONCAT('%' , :searchString2  ,'%') "; //the sql query
+
+        $stmt = $productTable->prepare($sqlQuery);
+
+        $stmt->bindValue(':searchString1', $searchString); //bind searchstring with user input value
+        //$stmt->bindValue(':searchString2', $searchString); //bind searchstring with user input value
+
+        
+        
+
+        if ($stmt->execute() && $stmt->rowCount() > 0) //if it executes and the rowcount is more than 0:
+        {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC); //grab what's in the db
+        }
+        return $results; //return results
+    }
 
 //Get listing from the database
     // public function getProduct ($product_id)

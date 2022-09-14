@@ -1,55 +1,61 @@
 <?php
-    // Include functions
+
+    // Include helper utility functions
     include_once __DIR__ . '/include/functions.php';
 
-    // include AdminLogin Class
+    // Include user database definitions
     include_once __DIR__ . '/model/admin_login.php';
 
+
+    session_start();
+
     // set logged in to false
-    $_SESSION['loggedIn'] = false;
+    $_SESSION['isLoggedIn'] = false;
     
-    
+    // If this is a POST, check to see if user credentials are valid.
+    // First we need to gab the crednetials form the form 
+    //      and create a user database object
     $message = "";
+
     if (postRequest()) 
     {
+        //echo "made it";
         // get _POST form fields
         $username = filter_input(INPUT_POST, 'username');
         $password = filter_input(INPUT_POST, 'password');
-        
+        //echo "made it 5";
         // Set up configuration file and create database
         $configFile = __DIR__ . '/model/dbconfig.ini';
         try 
         {
-            $loginLookup = new AdminLogin($configFile);
-            
+            $loginData = new AdminLogin($configFile);
+            //echo "made it 6";
         } 
         catch ( Exception $error ) 
         {
-            
+            //echo "made it 4";
             echo "<h2>" . $error->getMessage() . "</h2>";
         }   
     
         
-        // check to see if user credentials are valid.
-        if ($loginLookup->validateCredentials($username, $password))
+        // Now we can check to see if use credentials are valid.
+        if ($loginData->validateCredentials($username, $password))
         {
-            
-            // set logged in to TRUE
-            $_SESSION['loggedIn'] = true;
-            // Redirect to admin_portal page
-            header ('Location: admin_portal.html');
+            //echo "made it 2";
+            // If so, set logged in to TRUE
+            $_SESSION['isLoggedIn'] = true;
+            // Redirect to portal page
+            header ('Location: admin_portal.php');
         } 
         else 
         {
-            
-           // error message
+            //echo "made it 3";
+           // Whoops! Incorrect login. Tell user and stay on this page.
            $message = "You did not enter the correct login credentials.";
         }
     }
->>>>>>>>> Temporary merge branch 2:login.html
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,8 +72,16 @@
     <div id="login">
     </br>
     <div>
-        <a href="index.html"><img src="image/TravelLogo_2.jpg"></a>
-        <form class="login">
+        <a href="index.php"><img src="image/TravelLogo_2.jpg"></a>
+        <form class="login" method="post" action="login.php">
+
+            <?php
+            if ($message)
+            {   ?>
+            <div style="background-color: yellow; padding: 10px; border: solid 1px black;"> 
+           <?php echo $message; ?>
+           </div>
+        <?php } ?>
 
             <p class="login-text">
                 <label class="login-lbl" for="">Username: </label>  
@@ -81,12 +95,11 @@
                 <a onclick="#">Show Password</a>
             </p>
             </br>
-
-
+            
             <div class="login-btn">
-                <button type="submit" class="login-btn">Login</button> 
-                <a href="admin_portal.php" style="color:blue">PROTOTYPE LOGIN</a>
-                <a href="index.html" class="login-home" style="color:#7C6990"><p>Site Home</p></a>
+                <button type="submit" name="login" class="login-btn">Login</button>
+                <!-- <a href="admin_portal.php" style="color:blue">PROTOTYPE LOGIN</a> -->
+                <a href="index.php" class="login-home" style="color:#7C6990"><p>Site Home</p></a>
             </div><!--END OF LOGIN-BTN-->
         </form><!--END OF FORM-->
         
