@@ -58,7 +58,7 @@
       } 
       //else it is Add and the user will enter info
       else 
-      {
+      { 
           $product_name = "";
           $product_price = "";
           $category_id = "";
@@ -76,23 +76,23 @@
   // we need to determine action, then return to admin_portal.php
   elseif (postRequest()){
 
+    define("UPLOAD_DIRECTORY", "upload");
+    if (isset ($_FILES['fileToUpload'])) 
+    {
+
+        $path = getcwd(). DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
+        $tmp_name = $_FILES['fileToUpload']['tmp_name']; 
+        $target_file = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
+
+        move_uploaded_file($tmp_name, $target_file);
+        echo $target_file;
+
+        //$insertSchool = $schoolDatabase->insertSchoolsFromFile($target_file);
+
+    }
     if (isset($_POST['action'])) 
     { 
-      define("UPLOAD_DIRECTORY", "upload");
   
-      if (isset ($_FILES['fileToUpload'])) 
-      {
-  
-          $path = getcwd(). DIRECTORY_SEPARATOR . UPLOAD_DIRECTORY;
-          $tmp_name = $_FILES['fileToUpload']['tmp_name']; 
-          $target_file = $path . DIRECTORY_SEPARATOR . $_FILES['fileToUpload']['name'];
-  
-          move_uploaded_file($tmp_name, $target_file);
-          echo $target_file;
-  
-          //$insertSchool = $schoolDatabase->insertSchoolsFromFile($target_file);
-  
-      }
       //echo("made it");
       $action = filter_input(INPUT_POST, 'action');
       //echo $action;
@@ -142,19 +142,14 @@
 
       
       // Redirect to admin_portal page
-      //header('Location: admin_portal.php');
+      header('Location: admin_portal.php');
       
     } // end if POST
-
-  
-  
 
   // If it is neither POST nor GET, we go to admin_portal.php
   // This page should not be loaded directly
   else
   {
-    //echo ("skipped if's");
-    //var_dump($results);
     header('Location: admin_portal.php');  
   } 
  

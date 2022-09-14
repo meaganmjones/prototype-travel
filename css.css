@@ -530,7 +530,7 @@ p{
   justify-content: space-between;
 }
 .inv_tbl:nth-child(even){
-  background-color: #3e8e41;
+  background-color: grey;
 }
 .inv-btn{
   display: flex;

@@ -74,20 +74,24 @@
           </div><!--END OF DROPDOWN-->
           </div><!--END OF BUTTONS-->
 </div><!--END OF LNAV-->
-<div class="rnav" >
+<div class="mnav" >
             <div class="search">
                 <form action="header.php" method="POST">
                   <input type='search' id='search' placeholder="Search" class="search_input" name="searchString">
                   <a type="submit" class="fas fa-search fa-xs" id="searchbtn" ></a>
+                </form>
+            </div><!--END OF SEARCH-->
+</div><!--END OF MNAV-->
+<div class='rnav'>
                   <div class="dropdown">
-                <a style="text-decoration: none;" href="login.php" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990;"></i></a>
+                <a style="text-decoration: none;" href="login.php" onclick="dropDown()"><i class="fa-solid fa-circle-user fa-2xl" style="color:#7C6990; margin-right: 10px;"></i></a>
                 <div class="dropdown-content">
-                  <a href="#" class="menu">Account</a>
+                  <!--<a href="#" class="menu" style='margin-right: -10px;'>Account</a>-->
                   <a href="logoff.php" class="menu">Logout</a>
                 </div><!--END OF DROPDOWN-CONTENT-->
               </div><!--END OF DROPDOWN-->
-                </form>
-              </div><!--END OF SEARCH-->
+
+              <i class="fa-solid fa-cart-shopping fa-xl" style='margin-left: 10px; color: #7C6990;'></i>
 </div><!--END OF RNAV-->
           </div>
             
