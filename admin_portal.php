@@ -62,7 +62,7 @@
         </div><!--END OF INV-BTN-->
     </br>
     
-        <a href="index.html"><image src="image/TravelLogo_2.jpg" class="top-img"></a>
+        <a href="index.php"><image src="image/TravelLogo_2.jpg" class="top-img"></a>
     </br>
     <table class="inv_tbl">
     <thead>

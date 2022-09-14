@@ -13,10 +13,10 @@
   // Set up configuration file and create database
   $configFile = __DIR__ . '\model\dbconfig.ini';
 
-  // if (!loggedIn())
-  //   {
-  //       header ('Location: login.php');
-  //   }
+  if (!isLoggedIn())
+    {
+        header ('Location: login.php');
+    }
 
   try 
   {
@@ -235,12 +235,13 @@
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
 
-<?php
-include_once 'footer.php';
-?>
+
 </div><!--END OF CONTAINER-->
 </body>
 </html>
+<?php
+include_once 'footer.php';
+?>
 
 <?php
 
