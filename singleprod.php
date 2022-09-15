@@ -44,8 +44,8 @@ if (isset($_GET['action']))
       $product_image = $row['productImage'];
 
       $path = "upload/";
-      //$color = $colorData->getColor($color_id);
-      //var_dump($color[2]);
+      $color = $colorData->getColor($color_id);
+      $color_hex = $color['colorHex'];
     //else it is Add and the user will enter info
 } // end if GET
 ?>
@@ -62,7 +62,7 @@ if (isset($_GET['action']))
     <link rel="stylesheet" href="css.css">
     <script src="jss.js"></script>
     <script src="https://kit.fontawesome.com/3ed3e280c1.js" crossorigin="anonymous"></script>
-    <title>Mountain Longsleeve | Travel</title>
+    <title>Travel</title>
 </head>
 <body>
 <div id="container">
@@ -79,9 +79,9 @@ if (isset($_GET['action']))
                 <h3 class="prod-price"><?php echo "$".$product_price; ?></h3>
                 <div class="colorpick">
                     <p class="pick">Choose A Color</p>
-                    <i class="fas fa-circle fa-lg" style="color: hotpink;"></i>
-                    <i class="fas fa-circle fa-lg" style="color: grey;"></i>
-                    <i class="fas fa-circle fa-lg" style="color: black;"></i>
+                    <button class="fas fa-circle fa-lg" style="color: <?php echo $color_hex?>"></button>
+                    <i class="fas fa-circle fa-lg" style="color: "></i>
+                    <i class="fas fa-circle fa-lg" style="color: "></i>
                 </div><!--END OF COLORPICK-->
                 <div class="sizepick">
                     <button class="size">XS</button>
@@ -98,8 +98,9 @@ if (isset($_GET['action']))
     </div><!--END OF DESC-->
 </div><!--END OF MAIN-->
 </div><!--END OF CONTAINER-->
+
 </body>
-</html>
 <?php
 include_once 'footer.php';
 ?>
+</html>
