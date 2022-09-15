@@ -40,7 +40,7 @@
         else{
 
           $productList = $productData->searchProducts($query);
-          var_dump($productList);
+          //var_dump($productList);
           
         }
     }
@@ -93,8 +93,8 @@
         </div><!--END OF PROD-->
     </div><!--END OF MAIN-->
     </div><!--END OF CONTAINER-->
-</body>
-</html>
 <?php
 include_once 'footer.php';
 ?>
+</body>
+</html>

@@ -31,7 +31,7 @@ h1{
 .container{
   position: relative;
   width: auto;
-  height: auto;
+  min-height: 100%;
 }
 /* -------------------HOME PAGE----------------------- */
 #banner{
@@ -185,6 +185,7 @@ h1{
 #main{
   display: block;
   background-image: url("image/TravelBackground_1.png");
+  min-height: 100%;
   width: auto;
   position: relative;
   object-fit: contain;
@@ -268,6 +269,7 @@ footer{
   color: white;
   width: 100%;
   height: auto;
+  position: fixed;
   justify-content:space-between;
 }
 a{

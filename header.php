@@ -60,7 +60,7 @@
               <a href="all_products.php?filter=1&query=" class="menu">T Shirts</a>
               <a href="all_products.php?filter=2&query=" class="menu">Hoodies</a>
               <a href="all_products.php?filter=3&query=" class="menu">Socks</a>
-              <a href="all_products.php" class="menu">Shop All</a>
+              <a href="all_products.php?query=" class="menu">Shop All</a>
             </div><!--END OF DROPDOWN-CONTENT-->
         </div><!--END OF CLOTHING-->
         <div class="dropdown">
