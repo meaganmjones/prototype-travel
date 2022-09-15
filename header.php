@@ -1,6 +1,5 @@
 <?php
     include_once __DIR__ . '/model/product.php';
-    include_once __DIR__ . '/model/search.php';
     include_once __DIR__ . '/model/category.php';
     include_once __DIR__ . '/include/functions.php';
 
@@ -11,7 +10,7 @@
         $productDatabase = new Product($configFile);
         //$colorDatabase = new Color($configFile);
         $categoryDatabase = new Category($configFile);
-        $searchDatabase = new ProductSearch($configFile);
+        //$searchDatabase = new ProductSearch($configFile);
     } 
     catch ( Exception $error ) 
     {
@@ -26,7 +25,7 @@
       $searchString = filter_input(INPUT_POST, 'searchString');
       //echo $searchString;
       header('Location: all_products.php?query='.$searchString);
-      //$searchResult = $searchDatabase->searchProducts($searchString);
+      //$searchResult = $productDatabase->searchProducts($searchString);
     }
     else{
       //echo 'no post request ig';

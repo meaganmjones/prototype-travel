@@ -91,7 +91,7 @@
 
             <p class="login-text">
                 <label class="login-lbl" for="">Password: </label> 
-                <input class="login-input" type="password" name="password"> 
+                <input class="login-input" type="password" name="password" required> 
                 <a onclick="#">Show Password</a>
             </p>
             </br>

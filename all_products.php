@@ -19,7 +19,6 @@
   {
       $productData = new Product($configFile);
 
-      //$searchData = new ProductSearch($configFile);
   } 
   catch ( Exception $error ) 
   {
@@ -35,27 +34,28 @@
         if($query == ''){
           
           $productList = $productData->getProduct();
+          $path = "upload/";
           
         }
         else{
 
           $productList = $productData->searchProducts($query);
-          //var_dump($productList);
+          var_dump($productList);
           
         }
     }
 //}
    
 //elseif((postRequest())){
-  if(isset($_POST)) 
-  {
+  // if(isset($_POST)) 
+  // {
 
-    $productList = $productData->getProduct();
+  //   $productList = $productData->getProduct();
 
-    $path = "upload/";
+  //   $path = "upload/";
 
 
-  }
+  // }
 //}
  
 ?>
