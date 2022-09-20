@@ -62,6 +62,8 @@ if (isset($_GET['action']))
     <link rel="stylesheet" href="css.css">
     <script src="jss.js"></script>
     <script src="https://kit.fontawesome.com/3ed3e280c1.js" crossorigin="anonymous"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Travel</title>
 </head>
 <body>
@@ -91,7 +93,16 @@ if (isset($_GET['action']))
                     <button class="size">XL</button>
                 </div><!--END OF SIZEPICK-->
                 <div class="addbtn">
-                    <p class="addbtntxt">Add To Cart</p>
+                    <script>
+                    function addToCart(){
+                        Swal.fire('Successfully Added to Cart')
+                    };
+                    </script>
+                <button onclick="addToCart()">Add To Cart</button>
+
+
+                    
+                    
                 </div><!--END OF ADDBTN-->
             </div><!--END OF TEXT-->
         </div><!--END OF PROD-PG-RIGHT-->
